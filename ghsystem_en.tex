@@ -1,0 +1,600 @@
+% arara: pdflatex
+% arara: biber
+% arara: pdflatex
+% arara: pdflatex
+% --------------------------------------------------------------------------
+% the CHEMMACROS bundle
+%   ghsystem_en.tex
+% macros and commands for chemists
+% --------------------------------------------------------------------------
+% Clemens Niederberger
+% --------------------------------------------------------------------------
+% https://bitbucket.org/cgnieder/chemmacros/
+% contact@mychemistry.eu
+% --------------------------------------------------------------------------
+% If you have any ideas, questions, suggestions or bugs to report, please
+% feel free to contact me.
+% --------------------------------------------------------------------------
+% Copyright 2011-2013 Clemens Niederberger
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Clemens Niederberger.
+% --------------------------------------------------------------------------
+\documentclass[load-preamble+]{cnltx-doc}
+\usepackage[utf8]{inputenc}
+\usepackage[greek=newtx]{chemmacros}
+\setcnltx{
+  package  = {ghsystem},
+  date     = \csname ghsystem@date\endcsname ,
+  version  = v\csname ghsystem@version\endcsname ,
+  title    = \huge the \chemmacros\ bundle,
+  url      = https://bitbucket.org/cgnieder/chemmacros/ ,
+  authors  = Clemens Niederberger ,
+  email    = contact@mychemistry.eu ,
+  info     = {
+    packages \chemmacros\ (v\csname chemmacros@version\endcsname),
+    \chemformula\ (v\csname chemformula@version\endcsname),
+    \ghsystem\ (v\csname ghsystem@version\endcsname) and
+    \chemgreek\ (v\csname chemgreek@version\endcsname)\\[2ex]
+    {\Large documentation for the \ghsystem\ package}} ,
+  abstract = {%
+    \centering
+    \includegraphics{chemmacros-logo.pdf}
+    \par
+  } ,
+  add-cmds = {
+     abinitio, activatechemgreekmapping, AddRxnDesc, anti, aq, aqi,
+     ba, bond, bridge,
+    cd, ch, changechemgreeksymbol, charrow, chcpd, chemabove, Chemalpha,
+      Chembeta, Chemgamma, Chemdelta, ChemDelta, chemformula@bondlength,
+      Chemomega, Chemphi, ChemPhi, chemsetup, chlewis, chname , cip, cis, ch,
+      CNMR,
+    data, DeclareChemArrow, DeclareChemBond, DeclareChemBondAlias,
+      declarechemgreekmapping, DeclareChemIUPAC, DeclareChemLatin,
+      DeclareChemNMR, DeclareChemParticle, DeclareChemPhase,
+      DeclareChemReaction, DeclareChemState, delm, delp, Delta, Dfi,
+    el, ElPot, endo, Enthalpy, enthalpy, Entropy,
+    fmch, fpch, fscrm, fscrp,
+    gas, ghs, ghslistall, ghspic, Gibbs, gram,
+    hapto, HNMR, Helmholtz,
+    insitu, invacuo, iupac,
+    Ka, Kb, Kw,
+    Lfi, listofreactions, lqd, ltn,
+    mch, mega, meta, mhName,
+    newchemgreekmapping,
+    newman, NMR, Nu, Nuc,
+    orbital, ortho, ox, OX,
+    para, pch, per, pH, phase, photon, pKa, pKb, pOH, pos, positron,
+    Pot, prt,
+    Rad, redox, RenewChemArrow, RenewChemBond, renewchemgreekmapping,
+      RenewChemIUPAC, RenewChemLatin, RenewChemNMR, RenewChemParticle,
+      RenewChemPhase, RenewChemState,
+    Sf, scrm, scrp, second, selectchemgreekmapping, setchemformula,
+      ShowChemArrow, ShowChemBond, sld, Sod, State,
+    trans,
+    val
+  } ,
+  add-silent-cmds = {
+    addplot,
+    bottomrule,
+    cancel, cdot, ce, cee, celsius, centering, chemfig, chemname, clap,
+      cnsetup, color, cstack, cstsetup,
+    DeclareInstance, DeclareSIUnit, definecolor, draw,
+    electronvolt,
+    footnotesize,
+    glqq, grqq,
+    hertz, hspace,
+    includegraphics, intertext, IUPAC,
+    joule,
+    kilo,
+    latin, lewis, Lewis,
+    metre, midrule, milli, mmHg, mole,
+    nano, nicefrac, num, numrange,
+    ominus, oplus,
+    percent, pgfarrowsdeclarealias, pgfarrowsrenewalias,
+    renewtagform, rightarrow,
+    sample, scriptscriptstyle, setatomsep, setbondoffset, sfrac, shorthandoff,
+      si, SI, sisetup, square, subsection,
+    textcolor, textendash, textsuperscript, tiny, toprule,
+    upbeta, upeta, upgamma, usetikzlibrary,
+    volt, vphantom, vspave,
+    xspace
+  }
+}
+
+\usepackage{chemfig,booktabs,cancel,varioref}
+\usepackage[version=3]{mhchem}
+
+\expandafter\def\csname libertine@figurestyle\endcsname{LF}
+\usepackage[libertine]{newtxmath}
+\expandafter\def\csname libertine@figurestyle\endcsname{OsF}
+
+\usepackage[biblatex]{embrac}
+\ChangeEmph{[}[,.02em]{]}[.055em,-.08em]
+\ChangeEmph{(}[-.01em,.04em]{)}[.04em,-.05em]
+
+\usepackage[accsupp]{acro}
+\acsetup{
+  long-format  = \scshape ,
+  short-format = \scshape
+}
+\DeclareAcronym{ghs}{
+  short     = ghs ,
+  long      = Globally Harmonized System of Classification and Labelling of
+    Chemicals ,
+  pdfstring = GHS ,
+  accsupp   = GHS
+}
+\DeclareAcronym{eu}{
+  short     = EU ,
+  long      = European Union ,
+  pdfstring = EU ,
+  accsupp   = EU
+}
+\DeclareAcronym{iupac}{
+  short     = iupac ,
+  long      = International Union of Pure and Applied Chemistry ,
+  pdfstring = IUPAC ,
+  accsupp   = IUPAC
+}
+\DeclareAcronym{UN}{
+  short     = un ,
+  long      = United Nations ,
+  pdfstring = UN ,
+  accsupp   = UN
+}
+\DeclareAcronym{dvi}{
+  short     = dvi ,
+  long      = device independent file format ,
+  pdfstring = DVI ,
+  accsupp   = DVO
+}
+\DeclareAcronym{pdf}{
+  short     = pdf ,
+  long      = portable document file ,
+  pdfstring = PDF ,
+  accsupp   = PDF
+}
+
+\chemsetup{
+  option/synchronize ,
+  chemformula/format = \libertineLF
+}
+% \colorlet{chemformula}{black!90}
+
+\sisetup{
+  detect-mode=false,
+  mode=text,
+  text-rm=\libertineLF
+}
+
+\usepackage{filecontents}
+
+\defbibheading{bibliography}{\addsec{References}}
+\addbibresource{\jobname.bib}
+\begin{filecontents*}{\jobname.bib}
+@book{iupac:greenbook,
+  author    = {E. Richard Cohan and Tomislav Cvita\v{s} and Jeremy G. Frey and
+    Bertil Holmstr\"om and Kozo Kuchitsu and Roberto Marquardt and Ian Mills and
+    Franco Pavese and Martin Quack and J\"urgen Stohner and Herbert L. Strauss and
+    Michio Takami and Anders J Thor} ,
+  title     = {``Quantities, Symbols and Units in Physical Chemistry'', \acs{iupac}
+    Green Book} ,
+  sorttitle = {Quantities, Symbols and Units in Physical Chemistry} ,
+  indexsorttitle = {Quantities, Symbols and Units in Physical Chemistry} ,
+  edition   = {3rd Edition. 2nd Printing} ,
+  year      = {2008} ,
+  publisher = {\acs{iupac} \&\ RSC Publishing, Cambridge}
+}
+@book{iupac:redbook,
+  author    = {Neil G. Connelly and Ture Damhus and Richard M. Hartshorn and
+    Alan T. Hutton} ,
+  title     = {``Nomenclature of Inorganic Chemistry'', \acs{iupac} Red Book} ,
+  sorttitle = {Nomenclature of Inorganic Chemistry} ,
+  indexsorttitle = {Nomenclature of Inorganic Chemistry} ,
+  year      = {2005} ,
+  publisher = { \acs{iupac} \&\ RSC Publishing, Cambridge} ,
+  isbn      = {0-85404-438-8}
+}
+@misc{eu:ghsystem_regulation,
+  author   = {{The European Parliament and The Council of the European Union}},
+  title    = {Regulation (EC) No 1272/2008 of the European Parliament and of
+    the Council} ,
+  subtitle = {on classification, labelling and packaging of substances and
+    mixtures, amending and repealing Directives 67/548/EEC and 1999/45/EC, and
+    amending Regulation (EC) No 1907/2006} ,
+  journal  = {Official Journal of the European Union} ,
+  date     = {2008-12-16}
+}
+@online{unece:ghsystem_implementation,
+  author   = {{United Nations Economic Commission for Europe}} ,
+  title    = {GHS Implementation} ,
+  url      =
+    {http://www.unece.org/trans/danger/publi/ghs/implementation_e.html} ,
+  urldate  = {2012-03-20} ,
+  date     = {2012-03-20}
+}
+\end{filecontents*}
+
+\DeclareInstance{xfrac}{chemformula-text-frac}{text}
+  {
+    scale-factor        = 1 ,
+    denominator-bot-sep = -.2ex ,
+    denominator-format  = \scriptsize #1 ,
+    numerator-top-sep   = -.2ex ,
+    numerator-format    = \scriptsize #1 ,
+    slash-right-kern    = .05em ,
+    slash-left-kern     = .05em
+  }
+
+\usetikzlibrary{calc,positioning,decorations.pathmorphing,patterns}
+
+\newpackagename\chemmacros{chemmacros}
+\newpackagename\chemformula{chemformula}
+% \newpackagename\ghsystem{ghsystem}
+\newpackagename\chemgreek{chemgreek}
+
+
+\newidxcmd\manual{\textsf{#1}}[\ (manual)]
+
+\newenvironment{codedesc}
+  {%
+    \def\Code##1{\item\code{##1}\hfill\newline}%
+    \cnltxlist
+  }
+  {\endcnltxlist}
+
+\renewcommand*\AmS{\hologo{AmS}}
+
+\newcommand*\TikZ{Ti\textit{k}Z}
+
+\newcommand*\tablehead[1]{\textrm{\bfseries#1}}
+
+\begin{document}
+
+\section{Introduction}
+As a chemist you are probably aware of the fact that the \acl{UN} have
+developed the \ac{ghs} as a global replacement for the various different
+systems in different countries.  While it has not been implemented by all
+countries yet~\cite{unece:ghsystem_implementation}, it is only a matter of
+time.
+
+The package \ghsystem\ now enables you to typeset all the hazard and
+precautionary statements and pictograms in a very easy way.  The statements
+are taken from \acs{eu} regulation 1272/2008~\cite{eu:ghsystem_regulation}.
+
+\section{Licence and Requirements}
+\license
+
+\ghsystem\ loads the following packages:
+\pkg{expl3}\footnote{\CTANurl{l3kernel}}~\cite{bnd:l3kernel}, \pkg{xparse} and
+\pkg{l3keys2e}\footnote{\CTANurl{l3packages}}~\cite{bnd:l3packages},
+\needpackage{translations}~\cite{pkg:translations},
+\needpackage{siunitx}~\cite{pkg:siunitx},
+\needpackage{graphicx}~\cite{pkg:graphicx},
+\needpackage{longtable}~\cite{pkg:longtable} and
+\needpackage{ifpdf}~\cite{pkg:ifpdf}.
+
+\section{Setup}
+The simplest way is to load \chemmacros\ which loads \ghsystem\ implicitily.
+All of \ghsystem's options belong to the module \module{ghsystem}.  This means
+they can be setup with
+\begin{sourcecode}
+  \chemsetup[ghsystem]{<options>} or
+  \chemsetup{ghsystem/<option1>,ghsystem/<option2>}
+\end{sourcecode}
+\sinceversion{4.0}However, \ghsystem\ can be loaded as a standalone package
+and thus provides its own setup command:
+\begin{commands}
+  \command{ghssetup}[\marg{options}]
+    Setup command for \ghsystem.
+\end{commands}
+
+\section{Get Hazard and Precautionary Statements}
+\subsection{Simple Statements}
+The general usage is simple: you use the command
+\begin{commands}
+  \command{ghs}[\sarg\oarg{options}\marg{type}\marg{number}]
+    Get statement number \meta{number} of type \meta{type}.
+\end{commands}
+There are three types available: \code{h}, \code{euh} and \code{p}.  The
+\meta{type} argument is case insensitive, so just type them in as you like.
+\begin{example}[side-by-side]
+  \ghs{h}{200} \par
+  \ghs{H}{224} \par
+  \ghs{euh}{001} \par
+  \ghs{Euh}{202} \par
+  \ghs{p}{201}
+\end{example}
+
+The starred version hides the identifier and only gives the statement.  If you
+want to hide the statement itself instead you can use the option:
+\begin{options}
+  \keybool{hide}\Default{false}
+    Hide the statement.
+\end{options}
+
+There is an option to customize the output, too.
+\begin{options}
+  \keyval{space}{space command}\Default
+    Space between \meta{type} and \meta{number}.
+\end{options}
+\begin{example}[side-by-side]
+  \ghs{h}{200} \par
+  \ghs[space=\,]{h}{200} \par
+  \ghs*{h}{200} \par
+  \ghs[hide]{h}{200}
+\end{example}
+
+\subsection{Statements with Placeholders}
+Some of the statements contain placeholders.  They can be one of the
+following:
+\begin{itemize}
+  \item \textit{\textless state route of exposure if it is conclusively proven
+      that no other routes of exposure cause the hazard\textgreater}
+  \item \textit{\textless state specific effect if known\textgreater}
+  \item \textit{\textless or state all organs affected, if known\textgreater}
+  \item \textit{\textless name of sensitising substance\textgreater}
+\end{itemize}
+
+Except the last one which needs to be filled in, they are hidden per default.
+They can be made visible with the option
+\begin{options}
+  \keybool{fill-in}\Default{false}
+    Show placeholders.
+\end{options}
+\begin{example}
+  \ghs{h}{340} \par
+  \ghs[fill-in]{h}{340} \par
+  \ghs{h}{360} \par
+  \ghs[fill-in]{h}{360} \par
+  \ghs{h}{370} \par
+  \ghs[fill-in]{h}{370} \par
+  \ghs{euh}{208} \par
+  \ghs[fill-in]{euh}{208}
+\end{example}
+
+These placeholders can be replaced with one of these options:
+\begin{options}
+  \keyval{exposure}{text}\Default
+    exposure placeholder
+  \keyval{effect}{text}\Default
+    effect placeholder
+  \keyval{organs}{text}\Default
+    organ placeholder
+  \keyval{substance}{text}\Default
+    substance placeholder
+\end{options}
+\begin{example}
+  \ghs[exposure=This is how you get exposed.]{h}{340} \par
+  \ghs[effect=These are the effects.]{h}{360} \par
+  \ghs[organs=to this organ]{h}{370} \par
+  \ghs[substance=substance]{euh}{208}
+\end{example}
+
+\subsection{Statements with Gaps}
+Some of the statements have gaps that can be filled.
+\begin{example}[side-by-side]
+  \ghs{p}{301} \par
+  \ghs{p}{401} \par
+  \ghs{p}{411} \par
+  \ghs{p}{413}
+\end{example}
+
+These gaps can be filled using these options:
+\begin{options}
+  \keyval{text}{text}
+    Fill the \code{text} gap.
+  \keyval{dots}{text}
+    Fill the \code{dots} gap.
+  \keyval{C-temperature}{num}
+    Fill the Celsius temperature gap.
+  \keyval{F-temperature}{num}
+    Fill the Fahrenheit temperature gap.
+  \keyval{kg-mass}{num}
+    Fill the \si{\GHSkilogram} mass gap.
+  \keyval{lbs-mass}{num}
+    Fill the \si{\GHSpounds} mass gap.
+\end{options}
+\begin{example}
+  \ghs[text=contact physician!]{p}{301} \par
+  \ghs[dots=here]{p}{401} \par
+  \ghs[C-temperature=50, F-temperature=122]{p}{411} \par
+  \ghs[kg-mass=5.0, lbs-mass=11, C-temperature=50, F-temperature=122]{p}{413}
+\end{example}
+
+\subsection{Combined Statements}
+There are some combinations of statements.  They are input with a \code{+}
+between the numbers:
+\begin{example}
+  \ghs{p}{235+410} \\
+  \ghs{p}{301+330+331}
+\end{example}
+
+Note that you can only get combinations that officially exist.  \emph{You
+  can't combine freely}.
+
+\section{Pictograms}
+\subsection{The Pictures}
+The \ac{ghs} defines a number of pictograms:
+
+\ghspic{explos} \ghspic{flame} \ghspic{flame-O} \ghspic{bottle} \ghspic{acid}
+\ghspic{skull} \ghspic{exclam} \ghspic{health} \ghspic{aqpol}
+
+\begin{commands}
+  \command{ghspic}[\oarg{options}\marg{name}]
+    Load pictogram \meta{name}.
+\end{commands}
+Table~\ref{tab:ghs_pictograms} shows all available pictograms and their names.
+To be more precise: it shows the names to use with the \cs{ghspic} command.
+The file names are \code{ghsystem\_\meta{name}.\meta{filetype}} where
+\meta{filetype} is \code{eps}, \code{pdf}, \code{jpg} or \code{png}, see also
+section~\ref{ssec:picture_type}.
+\begin{example}[side-by-side]
+  \ghspic{skull}
+\end{example}
+
+If you don't like the default size you can change it using this option:
+\begin{options}
+  \keyval{scale}{factor}\Default{1}
+    Scales the pictogram.
+\end{options}
+The pictures are actually quite large.  The default setting scales them by a
+factor of $\frac{1}{20}$.
+\begin{example}[side-by-side]
+  \ghspic[scale=2]{skull}
+\end{example}
+
+If you want to use some specific \cs*{includegraphics} options, \eg, if
+you want to rotate the pictogram for some reason, use this option:
+\begin{options}
+  \keyval{includegraphics}{includegraphics keyvals}
+    Pass options to the underlying \cs*{includegraphics} command.
+\end{options}
+\begin{example}
+  \ghspic[includegraphics={angle=90}]{skull}
+\end{example}
+
+\begin{longtable}{>{\ttfamily}ll>{\ttfamily}ll}
+    \caption{All available \ac{ghs} pictograms.\label{tab:ghs_pictograms}} \\
+  \toprule
+    \normalfont\bfseries name & \bfseries pictogram &
+    \normalfont\bfseries name & \bfseries pictogram \\
+  \midrule\endfirsthead
+  \toprule
+    \normalfont\bfseries name & \bfseries pictogram &
+    \normalfont\bfseries name & \bfseries pictogram \\
+  \midrule\endhead
+  \bottomrule\endfoot
+  explos          & \ghspic{explos}          & explos-1        & \ghspic{explos-1} \\
+  explos-2        & \ghspic{explos-2}        & explos-3        & \ghspic{explos-3} \\
+  explos-4        & \ghspic{explos-4}        & explos-5        & \ghspic{explos-5} \\
+  explos-6        & \ghspic{explos-6}        & & \\
+  flame           & \ghspic{flame}           & flame-2-white   & \ghspic{flame-2-white} \\
+  flame-2-black   & \ghspic{flame-2-black}   & flame-3-white   & \ghspic{flame-3-white} \\
+  flame-3-black   & \ghspic{flame-3-black}   & flame-4-1       & \ghspic{flame-4-1} \\
+  flame-4-2       & \ghspic{flame-4-2}       &
+    flame-4-3-white & \ghspic{flame-4-3-white} \\
+  flame-4-3-black & \ghspic{flame-4-3-black} &
+    flame-5-2-white & \ghspic{flame-5-2-white} \\
+  flame-5-2-black & \ghspic{flame-5-2-black} & & \\
+  flame-O         & \ghspic{flame-O}         & flame-O-5-1     & \ghspic{flame-O-5-1} \\
+  bottle          & \ghspic{bottle}          & bottle-2-black  & \ghspic{bottle-2-white} \\
+  bottle-2-white  & \ghspic{bottle-2-black}  & & \\
+  acid            & \ghspic{acid}            & acid-8          & \ghspic{acid-8} \\
+  skull           & \ghspic{skull}           & skull-2         & \ghspic{skull-2} \\
+  skull-6         & \ghspic{skull-6}         & & \\
+  exclam          & \ghspic{exclam}          & & \\
+  health          & \ghspic{health}          & & \\
+  aqpol           & \ghspic{aqpol}           & & \\
+\end{longtable}
+
+\subsection{Picture Type Depending on Engine}\label{ssec:picture_type}
+As you probably know you can't use every picture type with every compiler
+engine.  \pdfTeX{} in \acs{dvi} mode \emph{needs} \code{eps} pictures while
+\pdfTeX{} in \acs{pdf} mode, \XeTeX{} and \LuaTeX{} convert \code{eps}
+pictures into \code{pdf} files, given they have the rights to write in the
+directory the pictures are saved in.
+
+However, the latter can include \code{jpg} and \code{png} without any
+problems, while \pdfTeX{} in \acs{dvi} mode can't.
+
+To resolve this \ghsystem\ tests which engine is used and if \pdfTeX{} which
+mode is used and then chooses either \code{eps} or \code{pdf} for the
+pictograms.  You are free to choose the picture type yourself with the option
+\begin{options}
+  \keychoice{pic-type}{eps,pdf,jpg,png}
+    Choose the picture type.
+\end{options}
+
+\section{Available Languages}\label{sec:ghsystem_language}
+Right now the H and P statements are only available in English, German,
+Italian and Spanish.  The package adapts \chemmacros' option \option{language}
+or if the option hasn't been used recognizes the language settings made with
+\pkg{babel} or \pkg{polyglossia}.  To be more precise: the language selected
+at begin document is recognized.  Later changes won't affect \ghsystem.  If
+you want to use different languages you have to use \ghsystem's language
+option then.
+
+You can also choose the language explicitly.
+\begin{options}
+  \keychoice{language}{english,german,italian,spanish}\Default{english}
+    Selects and loads language file.  Falls back to \code{english} if the
+    chosen file doesn't exist.
+\end{options}
+\begin{example}[side-by-side]
+  \ghs{h}{201}
+
+  \chemsetup[ghsystem]{language=german}
+  \ghs{h}{201}
+\end{example}
+
+There is another alternative:
+\begin{commands}
+  \command{loadghsystemlanguage}[\marg{language}]
+    \sinceversion{4.0}Load the language used by \ghsystem.
+\end{commands}
+
+I will add other languages some time in future.  This may take a while,
+though.  If you would be willing to contribute and write the statements of
+another language please feel free to contact
+me\footnote{\href{mailto:contact@mychemistry.eu}{contact@mychemistry.eu}}.  I
+would provide you with a template file, a \acs{pdf} containing the official
+translations, and help to all your questions.
+
+\section{List of All Statements}
+If for some reason you want to list all sentences you can use
+\begin{commands}
+  \command{ghslistall}[\oarg{options}]
+    Print a table with all defined statements.
+\end{commands}
+
+This command has a number of options to customize the table, which is created
+with the \env{longtable} environment of the \pkg{longtable} package.
+\begin{options}
+  \keyval{table-head-number}{text}\Default{Identifier}
+    The table head for the number.
+  \keyval{table-head-text}{text}\Default{Statement}
+    The table head for the statement.
+  \keyval{table-next-page}{text}\Default{continues on next page}
+    The hint for a next page.
+  \keyval{table-caption}{text}\Default{All H, EUH, and P Statements.}
+    The \meta{text} in \cs*{caption}\marg{text}.
+  \keyval{table-caption-short}{short text}\Default
+    The \meta{short text} in \cs*{caption}\oarg{short text}\marg{text}.
+  \keyval{table-label}{text}\Default{tab:ghs-hp-statements}
+    The label to refer to the table with \cs*{ref} and similar commands.
+  \keyval{table-row-sep}{dim}\Default{3pt}
+    The separation of the table rows. A \TeX\ dimension.
+  \keychoice{table-rules}{\default{default},booktabs,none}\Default{default}
+    The style of the horizontal rules in the table.  \code{default} uses
+    \cs*{hline}, \code{booktabs} uses \cs*{toprule}, \cs*{midrule} and
+    \cs*{bottomrule}, resp.  This option needs the \pkg{booktabs} package
+    which you have to load yourself then.
+  \keychoice{table-top-head-rule}{\default{default},booktabs,none}\Default{default}
+    Change top rule explicitly.
+  \keychoice{table-head-rule}{\default{default},booktabs,none}\Default{default}
+    Change rule below head explicitly.
+  \keychoice{table-foot-rule}{\default{default},booktabs,none}\Default{default}
+    Change foot rule explicitly.
+  \keychoice{table-last-foot-rule}{\default{default},booktabs,none}\Default{default}
+    Change last foot rule explicitly.
+\end{options}
+
+The code below shows how table~\ref{tab:ghs-hp-statements} was created:
+\begin{sourcecode}
+  \ghslistall[fill-in,table-rules=booktabs]
+\end{sourcecode}
+
+\ghslistall[fill-in,table-rules=booktabs]
+
+\end{document}
