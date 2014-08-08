@@ -3,19 +3,20 @@
 % arara: pdflatex
 % arara: pdflatex
 % --------------------------------------------------------------------------
-% the CHEMMACROS bundle
-%   ghsystem_en.tex
-% macros and commands for chemists
+% the GHSYSTEM package
+%
+%   globally harmonized system
+%
 % --------------------------------------------------------------------------
 % Clemens Niederberger
 % --------------------------------------------------------------------------
-% https://bitbucket.org/cgnieder/chemmacros/
+% https://github.com/cgnieder/ghsystem/
 % contact@mychemistry.eu
 % --------------------------------------------------------------------------
 % If you have any ideas, questions, suggestions or bugs to report, please
 % feel free to contact me.
 % --------------------------------------------------------------------------
-% Copyright 2011-2013 Clemens Niederberger
+% Copyright 2011-2014 Clemens Niederberger
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3
@@ -32,87 +33,24 @@
 \documentclass[load-preamble+]{cnltx-doc}
 \usepackage[utf8]{inputenc}
 \usepackage[greek=newtx]{chemmacros}
+\usepackage{ghsystem}
 \setcnltx{
   package  = {ghsystem},
-  date     = \csname ghsystem@date\endcsname ,
-  version  = v\csname ghsystem@version\endcsname ,
-  title    = \huge the \chemmacros\ bundle,
   url      = https://bitbucket.org/cgnieder/chemmacros/ ,
   authors  = Clemens Niederberger ,
   email    = contact@mychemistry.eu ,
-  info     = {
-    packages \chemmacros\ (v\csname chemmacros@version\endcsname),
-    \chemformula\ (v\csname chemformula@version\endcsname),
-    \ghsystem\ (v\csname ghsystem@version\endcsname) and
-    \chemgreek\ (v\csname chemgreek@version\endcsname)\\[2ex]
-    {\Large documentation for the \ghsystem\ package}} ,
   abstract = {%
     \centering
     \includegraphics{chemmacros-logo.pdf}
     \par
   } ,
   add-cmds = {
-     abinitio, activatechemgreekmapping, AddRxnDesc, anti, aq, aqi,
-     ba, bond, bridge,
-    cd, ch, changechemgreeksymbol, charrow, chcpd, chemabove, Chemalpha,
-      Chembeta, Chemgamma, Chemdelta, ChemDelta, chemformula@bondlength,
-      Chemomega, Chemphi, ChemPhi, chemsetup, chlewis, chname , cip, cis, ch,
-      CNMR,
-    data, DeclareChemArrow, DeclareChemBond, DeclareChemBondAlias,
-      declarechemgreekmapping, DeclareChemIUPAC, DeclareChemLatin,
-      DeclareChemNMR, DeclareChemParticle, DeclareChemPhase,
-      DeclareChemReaction, DeclareChemState, delm, delp, Delta, Dfi,
-    el, ElPot, endo, Enthalpy, enthalpy, Entropy,
-    fmch, fpch, fscrm, fscrp,
-    gas, ghs, ghslistall, ghspic, Gibbs, gram,
-    hapto, HNMR, Helmholtz,
-    insitu, invacuo, iupac,
-    Ka, Kb, Kw,
-    Lfi, listofreactions, lqd, ltn,
-    mch, mega, meta, mhName,
-    newchemgreekmapping,
-    newman, NMR, Nu, Nuc,
-    orbital, ortho, ox, OX,
-    para, pch, per, pH, phase, photon, pKa, pKb, pOH, pos, positron,
-    Pot, prt,
-    Rad, redox, RenewChemArrow, RenewChemBond, renewchemgreekmapping,
-      RenewChemIUPAC, RenewChemLatin, RenewChemNMR, RenewChemParticle,
-      RenewChemPhase, RenewChemState,
-    Sf, scrm, scrp, second, selectchemgreekmapping, setchemformula,
-      ShowChemArrow, ShowChemBond, sld, Sod, State,
-    trans,
-    val
-  } ,
-  add-silent-cmds = {
-    addplot,
-    bottomrule,
-    cancel, cdot, ce, cee, celsius, centering, chemfig, chemname, clap,
-      cnsetup, color, cstack, cstsetup,
-    DeclareInstance, DeclareSIUnit, definecolor, draw,
-    electronvolt,
-    footnotesize,
-    glqq, grqq,
-    hertz, hspace,
-    includegraphics, intertext, IUPAC,
-    joule,
-    kilo,
-    latin, lewis, Lewis,
-    metre, midrule, milli, mmHg, mole,
-    nano, nicefrac, num, numrange,
-    ominus, oplus,
-    percent, pgfarrowsdeclarealias, pgfarrowsrenewalias,
-    renewtagform, rightarrow,
-    sample, scriptscriptstyle, setatomsep, setbondoffset, sfrac, shorthandoff,
-      si, SI, sisetup, square, subsection,
-    textcolor, textendash, textsuperscript, tiny, toprule,
-    upbeta, upeta, upgamma, usetikzlibrary,
-    volt, vphantom, vspave,
-    xspace
+    chemsetup,
+    ghs, ghslistall, ghspic
   }
 }
 
-\usepackage{chemfig,booktabs,cancel,varioref}
-\usepackage[version=3]{mhchem}
+\usepackage{booktabs}
 
 \expandafter\def\csname libertine@figurestyle\endcsname{LF}
 \usepackage[libertine]{newtxmath}
@@ -140,12 +78,6 @@
   pdfstring = EU ,
   accsupp   = EU
 }
-\DeclareAcronym{iupac}{
-  short     = iupac ,
-  long      = International Union of Pure and Applied Chemistry ,
-  pdfstring = IUPAC ,
-  accsupp   = IUPAC
-}
 \DeclareAcronym{UN}{
   short     = un ,
   long      = United Nations ,
@@ -169,7 +101,6 @@
   option/synchronize ,
   chemformula/format = \libertineLF
 }
-% \colorlet{chemformula}{black!90}
 
 \sisetup{
   detect-mode=false,
@@ -182,29 +113,6 @@
 \defbibheading{bibliography}{\addsec{References}}
 \addbibresource{\jobname.bib}
 \begin{filecontents*}{\jobname.bib}
-@book{iupac:greenbook,
-  author    = {E. Richard Cohan and Tomislav Cvita\v{s} and Jeremy G. Frey and
-    Bertil Holmstr\"om and Kozo Kuchitsu and Roberto Marquardt and Ian Mills and
-    Franco Pavese and Martin Quack and J\"urgen Stohner and Herbert L. Strauss and
-    Michio Takami and Anders J Thor} ,
-  title     = {``Quantities, Symbols and Units in Physical Chemistry'', \acs{iupac}
-    Green Book} ,
-  sorttitle = {Quantities, Symbols and Units in Physical Chemistry} ,
-  indexsorttitle = {Quantities, Symbols and Units in Physical Chemistry} ,
-  edition   = {3rd Edition. 2nd Printing} ,
-  year      = {2008} ,
-  publisher = {\acs{iupac} \&\ RSC Publishing, Cambridge}
-}
-@book{iupac:redbook,
-  author    = {Neil G. Connelly and Ture Damhus and Richard M. Hartshorn and
-    Alan T. Hutton} ,
-  title     = {``Nomenclature of Inorganic Chemistry'', \acs{iupac} Red Book} ,
-  sorttitle = {Nomenclature of Inorganic Chemistry} ,
-  indexsorttitle = {Nomenclature of Inorganic Chemistry} ,
-  year      = {2005} ,
-  publisher = { \acs{iupac} \&\ RSC Publishing, Cambridge} ,
-  isbn      = {0-85404-438-8}
-}
 @misc{eu:ghsystem_regulation,
   author   = {{The European Parliament and The Council of the European Union}},
   title    = {Regulation (EC) No 1272/2008 of the European Parliament and of
@@ -225,38 +133,6 @@
 }
 \end{filecontents*}
 
-\DeclareInstance{xfrac}{chemformula-text-frac}{text}
-  {
-    scale-factor        = 1 ,
-    denominator-bot-sep = -.2ex ,
-    denominator-format  = \scriptsize #1 ,
-    numerator-top-sep   = -.2ex ,
-    numerator-format    = \scriptsize #1 ,
-    slash-right-kern    = .05em ,
-    slash-left-kern     = .05em
-  }
-
-\usetikzlibrary{calc,positioning,decorations.pathmorphing,patterns}
-
-\newpackagename\chemmacros{chemmacros}
-\newpackagename\chemformula{chemformula}
-% \newpackagename\ghsystem{ghsystem}
-\newpackagename\chemgreek{chemgreek}
-
-
-\newidxcmd\manual{\textsf{#1}}[\ (manual)]
-
-\newenvironment{codedesc}
-  {%
-    \def\Code##1{\item\code{##1}\hfill\newline}%
-    \cnltxlist
-  }
-  {\endcnltxlist}
-
-\renewcommand*\AmS{\hologo{AmS}}
-
-\newcommand*\TikZ{Ti\textit{k}Z}
-
 \newcommand*\tablehead[1]{\textrm{\bfseries#1}}
 
 \begin{document}
@@ -268,7 +144,7 @@ systems in different countries.  While it has not been implemented by all
 countries yet~\cite{unece:ghsystem_implementation}, it is only a matter of
 time.
 
-The package \ghsystem\ now enables you to typeset all the hazard and
+The package \ghsystem{} now enables you to typeset all the hazard and
 precautionary statements and pictograms in a very easy way.  The statements
 are taken from \acs{eu} regulation 1272/2008~\cite{eu:ghsystem_regulation}.
 
@@ -285,14 +161,14 @@ are taken from \acs{eu} regulation 1272/2008~\cite{eu:ghsystem_regulation}.
 \needpackage{ifpdf}~\cite{pkg:ifpdf}.
 
 \section{Setup}
-The simplest way is to load \chemmacros\ which loads \ghsystem\ implicitily.
-All of \ghsystem's options belong to the module \module{ghsystem}.  This means
-they can be setup with
+The simplest way is to load \pkg{chemmacros}~\cite{pkg:chemmacros} which loads
+\ghsystem{} implicitily.  All of \ghsystem's options belong to
+\pkg{chemmacros}' module \module{ghsystem}.  This means they can be setup with
 \begin{sourcecode}
   \chemsetup[ghsystem]{<options>} or
   \chemsetup{ghsystem/<option1>,ghsystem/<option2>}
 \end{sourcecode}
-\sinceversion{4.0}However, \ghsystem\ can be loaded as a standalone package
+\sinceversion{4.0}However, \ghsystem{} can be loaded as a standalone package
 and thus provides its own setup command:
 \begin{commands}
   \command{ghssetup}[\marg{options}]
@@ -518,12 +394,12 @@ pictograms.  You are free to choose the picture type yourself with the option
 
 \section{Available Languages}\label{sec:ghsystem_language}
 Right now the H and P statements are only available in English, German,
-Italian and Spanish.  The package adapts \chemmacros' option \option{language}
-or if the option hasn't been used recognizes the language settings made with
-\pkg{babel} or \pkg{polyglossia}.  To be more precise: the language selected
-at begin document is recognized.  Later changes won't affect \ghsystem.  If
-you want to use different languages you have to use \ghsystem's language
-option then.
+Italian and Spanish.  The package adapts \pkg{chemmacros}' option
+\option{language} or if the option hasn't been used recognizes the language
+settings made with \pkg{babel} or \pkg{polyglossia}.  To be more precise: the
+language selected at begin document is recognized.  Later changes won't affect
+\ghsystem.  If you want to use different languages you have to use \ghsystem's
+language option then.
 
 You can also choose the language explicitly.
 \begin{options}

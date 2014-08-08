@@ -1,5 +1,0 @@
-\documentclass[convert={outext=.png}]{standalone}
-\usepackage{graphicx}
-\begin{document}
-\includegraphics{ghsystem_acid.png}
-\end{document}

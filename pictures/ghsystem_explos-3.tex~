@@ -1,5 +1,0 @@
-\documentclass{standalone}
-\usepackage{graphicx}
-\begin{document}
-\includegraphics{ghsystem_skull.png}
-\end{document}
