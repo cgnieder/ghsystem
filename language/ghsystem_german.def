@@ -11,7 +11,7 @@
 % - If you have any ideas, questions, suggestions or bugs to report, please
 % - feel free to contact me.
 % --------------------------------------------------------------------------
-% - Copyright 2011-2014 Clemens Niederberger
+% - Copyright 2011-2016 Clemens Niederberger
 % -
 % - This work may be distributed and/or modified under the
 % - conditions of the LaTeX Project Public License, either version 1.3
@@ -256,13 +256,13 @@
   den~ Anstrich~ von~ Gegenst\"anden~ verwenden,~ die~ von~ Kindern~ gekaut~
   oder~ gelutscht~ werden~ k\"onnten. }
 \prop_put:Nnn \l__ghsystem_euh_prop { 201A } { Achtung!~ Enth\"alt~ Blei. }
-\prop_put:Nnn \l__ghsystem_euh_prop { 202 } { \iupac{Cyan\|acryl\|at}.~
+\prop_put:Nnn \l__ghsystem_euh_prop { 202 } { \iupac{Cyan|acryl|at}.~
   Gefahr.~ Klebt~ innerhalb~ von~ Sekunden~ Haut~ und~ Augenlider~ zusammen.~
   Darf~ nicht~ in~ die~ H\"ande~ von~ Kindern~ gelangen. }
 \prop_put:Nnn \l__ghsystem_euh_prop { 203 } { Enth\"alt~ Chrom\,(VI).~ Kann~
   allergische~ Reaktionen~ hervorrufen. }
 \prop_put:Nnn \l__ghsystem_euh_prop { 204 } { Enth\"alt~
-  \iupac{Iso\|cyan\|ate}.~ Kann~ allergische~ Reaktionen~ hervorrufen. }
+  \iupac{Iso|cyan|ate}.~ Kann~ allergische~ Reaktionen~ hervorrufen. }
 \prop_put:Nnn \l__ghsystem_euh_prop { 205 } { Enth\"alt~ epoxidhaltige~
   Verbindungen.~ Kann~ allergische~ Reaktionen~ hervorrufen. }
 \prop_put:Nnn \l__ghsystem_euh_prop { 206 } { Achtung!~ Nicht~ zusammen~ mit~
@@ -593,3 +593,4 @@
   sch\"adigen. }
 \prop_put:Nnn \l__ghsystem_h_prop { 360Df } { Kann~ das~ Kind~ im~ Mutterleib~
   sch\"adigen.~ Kann~ vermutlich~ die~ Fruchtbarkeit~ beeintr\"achtigen. }
+

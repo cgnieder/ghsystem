@@ -12,7 +12,7 @@
 % If you have any ideas, questions, suggestions or bugs to report, please
 % feel free to contact me.
 % --------------------------------------------------------------------------
-% Copyright 2011-2014 Clemens Niederberger
+% Copyright 2011-2016 Clemens Niederberger
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3
@@ -26,92 +26,72 @@
 %
 % The Current Maintainer of this work is Clemens Niederberger.
 % --------------------------------------------------------------------------
-\RequirePackage{ expl3, xparse, l3keys2e }
-\def\ghsystem@version{4.6}
-\def\ghsystem@date{2014/08/08}
+\RequirePackage{ expl3, xparse, l3keys2e , chemmacros }
+\ExplSyntaxOn
+
+\tl_const:Nn \c_ghsystem_version_tl {4.7}
+\tl_const:Nn \c_ghsystem_date_tl    {2016/01/11}
+\tl_const:Nn \c_ghsystem_info_tl    {globally~ harmonised~ system}
+
 \ProvidesExplPackage
   {ghsystem}
-  {\ghsystem@date}
-  {\ghsystem@version}
-  {globally harmonised system}
-
-% --------------------------------------------------------------------------
-% check expl3 version:
-\@ifpackagelater { expl3 } { 2012/11/21 }
-  { }
-  {
-    \PackageError { ghsystem } { Support~package~expl3~too~old }
-      {
-        You~need~to~update~your~installation~of~the~bundles~'l3kernel'~and~
-        'l3packages'.\MessageBreak
-        Loading~ghsystem~will~abort!
-      }
-    \tex_endinput:D
-  }
+  {\c_ghsystem_date_tl}
+  {\c_ghsystem_version_tl}
+  {\c_ghsystem_info_tl}
 
 % --------------------------------------------------------------------------- %
 % error and warning messages:
-\msg_set:nnnn { ghsystem } { explicit }
-  { It~seems~you've~loaded~`ghsystem'~explicitly. }
-  {
-    It~seems~you've~loaded~`ghsystem'~explicitly.~This~should~work~but~the~
-    recommended~way~is~to~load~it~via~the~bundle,~i.e.~by~using~
-    \token_to_str:N \usepackage \{ chemmacros \}.
-  }
-  
-\msg_set:nnnn { ghsystem } { statements }
+\msg_new:nnn {ghsystem} {statements}
   {
     You've~tried~to~call~statement~#1#2~ \msg_line_context: \c_space_tl but~it~
     it~is~not~defined~in~ghsystem.sty .
   }
-  {
-    You've~tried~to~call~statement~#1#2~ \msg_line_context: \c_space_tl but~it~
-    it~is~not~defined~in~ghsystem.sty . ~ Are~you~sure~it~exists? ~ If~so~please
-    ~send~a~message~to~the~author.~Thanks.
-  }
 
-\msg_set:nnnn { ghsystem } { booktabs }
-  { Package~`booktabs'~missing~\msg_line_context: . }
+\msg_new:nnn {ghsystem} {booktabs}
   {
     Option~#1~of~the~\token_to_str:N \ghslistall \c_space_tl command~
     \msg_line_context: \c_space_tl needs~the~`booktabs'~package . ~Please~make~
     sure~to~load~it~in~your~preamble.
   }
 
-\cs_new_protected:Npn \ghsystem_msg:nnxx #1#2#3#4
+\msg_new:nnn {ghsystem} {unknown-type}
+  {
+    The~ statement~ type~ `#1'~ \msg_line_context: \c_space_tl is~ unkown.~
+    Valid~ types~ are~ `H',~ `EUH',~ and~ `P'.
+  }
+
+\cs_new_protected:Npn \ghsystem_msg:nnn #1#2#3
   {
     \bool_if:NTF \l__ghsystem_strict_bool
-      { \msg_error:nnxx { #1 } { #2 } { #3 } { #4 } }
-      { \msg_warning:nnxx { #1 } { #2 } { #3 } { #4 } }
+      { \msg_error:nnn   {#1} {#2} {#3} }
+      { \msg_warning:nnn {#1} {#2} {#3} }
+  }
+\cs_generate_variant:Nn \ghsystem_msg:nnn {nnx}
+
+\cs_new_protected:Npn \ghsystem_msg:nnnn #1#2#3#4
+  {
+    \bool_if:NTF \l__ghsystem_strict_bool
+      { \msg_error:nnn   {#1} {#2} {#3} {#4} }
+      { \msg_warning:nnn {#1} {#2} {#3} {#4} }
   }
 
 % --------------------------------------------------------------------------
 % package options:
 \bool_new:N \l__ghsystem_strict_bool
-\keys_define:nn { chemmacros / ghsystem }
+\keys_define:nn {ghsystem}
   {
     strict   .bool_set:N = \l__ghsystem_strict_bool ,
     strict   .default:n  = true ,
-    language .code:n     = \ghsystem_load_language:n { #1 }
+    language .code:n     = \ghsystem_load_language:n {#1}
   }
 
-\AtBeginDocument
-  {
-    \@ifpackageloaded{ chemmacros }
-      {
-        \bool_if:NT \l_chemmacros_strict_bool
-          { \bool_set_true:N \l__ghsystem_strict_bool }
-      }
-      {
-        \cs_new:Npn \iupac #1
-          {
-            \group_begin:
-              \cs_set_eq:NN \| \scan_stop:
-              #1
-            \group_end:
-          }
-      }
-  }
+% \AtBeginDocument
+%   {
+%     \@ifpackageloaded {chemmacros}
+%       {}
+%       {\RequirePackage{chemmacros}}
+%     \usechemmodule {nomenclature}
+%   }
 
 % --------------------------------------------------------------------------- %
 % variants of kernel functions:
@@ -125,7 +105,7 @@
 \int_new:N \l__ghsystem_tmpb_int
 
 % load required packages:
-\RequirePackage{ translations , siunitx , graphicx , longtable , ifpdf }
+\RequirePackage { translations , siunitx , graphicx , longtable , ifpdf }
 
 % --------------------------------------------------------------------------- %
 % define variables:
@@ -157,9 +137,6 @@
 \bool_new:N \l__ghsystem_substance_bool
 \bool_new:N \l__ghsystem_organs_bool
 \bool_new:N \l__ghsystem_hide_statement_bool
-\bool_new:N \l__ghsystem_engine_pdftex_bool
-\bool_new:N \l__ghsystem_engine_xetex_bool
-\bool_new:N \l__ghsystem_engine_luatex_bool
 
 \tl_new:N   \l__ghsystem_number_space_tl
 \tl_new:N   \l__ghsystem_celsius_temperature_tl
@@ -199,10 +176,10 @@
 \fp_new:N   \l__ghsystem_picture_scale_fp
 \fp_set:Nn  \l__ghsystem_picture_scale_fp { \l__ghsystem_picture_scale_tl }
 
-\DeclareSIUnit { \GHSfahrenheit } { \SIUnitSymbolDegree F }
-\DeclareSIUnit { \GHScelsius } { \SIUnitSymbolDegree C }
-\DeclareSIUnit { \GHSkilogram } { kg }
-\DeclareSIUnit { \GHSpounds } { lbs }
+\DeclareSIUnit \GHSfahrenheit { \SIUnitSymbolDegree F }
+\DeclareSIUnit \GHScelsius    { \SIUnitSymbolDegree C }
+\DeclareSIUnit \GHSkilogram   { kg }
+\DeclareSIUnit \GHSpounds     { lbs }
 
 % language settings
 \bool_new:N \l__ghsystem_language_file_loaded_bool
@@ -255,20 +232,21 @@
     \file_input:n { ghsystem_#1.def }
     \__ghsystem_namespace_restore:
   }
+\cs_generate_variant:Nn \ghsystem_load_language_file:n { V }
 
 \cs_new_protected:Npn \ghsystem_load_language:n #1
   {
-    \file_if_exist:xTF { ghsystem_ #1 .def }
+    \file_if_exist:xTF { ghsystem_ \@trnslt@language {#1} .def }
       {
         \bool_set_true:N \l__ghsystem_language_file_loaded_bool
-        \ghsystem_load_language_file:n { #1 }
+        \ghsystem_load_language_file:n { \@trnslt@language {#1} }
       }
-      { \ghsystem_load_language_file:n { english } }
+      { \ghsystem_load_language_file:V \l_chemmacros_language_tl }
   }
 \cs_generate_variant:Nn \ghsystem_load_language:n { V }
 
-\NewDocumentCommand \loadghsystemlanguage { m }
-  { \ghsystem_load_language:n { #1 } }
+\NewDocumentCommand \loadghsystemlanguage {m}
+  { \ghsystem_load_language:n {#1} }
 
 \AtBeginDocument{
   \bool_if:NF \l__ghsystem_language_file_loaded_bool
@@ -277,7 +255,7 @@
         { \ghsystem_load_language:V \l_chemmacros_language_tl }
         {
           \ghsystem_load_language:n
-            { \@trnslt@language{\@trnslt@current@language} }
+            { \@trnslt@language {\@trnslt@current@language} }
         }
     }
 }
@@ -285,12 +263,12 @@
 \cs_new_nopar:Nn \ghsystem_booktabs:n
   {
     \cs_if_exist:cF { ver@booktabs.sty }
-      { \msg_error:nnx { ghsystem } { booktabs } { #1 } }
+      { \msg_error:nnx {ghsystem} { booktabs } {#1} }
   }
 
 % --------------------------------------------------------------------------- %
 % define options:
-\keys_define:nn { chemmacros / ghsystem }
+\keys_define:nn {ghsystem}
   {
     % \ghs options:
     hide                            .bool_set:N =
@@ -399,46 +377,42 @@
 %   \ghs{<type>}{<num>}
 %   \ghs*{<type>}{<num>} : type without number
 %
-\NewDocumentCommand \ghs { somm }
+\NewDocumentCommand \ghs {somm}
   {
     \group_begin:
-      \IfBooleanF { #1 } { \bool_set_true:N \l__ghsystem_show_number_bool }
-      \IfNoValueF { #2 } { \keys_set:nn { chemmacros / ghsystem } { #2 } }
-      \ghsystem_read_args:nn { #3 } { #4 }
+      \IfBooleanF {#1} { \bool_set_true:N \l__ghsystem_show_number_bool }
+      \IfNoValueF {#2} { \keys_set:nn {ghsystem} {#2} }
+      \ghsystem_read_args:nn {#3} {#4}
     \group_end:
   }
 
 \cs_new:Nn \ghsystem_read_args:nn
   {
-    \__ghsystem_get_type:nN { #1 } \l__ghsystem_tmpa_tl
-    \prop_get:cnNTF { l__ghsystem_ \l__ghsystem_tmpa_tl _prop } { #2 } \l__ghsystem_tmpb_tl
+    \__ghsystem_get_type:nN {#1} \l__ghsystem_tmpa_tl
+    \prop_get:cnNTF { l__ghsystem_ \l__ghsystem_tmpa_tl _prop } {#2} \l__ghsystem_tmpb_tl
       {
-        \__ghsystem_is_combination:nn { #1 } { #2 }
+        \__ghsystem_is_combination:nn {#1} {#2}
         \bool_if:NF \l__ghsystem_hide_statement_bool
           { \tl_use:N \l__ghsystem_tmpb_tl  }
       }
-      { \ghsystem_msg:nnxx { ghsystem } { statements } { #1 } { #2 } }
+      { \ghsystem_msg:nnnn {ghsystem} {statements} {#1} {#2} }
   }
+
+\seq_new:N \l__ghsystem_types_seq
+\seq_put_right:Nn \l__ghsystem_types_seq {h}
+\seq_put_right:Nn \l__ghsystem_types_seq {euh}
+\seq_put_right:Nn \l__ghsystem_types_seq {p}
 
 \cs_new_protected:Nn \__ghsystem_get_type:nN
   {
-    \tl_if_eq:nnT { #1 } { h }   { \tl_set:Nn #2 { h } }
-    \tl_if_eq:nnT { #1 } { H }   { \tl_set:Nn #2 { h } }
-    \tl_if_eq:nnT { #1 } { euh } { \tl_set:Nn #2 { euh } }
-    \tl_if_eq:nnT { #1 } { Euh } { \tl_set:Nn #2 { euh } }
-    \tl_if_eq:nnT { #1 } { euH } { \tl_set:Nn #2 { euh } }
-    \tl_if_eq:nnT { #1 } { eUh } { \tl_set:Nn #2 { euh } }
-    \tl_if_eq:nnT { #1 } { EUh } { \tl_set:Nn #2 { euh } }
-    \tl_if_eq:nnT { #1 } { EuH } { \tl_set:Nn #2 { euh } }
-    \tl_if_eq:nnT { #1 } { eUH } { \tl_set:Nn #2 { euh } }
-    \tl_if_eq:nnT { #1 } { EUH } { \tl_set:Nn #2 { euh } }
-    \tl_if_eq:nnT { #1 } { p }   { \tl_set:Nn #2 { p } }
-    \tl_if_eq:nnT { #1 } { P }   { \tl_set:Nn #2 { p } }
+    \tl_set:Nx #2 { \tl_lower_case:n {#1} }
+    \seq_if_in:NVF \l__ghsystem_types_seq #2
+      { \ghsystem_msg:nnx {ghsystem} {unknown-type} {#2} }
   }
 
 \cs_new:Nn \__ghsystem_is_combination:nn
   {
-    \tl_if_in:nnTF { #2 } { + }
+    \tl_if_in:nnTF {#2} { + }
       { \__ghsystem_is_combination_aux_i:w #1,#2 \q_stop }
       { \__ghsystem_is_combination_aux_ii:w #1,#2 \q_stop }
   }
@@ -447,13 +421,13 @@
   {
     \bool_if:NT \l__ghsystem_show_number_bool
       {
-        \tl_to_uppercase:n { #1 }
+        \tl_upper_case:n {#1}
         \tl_use:N \l__ghsystem_number_space_tl
         #2 ~ + ~
-        \tl_if_in:nnTF { #3 } { + }
+        \tl_if_in:nnTF {#3} { + }
           { \__ghsystem_is_combination_aux_iii:w #1,#3 \q_stop }
           {
-            \tl_to_uppercase:n { #1 }
+            \tl_upper_case:n {#1}
             \tl_use:N \l__ghsystem_number_space_tl
             #3 \bool_if:NF \l__ghsystem_hide_statement_bool { : ~ }
           }
@@ -464,7 +438,7 @@
   {
     \bool_if:NT \l__ghsystem_show_number_bool
       {
-        \tl_to_uppercase:n { #1 }
+        \tl_upper_case:n {#1}
         \tl_use:N \l__ghsystem_number_space_tl
         #2 \bool_if:NF \l__ghsystem_hide_statement_bool { : ~ }
       }
@@ -474,10 +448,10 @@
   {
     \bool_if:NT \l__ghsystem_show_number_bool
       {
-        \tl_to_uppercase:n { #1 }
+        \tl_upper_case:n {#1}
         \tl_use:N \l__ghsystem_number_space_tl
         #2 ~ + ~
-        \tl_to_uppercase:n { #1 }
+        \tl_upper_case:n {#1}
         \tl_use:N \l__ghsystem_number_space_tl
         #3 \bool_if:NF \l__ghsystem_hide_statement_bool { : ~ }
       }
@@ -486,10 +460,10 @@
 % --------------------------------------------------------------------------- %
 % list all statements in a table
 %
-\NewDocumentCommand \ghslistall { o }
+\NewDocumentCommand \ghslistall {o}
   {
     \group_begin:
-      \IfNoValueF { #1 } { \keys_set:nn { chemmacros / ghsystem } { #1 } }
+      \IfNoValueF {#1} { \keys_set:nn {ghsystem} {#1} }
       \ghsystem_list_all:
     \group_end:
   }
@@ -527,16 +501,16 @@
         \l__ghsystem_table_foot_rule_tl \multicolumn{2}{r} { }
       \endlastfoot
       \prop_map_inline:Nn \l__ghsystem_h_prop
-        { \__ghsystem_read_number:nn { H } { ##1 } & ##2 \\ }
+        { \__ghsystem_read_number:nn {H} {##1} & ##2 \\ }
       \prop_map_inline:Nn \l__ghsystem_euh_prop
-        { \__ghsystem_read_number:nn { EUH } { ##1 } & ##2 \\ }
+        { \__ghsystem_read_number:nn {EUH} {##1} & ##2 \\ }
       \int_zero:N \l__ghsystem_tmpa_int
       \prop_map_inline:Nn \l__ghsystem_p_prop { \int_gincr:N \l__ghsystem_tmpa_int }
       \int_zero:N \l__ghsystem_tmpb_int
       \prop_map_inline:Nn \l__ghsystem_p_prop
         {
           \int_gincr:N \l__ghsystem_tmpb_int
-          \__ghsystem_read_number:nn { P } { ##1 } & ##2
+          \__ghsystem_read_number:nn {P} {##1} & ##2
           \int_compare:nNnT { \l__ghsystem_tmpb_int } < { \l__ghsystem_tmpa_int } { \\ }
         }
     \end { longtable }
@@ -544,7 +518,7 @@
 
 \cs_new:Nn \__ghsystem_read_number:nn
   {
-    \tl_if_in:nnTF { #2 } { + }
+    \tl_if_in:nnTF {#2} { + }
       { \__ghsystem_read_number_aux_i:w #1 , #2 \q_stop }
       { #1 \tl_use:N \l__ghsystem_number_space_tl #2 }
   }
@@ -552,7 +526,7 @@
 \cs_new:Npn \__ghsystem_read_number_aux_i:w #1,#2+#3\q_stop
   {
      #1 \tl_use:N \l__ghsystem_number_space_tl #2 ~+~
-     \tl_if_in:nnTF { #3 } { + }
+     \tl_if_in:nnTF {#3} { + }
        { \__ghsystem_read_number_aux_ii:w #1,#3 \q_stop }
        { #1#3 }
   }
@@ -565,31 +539,25 @@
 %   \ghspic[<options>]{<name>}
 %
 % test for compilation engine/mode:
-\pdftex_if_engine:T { \bool_set_true:N \l__ghsystem_engine_pdftex_bool }
-\xetex_if_engine:T  { \bool_set_true:N \l__ghsystem_engine_xetex_bool }
-\luatex_if_engine:T { \bool_set_true:N \l__ghsystem_engine_luatex_bool }
-
-\bool_new:N \l__ghsystem_picture_directory_bool
-
-\bool_if:NT \l__ghsystem_engine_pdftex_bool
+\sys_if_engine_pdftex:T
   {
     \ifpdf
-      \tl_set:Nn \l__ghsystem_picture_type_tl { pdf }
+      \tl_set:Nn \l__ghsystem_picture_type_tl {pdf}
     \else
-      \tl_set:Nn \l__ghsystem_picture_type_tl { eps }
+      \tl_set:Nn \l__ghsystem_picture_type_tl {eps}
     \fi
   }
-\bool_if:NT \l__ghsystem_engine_xetex_bool
-  { \tl_set:Nn \l__ghsystem_picture_type_tl { pdf } }
-\bool_if:NT \l__ghsystem_engine_luatex_bool
-  { \tl_set:Nn \l__ghsystem_picture_type_tl { pdf } }
+\sys_if_engine_xetex:T
+  { \tl_set:Nn \l__ghsystem_picture_type_tl {pdf} }
+\sys_if_engine_luatex:T
+  { \tl_set:Nn \l__ghsystem_picture_type_tl {pdf} }
 
 % the command:
-\NewDocumentCommand \ghspic { om }
+\NewDocumentCommand \ghspic {om}
   {
     \group_begin:
-      \IfNoValueF { #1 } { \keys_set:nn { chemmacros / ghsystem } { #1 } }
-      \ghsystem_pic:n { #2 }
+      \IfNoValueF {#1} { \keys_set:nn {ghsystem} {#1} }
+      \ghsystem_pic:n {#2}
     \group_end:
   }
 
@@ -609,13 +577,17 @@
 
 % --------------------------------------------------------------------------
 % options and setup
-\ProcessKeysOptions{ chemmacros / ghsystem }
+\ProcessKeysOptions {ghsystem}
 
 \cs_new_protected:Npn \ghsystem_setup:n #1
-  { \keys_set:nn { chemmacros / ghsystem } { #1 } }
+  { \keys_set:nn {ghsystem} {#1} }
 
-\NewDocumentCommand \ghssetup { m }
-  { \ghsystem_setup:n { #1 } }
+\NewDocumentCommand \ghssetup {m}
+  { \ghsystem_setup:n {#1} }
+
+\chemmacros_load_module:n {nomenclature}
+
+\chemmacros_integrate_package:nnn {} {ghsystem} {2016/01/11}
 
 \tex_endinput:D
 
@@ -648,6 +620,8 @@ VERSION HISTORY
 2014/06/30 - version 4.5b - adapt to deprecated expl3 function
 2014/08/08 - version 4.6  - split from `chemmacros' bundle as independent
                             package
+2016/01/09 - version 4.7  - adapt to changes in expl3
+                          - adapt to v5 of chemmacros
 
 % --------------------------------------------------------------------------
 % TODO:
