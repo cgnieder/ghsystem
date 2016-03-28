@@ -313,7 +313,7 @@
 \prop_put:Nnn \l__ghsystem_p_prop { 230 } { Feucht~ halten~ mit~ \l__ghsystem_dots_tl }
 \prop_put:Nnn \l__ghsystem_p_prop { 231 } { Unter~ inertem~ Gas~ handhaben. }
 \prop_put:Nnn \l__ghsystem_p_prop { 232 } { Vor~ Feuchtigkeit~ sch\"utzen. }
-\prop_put:Nnn \l__ghsystem_p_prop { 233 } { Beh\"alter~ dicht~ verschlossen~ halen. }
+\prop_put:Nnn \l__ghsystem_p_prop { 233 } { Beh\"alter~ dicht~ verschlossen~ halten. }
 \prop_put:Nnn \l__ghsystem_p_prop { 234 } { Nur~ im~ Originalbeh\"alter~ aufbewahren. }
 \prop_put:Nnn \l__ghsystem_p_prop { 235 } { K\"uhl~ halten. }
 \prop_put:Nnn \l__ghsystem_p_prop { 240 } { Beh\"alter~ und~ zu~ bef\"ullende~
