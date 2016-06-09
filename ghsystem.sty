@@ -26,11 +26,11 @@
 %
 % The Current Maintainer of this work is Clemens Niederberger.
 % --------------------------------------------------------------------------
-\RequirePackage{ expl3, xparse, l3keys2e , chemmacros }
+\RequirePackage{ expl3, xparse, chemmacros }
 \ExplSyntaxOn
 
-\tl_const:Nn \c_ghsystem_version_tl {4.7}
-\tl_const:Nn \c_ghsystem_date_tl    {2016/01/11}
+\tl_const:Nn \c_ghsystem_version_tl {5.0}
+\tl_const:Nn \c_ghsystem_date_tl    {2016/01/15}
 \tl_const:Nn \c_ghsystem_info_tl    {globally~ harmonised~ system}
 
 \ProvidesExplPackage
@@ -47,6 +47,12 @@
     it~is~not~defined~in~ghsystem.sty .
   }
 
+\msg_new:nnn {ghsystem} {language-file}
+  {
+    You've~ tried~ to~ load~ the~ language~ file~ `#1'~ \msg_line_context: .~
+    However,~ you~ can~ only~ load~ language~ files~ in~ the~ preamble!
+  }
+  
 \msg_new:nnn {ghsystem} {booktabs}
   {
     Option~#1~of~the~\token_to_str:N \ghslistall \c_space_tl command~
@@ -60,42 +66,22 @@
     Valid~ types~ are~ `H',~ `EUH',~ and~ `P'.
   }
 
-\cs_new_protected:Npn \ghsystem_msg:nnn #1#2#3
-  {
-    \bool_if:NTF \l__ghsystem_strict_bool
-      { \msg_error:nnn   {#1} {#2} {#3} }
-      { \msg_warning:nnn {#1} {#2} {#3} }
-  }
-\cs_generate_variant:Nn \ghsystem_msg:nnn {nnx}
-
-\cs_new_protected:Npn \ghsystem_msg:nnnn #1#2#3#4
-  {
-    \bool_if:NTF \l__ghsystem_strict_bool
-      { \msg_error:nnn   {#1} {#2} {#3} {#4} }
-      { \msg_warning:nnn {#1} {#2} {#3} {#4} }
-  }
-
 % --------------------------------------------------------------------------
 % package options:
-\bool_new:N \l__ghsystem_strict_bool
 \keys_define:nn {ghsystem}
   {
-    strict   .bool_set:N = \l__ghsystem_strict_bool ,
-    strict   .default:n  = true ,
-    language .code:n     = \ghsystem_load_language:n {#1}
+    % TODO
+    % strict   .bool_set:N = \l__ghsystem_strict_bool ,
+    % strict   .default:n  = true ,
+    language .code:n = \ghsystem_load_languages:n {#1}
   }
-
-% \AtBeginDocument
-%   {
-%     \@ifpackageloaded {chemmacros}
-%       {}
-%       {\RequirePackage{chemmacros}}
-%     \usechemmodule {nomenclature}
-%   }
 
 % --------------------------------------------------------------------------- %
 % variants of kernel functions:
-\cs_generate_variant:Nn \file_if_exist:nTF { x }
+\cs_generate_variant:Nn \file_if_exist:nTF {x}
+\cs_generate_variant:Nn \prop_put:Nnn      {cx}
+\cs_generate_variant:Nn \prop_get:NnNTF    {cx}
+\cs_generate_variant:Nn \str_case:nnF      {V}
 
 % --------------------------------------------------------------------------- %
 % scratch variables
@@ -132,28 +118,31 @@
     \skip_horizontal:N \c_zero_skip
   }
 
-\bool_new:N \l__ghsystem_fill_in_bool
+\cs_new_protected:Npn \ghsystem_filler:n #1
+  { \emph { $\langle$ #1 $\rangle$ } }
+  
+\bool_new:N \l_ghsystem_fill_in_bool
 \bool_new:N \l__ghsystem_show_number_bool
-\bool_new:N \l__ghsystem_substance_bool
-\bool_new:N \l__ghsystem_organs_bool
+\bool_new:N \l_ghsystem_substance_bool
+\bool_new:N \l_ghsystem_organs_bool
 \bool_new:N \l__ghsystem_hide_statement_bool
 
 \tl_new:N   \l__ghsystem_number_space_tl
-\tl_new:N   \l__ghsystem_celsius_temperature_tl
-\tl_new:N   \l__ghsystem_fahrenheit_temperature_tl
-\tl_new:N   \l__ghsystem_kg_mass_tl
-\tl_new:N   \l__ghsystem_lbs_mass_tl
-\tl_new:N   \l__ghsystem_dots_tl
-\tl_set:Nn  \l__ghsystem_dots_tl { \ldots }
+\tl_new:N   \l_ghsystem_celsius_temperature_tl
+\tl_new:N   \l_ghsystem_fahrenheit_temperature_tl
+\tl_new:N   \l_ghsystem_kg_mass_tl
+\tl_new:N   \l_ghsystem_lbs_mass_tl
+\tl_new:N   \l_ghsystem_dots_tl
+\tl_set:Nn  \l_ghsystem_dots_tl { \ldots }
 \tl_new:N   \l__ghsystem_picture_scale_default_tl
 \tl_set:Nn  \l__ghsystem_picture_scale_default_tl { .05 }
 \tl_new:N   \l__ghsystem_picture_scale_tl
 \tl_set_eq:NN \l__ghsystem_picture_scale_tl \l__ghsystem_picture_scale_default_tl
 \tl_new:N   \l__ghsystem_picture_includegraphics_tl
 \tl_new:N   \l__ghsystem_picture_type_tl
-\tl_new:N   \l__ghsystem_identifier_tl
-\tl_new:N   \l__ghsystem_table_text_tl
-\tl_new:N   \l__ghsystem_table_next_page_tl
+\tl_new:N   \l_ghsystem_identifier_tl
+\tl_new:N   \l_ghsystem_table_text_tl
+\tl_new:N   \l_ghsystem_table_next_page_tl
 \tl_new:N   \l__ghsystem_table_head_rule_tl
 \tl_set:Nn  \l__ghsystem_table_head_rule_tl { \hline }
 \tl_new:N   \l__ghsystem_table_top_head_rule_tl
@@ -162,14 +151,17 @@
 \tl_set:Nn  \l__ghsystem_table_foot_rule_tl { \hline }
 \tl_new:N   \l__ghsystem_table_last_foot_rule_tl
 \tl_set:Nn  \l__ghsystem_table_last_foot_rule_tl { \hline }
-\tl_new:N   \l__ghsystem_table_caption_tl
-\tl_new:N   \l__ghsystem_table_caption_short_tl
+\tl_new:N   \l_ghsystem_table_caption_tl
+% TODO: implement usage:
+\tl_new:N   \l_ghsystem_table_caption_short_tl
 \tl_new:N   \l__ghsystem_table_label_tl
 \tl_set:Nn  \l__ghsystem_table_label_tl { tab : ghs-hp-statements }
 \tl_new:N   \l__ghsystem_list_all_column_format_tl
 
 \dim_new:N  \l__ghsystem_list_all_column_width_dim
-\dim_set:Nn \l__ghsystem_list_all_column_width_dim { .7\linewidth }
+\AtBeginDocument{
+  \dim_set:Nn \l__ghsystem_list_all_column_width_dim { .7\linewidth }
+}
 \dim_new:N  \l__ghsystem_table_line_sep_dim
 \dim_set:Nn \l__ghsystem_table_line_sep_dim { 3pt }
 
@@ -183,70 +175,82 @@
 
 % language settings
 \bool_new:N \l__ghsystem_language_file_loaded_bool
-\bool_new:N \l__ghsystem_language_directory_bool
 
-% load the language file -- it needs expl3 namespace but shouldn't care about
-% what catcode regime was before and simply restore it...
-% so we basically copy the definitions of \ExplSyntaxOn and \ExplSyntaxOff
+\tl_const:Nn \c__ghsystem_definition_file_prefix_tl {ghsystem}
+\tl_const:Nn \c__ghsystem_definition_file_extension_tl {def}
 
-\cs_new_protected:Npn \__ghsystem_namespace_restore: {}
-\bool_new:N \l__ghsystem_expl_namespace_bool
+\tl_new:N \l_ghsystem_current_language_file_tl
+\str_new:N \l_ghsystem_current_language_str
+\seq_new:N \g__ghsystem_loadad_languages_seq
 
-\cs_new_protected:Npn \__ghsystem_expl_namespace:
+\cs_new_protected:Npn \__ghsystem_language_file:nn #1#2
   {
-    \bool_if:NF \l__ghsystem_expl_namespace_bool
+    \ProvidesFile
       {
-        \cs_set_protected:Npx \__ghsystem_namespace_restore:
-          {
-            \char_set_catcode:nn { 9 }   { \char_value_catcode:n { 9 } }
-            \char_set_catcode:nn { 32 }  { \char_value_catcode:n { 32 } }
-            \char_set_catcode:nn { 34 }  { \char_value_catcode:n { 34 } }
-            \char_set_catcode:nn { 38 }  { \char_value_catcode:n { 38 } }
-            \char_set_catcode:nn { 58 }  { \char_value_catcode:n { 58 } }
-            \char_set_catcode:nn { 94 }  { \char_value_catcode:n { 94 } }
-            \char_set_catcode:nn { 95 }  { \char_value_catcode:n { 95 } }
-            \char_set_catcode:nn { 124 } { \char_value_catcode:n { 124 } }
-            \char_set_catcode:nn { 126 } { \char_value_catcode:n { 126 } }
-            \tex_endlinechar:D = \tex_the:D \tex_endlinechar:D \scan_stop:
-            \bool_set_false:N \l__ghsystem_expl_namespace_bool
-            \cs_set_protected:Npn \__ghsystem_namespace_restore: {}
-          }
+        \c__ghsystem_definition_file_prefix_tl _ #1 .
+        \c__ghsystem_definition_file_extension_tl
       }
-    \char_set_catcode_ignore:n { 9 }
-    \char_set_catcode_ignore:n { 32 }
-    \char_set_catcode_other:n { 34 }
-    \char_set_catcode_math_toggle:n { 36 }
-    \char_set_catcode_alignment:n { 38 }
-    \char_set_catcode_letter:n { 58 }
-    \char_set_catcode_math_superscript:n { 94 }
-    \char_set_catcode_letter:n { 95 }
-    \char_set_catcode_other:n { 124 }
-    \char_set_catcode_space:n { 126 }
-    \tex_endlinechar:D = 32 \scan_stop:
-    \bool_set_true:N \l__ghsystem_expl_namespace_bool
+      [#2]
+    \ExplSyntaxOn
+    \tl_set:Nn \l_ghsystem_current_language_file_tl {#1}
+  }
+
+\NewDocumentCommand \ghsystemlanguagefile {mm}
+  { \__ghsystem_language_file:nn {#1} {#2} }
+
+% prop
+% number
+% statement
+\cs_new_protected:Npn \ghsystem_add_statement:nnn #1#2#3
+  {
+    \prop_put:cxn {l__ghsystem_ \str_lower_case:n {#1} _prop}
+      {\l_ghsystem_current_language_file_tl-#2}
+      {#3}
   }
 
 \cs_new:Npn \ghsystem_load_language_file:n #1
   {
-    \__ghsystem_expl_namespace:
-    \file_input:n { ghsystem_#1.def }
-    \__ghsystem_namespace_restore:
+    \ghsystem_if_language_file_loaded:nF {#1}
+      {
+        \cs_if_eq:NNTF \@onefilewithoptions\@notprerr
+          { \msg_error:nnn {ghsystem} {language-file} {#1} }
+          {
+            \seq_gput_right:Nx \g__ghsystem_loadad_languages_seq
+              { \@trnslt@language {#1} }
+            \@onefilewithoptions
+              {\c__ghsystem_definition_file_prefix_tl _ #1} [][]
+              \c__ghsystem_definition_file_extension_tl
+          }
+      }
   }
 \cs_generate_variant:Nn \ghsystem_load_language_file:n { V }
 
+\prg_new_protected_conditional:Npnn \ghsystem_if_language_file_loaded:n #1 {T,F,TF}
+  {
+    \seq_if_in:NxTF \g__ghsystem_loadad_languages_seq
+      { \@trnslt@language {#1} }
+      { \prg_return_true: }
+      { \prg_return_false: }
+  }
+
+% TODO: an neuen Mechanismus anpassen:
 \cs_new_protected:Npn \ghsystem_load_language:n #1
   {
-    \file_if_exist:xTF { ghsystem_ \@trnslt@language {#1} .def }
-      {
-        \bool_set_true:N \l__ghsystem_language_file_loaded_bool
-        \ghsystem_load_language_file:n { \@trnslt@language {#1} }
-      }
-      { \ghsystem_load_language_file:V \l_chemmacros_language_tl }
+    \ghsystem_if_language_file_loaded:nF {#1}
+      { \ghsystem_load_language_file:n {#1} }
+    \str_set:Nx \l_ghsystem_current_language_str { \@trnslt@language {#1} }
+    \bool_set_true:N \l__ghsystem_language_file_loaded_bool
   }
 \cs_generate_variant:Nn \ghsystem_load_language:n { V }
 
-\NewDocumentCommand \loadghsystemlanguage {m}
-  { \ghsystem_load_language:n {#1} }
+\cs_new_protected:Npn \ghsystem_load_languages:n #1
+  { \clist_map_inline:nn {#1} { \ghsystem_load_language:n {##1} } }
+
+% \NewDocumentCommand \loadghsystemlanguage {m}
+%   { \ghsystem_load_language:n {#1} }
+
+% \NewDocumentCommand \loadghsystemlanguages {m}
+%   { \ghsystem_load_languages:n {#1} }
 
 \AtBeginDocument{
   \bool_if:NF \l__ghsystem_language_file_loaded_bool
@@ -274,29 +278,29 @@
     hide                            .bool_set:N =
       \l__ghsystem_hide_statement_bool ,
     hide                            .default:n  = true ,
-    fill-in                         .bool_set:N = \l__ghsystem_fill_in_bool ,
+    fill-in                         .bool_set:N = \l_ghsystem_fill_in_bool ,
     fill-in                         .default:n  = true ,
     exposure                        .code:n     =
       \cs_set:Npn \ghsystem_exposure: { ~ #1 } ,
     effect                          .code:n     =
       \cs_set:Npn \ghsystem_effect: { ~ #1 } ,
     organs                          .code:n     =
-      \bool_set_true:N \l__ghsystem_organs_bool
+      \bool_set_true:N \l_ghsystem_organs_bool
       \cs_set:Npn \ghsystem_organs: { ~ #1 } ,
     substance                       .code:n     =
-      \bool_set_true:N \l__ghsystem_substance_bool
+      \bool_set_true:N \l_ghsystem_substance_bool
       \cs_set:Npn \ghsystem_substance: { ~ #1 } ,
     text                            .code:n     =
       \cs_set:Npn \ghsystem_text: { ~ #1 } ,
     space                           .tl_set:N   =
       \l__ghsystem_number_space_tl ,
     C-temperature                   .tl_set:N   =
-      \l__ghsystem_celsius_temperature_tl ,
+      \l_ghsystem_celsius_temperature_tl ,
     F-temperature                   .tl_set:N   =
-      \l__ghsystem_fahrenheit_temperature_tl ,
-    kg-mass                         .tl_set:N   = \l__ghsystem_kg_mass_tl ,
-    lbs-mass                        .tl_set:N   = \l__ghsystem_lbs_mass_tl ,
-    dots                            .tl_set:N   = \l__ghsystem_dots_tl ,
+      \l_ghsystem_fahrenheit_temperature_tl ,
+    kg-mass                         .tl_set:N   = \l_ghsystem_kg_mass_tl ,
+    lbs-mass                        .tl_set:N   = \l_ghsystem_lbs_mass_tl ,
+    dots                            .tl_set:N   = \l_ghsystem_dots_tl ,
     % \ghspic options:
     scale                           .code:n     =
       \fp_set:Nn \l__ghsystem_picture_scale_fp { #1 * \l__ghsystem_picture_scale_fp } ,
@@ -305,8 +309,8 @@
     pic-type                        .choices:nn = { eps , jpg , png , pdf }
       { \tl_set_eq:NN \l__ghsystem_picture_type_tl \l_keys_choice_tl } ,
     % \ghslistall options:
-    table-head-number               .tl_set:N   = \l__ghsystem_identifier_tl ,
-    table-head-text                 .tl_set:N   = \l__ghsystem_table_text_tl ,
+    table-head-number               .tl_set:N   = \l_ghsystem_identifier_tl ,
+    table-head-text                 .tl_set:N   = \l_ghsystem_table_text_tl ,
     table-next-page                 .tl_set:N   =
       \l__ghsystem_table_next_page_tl ,
     table-row-sep                   .dim_set:N  =
@@ -361,9 +365,9 @@
       \tl_clear:N \l__ghsystem_table_foot_rule_tl
       \tl_clear:N \l__ghsystem_table_last_foot_rule_tl ,
     table-caption                   .tl_set:N   =
-      \l__ghsystem_table_caption_tl ,
+      \l_ghsystem_table_caption_tl ,
     table-caption-short             .tl_set:N   =
-      \l__ghsystem_table_caption_short_tl ,
+      \l_ghsystem_table_caption_short_tl ,
     table-label                     .tl_set:N   =
       \l__ghsystem_table_label_tl ,
     table-column-format             .tl_set:N   =
@@ -389,27 +393,26 @@
 \cs_new:Nn \ghsystem_read_args:nn
   {
     \__ghsystem_get_type:nN {#1} \l__ghsystem_tmpa_tl
-    \prop_get:cnNTF { l__ghsystem_ \l__ghsystem_tmpa_tl _prop } {#2} \l__ghsystem_tmpb_tl
+    \prop_get:cxNTF
+      { l__ghsystem_ \l__ghsystem_tmpa_tl _prop }
+      {\l_ghsystem_current_language_str - #2}
+      \l__ghsystem_tmpb_tl
       {
         \__ghsystem_is_combination:nn {#1} {#2}
         \bool_if:NF \l__ghsystem_hide_statement_bool
           { \tl_use:N \l__ghsystem_tmpb_tl  }
       }
-      { \ghsystem_msg:nnnn {ghsystem} {statements} {#1} {#2} }
+      { \msg_error:nnnn {ghsystem} {statements} {#1} {#2} }
   }
-
-\seq_new:N \l__ghsystem_types_seq
-\seq_put_right:Nn \l__ghsystem_types_seq {h}
-\seq_put_right:Nn \l__ghsystem_types_seq {euh}
-\seq_put_right:Nn \l__ghsystem_types_seq {p}
 
 \cs_new_protected:Nn \__ghsystem_get_type:nN
   {
-    \tl_set:Nx #2 { \tl_lower_case:n {#1} }
-    \seq_if_in:NVF \l__ghsystem_types_seq #2
-      { \ghsystem_msg:nnx {ghsystem} {unknown-type} {#2} }
+    \tl_set:Nx #2 { \str_lower_case:n {#1} }
+    \str_case:VnF #2
+      { {h} {} {p} {} {euh} {} }
+      { \msg_error:nnn {ghsystem} {unknown-type} {#2} }
   }
-
+  
 \cs_new:Nn \__ghsystem_is_combination:nn
   {
     \tl_if_in:nnTF {#2} { + }
@@ -468,64 +471,106 @@
     \group_end:
   }
 
+% TODO: an neue Sprachauswahl anpassen:
 \cs_new_protected:Npn \ghsystem_list_all:
   {
     \int_zero:N \l__ghsystem_tmpa_int
     \int_zero:N \l__ghsystem_tmpb_int
-    \prop_map_inline:Nn \l__ghsystem_p_prop { \int_incr:N \l__ghsystem_tmpa_int }
+    \prop_map_inline:Nn \l__ghsystem_p_prop
+      { \int_incr:N \l__ghsystem_tmpa_int }
     \dim_set_eq:NN \extrarowheight \l__ghsystem_table_line_sep_dim
-    \begin { longtable }
+    \begin {longtable}
       {
-        l
+        @{}
+        p{
+          \dim_eval:n {
+            \linewidth -\tabcolsep -\LTpre - \LTpost
+            -\l__ghsystem_list_all_column_width_dim
+          }
+        }
         >{ \l__ghsystem_list_all_column_format_tl }
         p{ \l__ghsystem_list_all_column_width_dim }
+        @{}
       }
-        \caption [ \l__ghsystem_table_caption_short_tl ]
+        \caption [ \l_ghsystem_table_caption_short_tl ]
           {
-            \l__ghsystem_table_caption_tl
+            \l_ghsystem_table_caption_tl
             \exp_args:No \label { \l__ghsystem_table_label_tl }
           } \\
         \l__ghsystem_table_top_head_rule_tl
-        \textbf { \l__ghsystem_identifier_tl } &
-        \textbf { \l__ghsystem_table_text_tl } \\
+        \textbf { \l_ghsystem_identifier_tl } &
+        \textbf { \l_ghsystem_table_text_tl } \\
         \l__ghsystem_table_head_rule_tl
       \endfirsthead
         \l__ghsystem_table_top_head_rule_tl
-        \textbf { \l__ghsystem_identifier_tl } &
-        \textbf { \l__ghsystem_table_text_tl } \\
+        \textbf { \l_ghsystem_identifier_tl } &
+        \textbf { \l_ghsystem_table_text_tl } \\
         \l__ghsystem_table_head_rule_tl
       \endhead
         \l__ghsystem_table_last_foot_rule_tl
-        \multicolumn{2}{r} { \textit { \l__ghsystem_table_next_page_tl } }
+        \multicolumn{2}{r} { \textit { \l_ghsystem_table_next_page_tl } }
       \endfoot
         \l__ghsystem_table_foot_rule_tl \multicolumn{2}{r} { }
       \endlastfoot
       \prop_map_inline:Nn \l__ghsystem_h_prop
-        { \__ghsystem_read_number:nn {H} {##1} & ##2 \\ }
+        {
+          \ghsystem_if_statement_in_current_language:nT {##1}
+            { \__ghsystem_read_number:nn {H} {##1} & ##2 \\ }
+        }
       \prop_map_inline:Nn \l__ghsystem_euh_prop
-        { \__ghsystem_read_number:nn {EUH} {##1} & ##2 \\ }
+        {
+          \ghsystem_if_statement_in_current_language:nT {##1}
+            { \__ghsystem_read_number:nn {EUH} {##1} & ##2 \\ }
+        }
       \int_zero:N \l__ghsystem_tmpa_int
-      \prop_map_inline:Nn \l__ghsystem_p_prop { \int_gincr:N \l__ghsystem_tmpa_int }
+      \prop_map_inline:Nn \l__ghsystem_p_prop
+        {
+          \ghsystem_if_statement_in_current_language:nT {##1}
+            { \int_gincr:N \l__ghsystem_tmpa_int }
+        }
       \int_zero:N \l__ghsystem_tmpb_int
       \prop_map_inline:Nn \l__ghsystem_p_prop
         {
-          \int_gincr:N \l__ghsystem_tmpb_int
-          \__ghsystem_read_number:nn {P} {##1} & ##2
-          \int_compare:nNnT { \l__ghsystem_tmpb_int } < { \l__ghsystem_tmpa_int } { \\ }
+          \ghsystem_if_statement_in_current_language:nT {##1}
+            {
+              \int_gincr:N \l__ghsystem_tmpb_int
+              \__ghsystem_read_number:nn {P} {##1} & ##2
+              \int_compare:nNnT
+                { \l__ghsystem_tmpb_int } < { \l__ghsystem_tmpa_int }
+                { \\ }
+            }
         }
-    \end { longtable }
+    \end {longtable}
   }
 
-\cs_new:Nn \__ghsystem_read_number:nn
+\prg_new_protected_conditional:Npnn
+\ghsystem_if_statement_in_current_language:n #1 {T,F,TF}
+  {
+    % is it safe to check str with \tl_ functions? interface3 seems to
+    % implicate it…
+    \tl_if_in:nVTF {#1} \l_ghsystem_current_language_str
+      { \prg_return_true: }
+      { \prg_return_false: }
+  }
+\cs_generate_variant:Nn \tl_if_in:nnTF {nV}
+
+\cs_new_protected:Nn \__ghsystem_read_number:nn
   {
     \tl_if_in:nnTF {#2} { + }
       { \__ghsystem_read_number_aux_i:w #1 , #2 \q_stop }
-      { #1 \tl_use:N \l__ghsystem_number_space_tl #2 }
+      {
+        #1
+        \tl_use:N \l__ghsystem_number_space_tl
+        \__ghsystem_extract_number:n {#2}
+      }
   }
 
-\cs_new:Npn \__ghsystem_read_number_aux_i:w #1,#2+#3\q_stop
+\cs_new_protected:Npn \__ghsystem_read_number_aux_i:w #1,#2+#3\q_stop
   {
-     #1 \tl_use:N \l__ghsystem_number_space_tl #2 ~+~
+     #1
+     \tl_use:N \l__ghsystem_number_space_tl
+     \__ghsystem_extract_number:n {#2}
+     \c_space_tl + \c_space_tl
      \tl_if_in:nnTF {#3} { + }
        { \__ghsystem_read_number_aux_ii:w #1,#3 \q_stop }
        { #1#3 }
@@ -534,6 +579,14 @@
 \cs_new:Npn \__ghsystem_read_number_aux_ii:w #1,#2+#3\q_stop
   { #1#2 ~+~ #1#3 }
 
+\cs_new_protected:Npn \__ghsystem_extract_number:n #1
+  {
+    \exp_after:wN \cs_set:Npn
+    \exp_after:wN \__ghsystem_extract_number_aux:w
+    \l_ghsystem_current_language_str - ##1 \q_stop {##1}
+    \__ghsystem_extract_number_aux:w #1 \q_stop
+  }
+  
 % --------------------------------------------------------------------------- %
 % the picture command
 %   \ghspic[<options>]{<name>}
@@ -577,8 +630,6 @@
 
 % --------------------------------------------------------------------------
 % options and setup
-\ProcessKeysOptions {ghsystem}
-
 \cs_new_protected:Npn \ghsystem_setup:n #1
   { \keys_set:nn {ghsystem} {#1} }
 
@@ -620,8 +671,12 @@ VERSION HISTORY
 2014/06/30 - version 4.5b - adapt to deprecated expl3 function
 2014/08/08 - version 4.6  - split from `chemmacros' bundle as independent
                             package
-2016/01/09 - version 4.7  - adapt to changes in expl3
+2016/01/15 - version 4.7  - adapt to changes in expl3
                           - adapt to v5 of chemmacros
+                          - small changes to table preamble in \ghslistall
+                          - set table column width of \ghslistall at begin
+                            document when we can be sure \linewidth has a
+                            proper value
 
 % --------------------------------------------------------------------------
 % TODO:

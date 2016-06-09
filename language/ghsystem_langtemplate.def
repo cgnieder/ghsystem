@@ -70,357 +70,355 @@
 % -----------------------------------------------------------------------------
 %
 % <LANGUAGE> DEFINITIONS
-\prop_clear:N \l__ghsystem_h_prop
-\prop_clear:N \l__ghsystem_euh_prop
-\prop_clear:N \l__ghsystem_p_prop
+\ghsystemlanguagefile{language}{date}
 
 % table head:
-\tl_set:Nn \l__ghsystem_identifier_tl { ... }
-\tl_set:Nn \l__ghsystem_table_text_tl { ... }
-\tl_set:Nn \l__ghsystem_table_caption_tl { ... }
+\tl_set:Nn \l_ghsystem_identifier_tl { ... }
+\tl_set:Nn \l_ghsystem_table_text_tl { ... }
+\tl_set:Nn \l_ghsystem_table_caption_tl { ... }
 
 % fill-in functions:
 % <state route of exposure if it is conclusively proven that no other routes of exposure cause the hazard>.
 \cs_set:Npn \ghsystem_exposure:
   {
-    \bool_if:NT \l__ghsystem_fill_in_bool
+    \bool_if:NT \l_ghsystem_fill_in_bool
       {
-        \c_space_tl \textit{\textless ... \textgreater}
+        \c_space_tl \ghsystem_filler:n { ... }
       }
   }
 
 %  <state specific effect if known> 
 \cs_set:Npn \ghsystem_effect:
   {
-    \bool_if:NT \l__ghsystem_fill_in_bool
+    \bool_if:NT \l_ghsystem_fill_in_bool
       {
-        \c_space_tl \textit{\textless ... \textgreater}
+        \c_space_tl \ghsystem_filler:n { ... }
       }
   }
 
 % <or state all organs affected, if known>
 \cs_set:Npn \ghsystem_organs:
   {
-    \bool_if:nT { \l__ghsystem_fill_in_bool && !\l__ghsystem_organs_bool }
+    \bool_if:nT { \l_ghsystem_fill_in_bool && !\l_ghsystem_organs_bool }
       {
-        \c_space_tl \textit{\textless ... \textgreater}
+        \c_space_tl \ghsystem_filler:n { ... }
       }
   }
 
 % <name of sensitising substance>
 \cs_set:Npn \ghsystem_substance:
   {
-    \bool_if:NF \l__ghsystem_substance_bool
+    \bool_if:NF \l_ghsystem_substance_bool
       {
-        \c_space_tl \textit{\textless ... \textgreater}
+        \c_space_tl \ghsystem_filler:n { ... }
       }
   }
 
 % HAZARD STATEMENTS (Annex 3)
 % 1. Hazard Statements
 % 1.1 Physical Hazards
-\prop_put:Nnn \l__ghsystem_h_prop { 200 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 201 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 202 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 203 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 204 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 205 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 220 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 221 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 222 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 223 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 224 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 225 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 226 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 228 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 240 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 241 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 242 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 250 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 251 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 252 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 260 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 261 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 270 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 271 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 272 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 280 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 281 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 290 } { ... }
+\ghsystem_add_statement:nnn {H} {200} {...}
+\ghsystem_add_statement:nnn {H} {201} {...}
+\ghsystem_add_statement:nnn {H} {202} {...}
+\ghsystem_add_statement:nnn {H} {203} {...}
+\ghsystem_add_statement:nnn {H} {204} {...}
+\ghsystem_add_statement:nnn {H} {205} {...}
+\ghsystem_add_statement:nnn {H} {220} {...}
+\ghsystem_add_statement:nnn {H} {221} {...}
+\ghsystem_add_statement:nnn {H} {222} {...}
+\ghsystem_add_statement:nnn {H} {223} {...}
+\ghsystem_add_statement:nnn {H} {224} {...}
+\ghsystem_add_statement:nnn {H} {225} {...}
+\ghsystem_add_statement:nnn {H} {226} {...}
+\ghsystem_add_statement:nnn {H} {228} {...}
+\ghsystem_add_statement:nnn {H} {240} {...}
+\ghsystem_add_statement:nnn {H} {241} {...}
+\ghsystem_add_statement:nnn {H} {242} {...}
+\ghsystem_add_statement:nnn {H} {250} {...}
+\ghsystem_add_statement:nnn {H} {251} {...}
+\ghsystem_add_statement:nnn {H} {252} {...}
+\ghsystem_add_statement:nnn {H} {260} {...}
+\ghsystem_add_statement:nnn {H} {261} {...}
+\ghsystem_add_statement:nnn {H} {270} {...}
+\ghsystem_add_statement:nnn {H} {271} {...}
+\ghsystem_add_statement:nnn {H} {272} {...}
+\ghsystem_add_statement:nnn {H} {280} {...}
+\ghsystem_add_statement:nnn {H} {281} {...}
+\ghsystem_add_statement:nnn {H} {290} {...}
 
 % 1.2 Health Hazards
-\prop_put:Nnn \l__ghsystem_h_prop { 300 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 301 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 302 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 304 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 310 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 311 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 312 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 314 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 315 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 317 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 318 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 319 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 330 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 331 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 332 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 334 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 335 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 336 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 340 } { ... \ghsystem_exposure: }
-\prop_put:Nnn \l__ghsystem_h_prop { 341 } { ... \ghsystem_exposure: }
-\prop_put:Nnn \l__ghsystem_h_prop { 350 } { ... \ghsystem_exposure: }
-\prop_put:Nnn \l__ghsystem_h_prop { 351 } { ... \ghsystem_exposure: }
-\prop_put:Nnn \l__ghsystem_h_prop { 360 } { ... \ghsystem_effect: \ghsystem_exposure: }
-\prop_put:Nnn \l__ghsystem_h_prop { 361 } { ... \ghsystem_effect: \ghsystem_exposure: }
-\prop_put:Nnn \l__ghsystem_h_prop { 362 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 370 }
+\ghsystem_add_statement:nnn {H} {300} {...}
+\ghsystem_add_statement:nnn {H} {301} {...}
+\ghsystem_add_statement:nnn {H} {302} {...}
+\ghsystem_add_statement:nnn {H} {304} {...}
+\ghsystem_add_statement:nnn {H} {310} {...}
+\ghsystem_add_statement:nnn {H} {311} {...}
+\ghsystem_add_statement:nnn {H} {312} {...}
+\ghsystem_add_statement:nnn {H} {314} {...}
+\ghsystem_add_statement:nnn {H} {315} {...}
+\ghsystem_add_statement:nnn {H} {317} {...}
+\ghsystem_add_statement:nnn {H} {318} {...}
+\ghsystem_add_statement:nnn {H} {319} {...}
+\ghsystem_add_statement:nnn {H} {330} {...}
+\ghsystem_add_statement:nnn {H} {331} {...}
+\ghsystem_add_statement:nnn {H} {332} {...}
+\ghsystem_add_statement:nnn {H} {334} {...}
+\ghsystem_add_statement:nnn {H} {335} {...}
+\ghsystem_add_statement:nnn {H} {336} {...}
+\ghsystem_add_statement:nnn {H} {340} {... \ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {341} {... \ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {350} {... \ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {351} {... \ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {360} {... \ghsystem_effect: \ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {361} {... \ghsystem_effect: \ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {362} {...}
+\ghsystem_add_statement:nnn {H} {370}
   {
-    ... \bool_if:NF \l__ghsystem_organs_bool { ... } \ghsystem_organs:
+    ... \bool_if:NF \l_ghsystem_organs_bool {...} \ghsystem_organs:
     . \ghsystem_exposure:
-  }
-\prop_put:Nnn \l__ghsystem_h_prop { 371 }
+ }
+\ghsystem_add_statement:nnn {H} {371}
   {
-    ... \bool_if:NF \l__ghsystem_organs_bool { ... } \ghsystem_organs:
+    ... \bool_if:NF \l_ghsystem_organs_bool {...} \ghsystem_organs:
     \ghsystem_exposure:
-  }
-\prop_put:Nnn \l__ghsystem_h_prop { 372 }
+ }
+\ghsystem_add_statement:nnn {H} {372}
   {
-    ... \bool_if:NF \l__ghsystem_organs_bool { ... } \ghsystem_organs:\
+    ... \bool_if:NF \l_ghsystem_organs_bool {...} \ghsystem_organs:\
     ... \ghsystem_exposure:
-  }
-\prop_put:Nnn \l__ghsystem_h_prop { 373 }
+ }
+\ghsystem_add_statement:nnn {H} {373}
   {
-    ... \bool_if:NF \l__ghsystem_organs_bool { ... } \ghsystem_organs:\
+    ... \bool_if:NF \l_ghsystem_organs_bool {...} \ghsystem_organs:\
     ... \ghsystem_exposure:
-  }
+ }
 
 % 1.3 Environmental hazards
-\prop_put:Nnn \l__ghsystem_h_prop { 400 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 410 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 411 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 412 } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 413 } { ... }
+\ghsystem_add_statement:nnn {H} {400} {...}
+\ghsystem_add_statement:nnn {H} {410} {...}
+\ghsystem_add_statement:nnn {H} {411} {...}
+\ghsystem_add_statement:nnn {H} {412} {...}
+\ghsystem_add_statement:nnn {H} {413} {...}
 
 % 2 Supplemental Hazard Informations
 % 2.1 Physical Properties
-\prop_put:Nnn \l__ghsystem_euh_prop { 001 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 006 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 014 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 018 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 019 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 044 } { ... }
+\ghsystem_add_statement:nnn {EUH} {001} {...}
+\ghsystem_add_statement:nnn {EUH} {006} {...}
+\ghsystem_add_statement:nnn {EUH} {014} {...}
+\ghsystem_add_statement:nnn {EUH} {018} {...}
+\ghsystem_add_statement:nnn {EUH} {019} {...}
+\ghsystem_add_statement:nnn {EUH} {044} {...}
 
 % 2.2 Health Properties
-\prop_put:Nnn \l__ghsystem_euh_prop { 029 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 031 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 032 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 066 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 070 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 071 } { ... }
+\ghsystem_add_statement:nnn {EUH} {029} {...}
+\ghsystem_add_statement:nnn {EUH} {031} {...}
+\ghsystem_add_statement:nnn {EUH} {032} {...}
+\ghsystem_add_statement:nnn {EUH} {066} {...}
+\ghsystem_add_statement:nnn {EUH} {070} {...}
+\ghsystem_add_statement:nnn {EUH} {071} {...}
 
 % 2.3 Environmental Properties
-\prop_put:Nnn \l__ghsystem_euh_prop { 059 } { ... }
+\ghsystem_add_statement:nnn {EUH} {059} {...}
 
 % 2.4 Supplemental Label Elements/Information On Certain Substances And Mixtures
-\prop_put:Nnn \l__ghsystem_euh_prop { 201 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 201A } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 202 } { \iupac { ... } . ~ ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 203 } { ... ~ ... \,(VI) . ~ ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 204 } { ... ~ \iupac { ... } . ~ ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 205 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 206 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 207 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 208 } { ... \ghsystem_substance: . ~ ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 209 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 209A } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 210 } { ... }
-\prop_put:Nnn \l__ghsystem_euh_prop { 401 } { ... }
+\ghsystem_add_statement:nnn {EUH} {201} {...}
+\ghsystem_add_statement:nnn {EUH} {201A} {...}
+\ghsystem_add_statement:nnn {EUH} {202} {\iupac {...} . ~ ...}
+\ghsystem_add_statement:nnn {EUH} {203} {... ~ ... \,(VI) . ~ ...}
+\ghsystem_add_statement:nnn {EUH} {204} {... ~ \iupac {...} . ~ ...}
+\ghsystem_add_statement:nnn {EUH} {205} {...}
+\ghsystem_add_statement:nnn {EUH} {206} {...}
+\ghsystem_add_statement:nnn {EUH} {207} {...}
+\ghsystem_add_statement:nnn {EUH} {208} {... \ghsystem_substance: . ~ ...}
+\ghsystem_add_statement:nnn {EUH} {209} {...}
+\ghsystem_add_statement:nnn {EUH} {209A} {...}
+\ghsystem_add_statement:nnn {EUH} {210} {...}
+\ghsystem_add_statement:nnn {EUH} {401} {...}
 
 % PRECAUTIONARY STATEMENTS (Annex 4 page 19ff)
 % 3 Precautionary Statements
 % 3.1 General
-\prop_put:Nnn \l__ghsystem_p_prop { 101 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 102 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 103 } { ... }
+\ghsystem_add_statement:nnn {P} {101} {...}
+\ghsystem_add_statement:nnn {P} {102} {...}
+\ghsystem_add_statement:nnn {P} {103} {...}
 
 % 3.2 Precautionary Statements — Prevention
-\prop_put:Nnn \l__ghsystem_p_prop { 201 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 202 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 210 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 211 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 220 }
-  { ... \ghsystem_slash: \l__ghsystem_dots_tl \ghsystem_slash: ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 221 } { ... \l__ghsystem_dots_tl }
-\prop_put:Nnn \l__ghsystem_p_prop { 222 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 223 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 230 } { ... ~ \l__ghsystem_dots_tl }
-\prop_put:Nnn \l__ghsystem_p_prop { 231 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 232 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 233 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 234 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 235 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 240 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 241 }
-  { ... \ghsystem_slash: \l__ghsystem_dots_tl\ ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 242 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 243 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 244 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 250 }
-  { ... \ghsystem_slash: \l__ghsystem_dots_tl \ghsystem_slash: ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 251 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 260 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 261 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 262 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 263 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 264 } { ... ~ \l__ghsystem_dots_tl\ ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 270 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 271 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 272 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 273 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 280 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 281 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 282 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 283 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 284 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 285 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 231 + 231 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 235 + 410 } { ... }
+\ghsystem_add_statement:nnn {P} {201} {...}
+\ghsystem_add_statement:nnn {P} {202} {...}
+\ghsystem_add_statement:nnn {P} {210} {...}
+\ghsystem_add_statement:nnn {P} {211} {...}
+\ghsystem_add_statement:nnn {P} {220}
+  {... \ghsystem_slash: \l_ghsystem_dots_tl \ghsystem_slash: ...}
+\ghsystem_add_statement:nnn {P} {221} {... \l_ghsystem_dots_tl}
+\ghsystem_add_statement:nnn {P} {222} {...}
+\ghsystem_add_statement:nnn {P} {223} {...}
+\ghsystem_add_statement:nnn {P} {230} {... ~ \l_ghsystem_dots_tl}
+\ghsystem_add_statement:nnn {P} {231} {...}
+\ghsystem_add_statement:nnn {P} {232} {...}
+\ghsystem_add_statement:nnn {P} {233} {...}
+\ghsystem_add_statement:nnn {P} {234} {...}
+\ghsystem_add_statement:nnn {P} {235} {...}
+\ghsystem_add_statement:nnn {P} {240} {...}
+\ghsystem_add_statement:nnn {P} {241}
+  {... \ghsystem_slash: \l_ghsystem_dots_tl\ ...}
+\ghsystem_add_statement:nnn {P} {242} {...}
+\ghsystem_add_statement:nnn {P} {243} {...}
+\ghsystem_add_statement:nnn {P} {244} {...}
+\ghsystem_add_statement:nnn {P} {250}
+  {... \ghsystem_slash: \l_ghsystem_dots_tl \ghsystem_slash: ...}
+\ghsystem_add_statement:nnn {P} {251} {...}
+\ghsystem_add_statement:nnn {P} {260} {...}
+\ghsystem_add_statement:nnn {P} {261} {...}
+\ghsystem_add_statement:nnn {P} {262} {...}
+\ghsystem_add_statement:nnn {P} {263} {...}
+\ghsystem_add_statement:nnn {P} {264} {... ~ \l_ghsystem_dots_tl\ ...}
+\ghsystem_add_statement:nnn {P} {270} {...}
+\ghsystem_add_statement:nnn {P} {271} {...}
+\ghsystem_add_statement:nnn {P} {272} {...}
+\ghsystem_add_statement:nnn {P} {273} {...}
+\ghsystem_add_statement:nnn {P} {280} {...}
+\ghsystem_add_statement:nnn {P} {281} {...}
+\ghsystem_add_statement:nnn {P} {282} {...}
+\ghsystem_add_statement:nnn {P} {283} {...}
+\ghsystem_add_statement:nnn {P} {284} {...}
+\ghsystem_add_statement:nnn {P} {285} {...}
+\ghsystem_add_statement:nnn {P} {231 + 231} {...}
+\ghsystem_add_statement:nnn {P} {235 + 410} {...}
 
 % 3.3 Precautionary Statements — Response
-\prop_put:Nnn \l__ghsystem_p_prop { 301 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 302 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 303 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 304 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 305 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 306 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 307 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 308 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 309 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 310 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 311 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 312 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 313 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 314 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 315 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 320 } { ... ~ \l__ghsystem_dots_tl\ ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 321 } { ... ~ \l__ghsystem_dots_tl\ ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 322 } { ... ~ \l__ghsystem_dots_tl\ ...}
-\prop_put:Nnn \l__ghsystem_p_prop { 330 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 331 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 332 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 333 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 334 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 335 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 336 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 337 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 338 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 340 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 341 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 342 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 350 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 351 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 352 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 353 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 360 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 361 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 362 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 363 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 370 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 371 } { ... : \ghsystem_text: }
-\prop_put:Nnn \l__ghsystem_p_prop { 372 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 373 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 374 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 375 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 376 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 377 } { ... : \ghsystem_text:\ ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 378 } { \l__ghsystem_dots_tl\ ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 380 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 381 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 390 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 391 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 301 + 310 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 301 + 312 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 301 + 330 + 331 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 302 + 334 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 302 + 350 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 302 + 352 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 303 + 361 + 353 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 304 + 340 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 304 + 341 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 305 + 351 + 338 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 306 + 360 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 307 + 311 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 308 + 313 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 309 + 311 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 332 + 313 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 333 + 313 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 335 + 334 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 337 + 313 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 342 + 311 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 370 + 376 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 370 + 378 } { ... ~ \l__ghsystem_dots_tl\ ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 370 + 380 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 370 + 380 + 375 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 371 + 380 + 375 } { ... }
+\ghsystem_add_statement:nnn {P} {301} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {302} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {303} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {304} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {305} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {306} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {307} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {308} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {309} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {310} {...}
+\ghsystem_add_statement:nnn {P} {311} {...}
+\ghsystem_add_statement:nnn {P} {312} {...}
+\ghsystem_add_statement:nnn {P} {313} {...}
+\ghsystem_add_statement:nnn {P} {314} {...}
+\ghsystem_add_statement:nnn {P} {315} {...}
+\ghsystem_add_statement:nnn {P} {320} {... ~ \l_ghsystem_dots_tl\ ...}
+\ghsystem_add_statement:nnn {P} {321} {... ~ \l_ghsystem_dots_tl\ ...}
+\ghsystem_add_statement:nnn {P} {322} {... ~ \l_ghsystem_dots_tl\ ...}
+\ghsystem_add_statement:nnn {P} {330} {...}
+\ghsystem_add_statement:nnn {P} {331} {...}
+\ghsystem_add_statement:nnn {P} {332} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {333} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {334} {...}
+\ghsystem_add_statement:nnn {P} {335} {...}
+\ghsystem_add_statement:nnn {P} {336} {...}
+\ghsystem_add_statement:nnn {P} {337} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {338} {...}
+\ghsystem_add_statement:nnn {P} {340} {...}
+\ghsystem_add_statement:nnn {P} {341} {...}
+\ghsystem_add_statement:nnn {P} {342} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {350} {...}
+\ghsystem_add_statement:nnn {P} {351} {...}
+\ghsystem_add_statement:nnn {P} {352} {...}
+\ghsystem_add_statement:nnn {P} {353} {...}
+\ghsystem_add_statement:nnn {P} {360} {...}
+\ghsystem_add_statement:nnn {P} {361} {...}
+\ghsystem_add_statement:nnn {P} {362} {...}
+\ghsystem_add_statement:nnn {P} {363} {...}
+\ghsystem_add_statement:nnn {P} {370} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {371} {... : \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {372} {...}
+\ghsystem_add_statement:nnn {P} {373} {...}
+\ghsystem_add_statement:nnn {P} {374} {...}
+\ghsystem_add_statement:nnn {P} {375} {...}
+\ghsystem_add_statement:nnn {P} {376} {...}
+\ghsystem_add_statement:nnn {P} {377} {... : \ghsystem_text:\ ...}
+\ghsystem_add_statement:nnn {P} {378} {\l_ghsystem_dots_tl\ ...}
+\ghsystem_add_statement:nnn {P} {380} {...}
+\ghsystem_add_statement:nnn {P} {381} {...}
+\ghsystem_add_statement:nnn {P} {390} {...}
+\ghsystem_add_statement:nnn {P} {391} {...}
+\ghsystem_add_statement:nnn {P} {301 + 310} {...}
+\ghsystem_add_statement:nnn {P} {301 + 312} {...}
+\ghsystem_add_statement:nnn {P} {301 + 330 + 331} {...}
+\ghsystem_add_statement:nnn {P} {302 + 334} {...}
+\ghsystem_add_statement:nnn {P} {302 + 350} {...}
+\ghsystem_add_statement:nnn {P} {302 + 352} {...}
+\ghsystem_add_statement:nnn {P} {303 + 361 + 353} {...}
+\ghsystem_add_statement:nnn {P} {304 + 340} {...}
+\ghsystem_add_statement:nnn {P} {304 + 341} {...}
+\ghsystem_add_statement:nnn {P} {305 + 351 + 338} {...}
+\ghsystem_add_statement:nnn {P} {306 + 360} {...}
+\ghsystem_add_statement:nnn {P} {307 + 311} {...}
+\ghsystem_add_statement:nnn {P} {308 + 313} {...}
+\ghsystem_add_statement:nnn {P} {309 + 311} {...}
+\ghsystem_add_statement:nnn {P} {332 + 313} {...}
+\ghsystem_add_statement:nnn {P} {333 + 313} {...}
+\ghsystem_add_statement:nnn {P} {335 + 334} {...}
+\ghsystem_add_statement:nnn {P} {337 + 313} {...}
+\ghsystem_add_statement:nnn {P} {342 + 311} {...}
+\ghsystem_add_statement:nnn {P} {370 + 376} {...}
+\ghsystem_add_statement:nnn {P} {370 + 378} {... ~ \l_ghsystem_dots_tl\ ...}
+\ghsystem_add_statement:nnn {P} {370 + 380} {...}
+\ghsystem_add_statement:nnn {P} {370 + 380 + 375} {...}
+\ghsystem_add_statement:nnn {P} {371 + 380 + 375} {...}
 
 % 3.4 Precautionary Statements — Storage
-\prop_put:Nnn \l__ghsystem_p_prop { 401 } { \l__ghsystem_dots_tl\ ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 402 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 403 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 404 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 405 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 406 }
-  { ... \ghsystem_slash: \l__ghsystem_dots_tl\ ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 407 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 410 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 411 }
+\ghsystem_add_statement:nnn {P} {401} {\l_ghsystem_dots_tl\ ...}
+\ghsystem_add_statement:nnn {P} {402} {...}
+\ghsystem_add_statement:nnn {P} {403} {...}
+\ghsystem_add_statement:nnn {P} {404} {...}
+\ghsystem_add_statement:nnn {P} {405} {...}
+\ghsystem_add_statement:nnn {P} {406}
+  {... \ghsystem_slash: \l_ghsystem_dots_tl\ ...}
+\ghsystem_add_statement:nnn {P} {407} {...}
+\ghsystem_add_statement:nnn {P} {410} {...}
+\ghsystem_add_statement:nnn {P} {411}
   {
-    ... ~ \exp_args:No \SI { \l__ghsystem_celsius_temperature_tl }
-    { \GHScelsius } \ghsystem_slash: \exp_args:No \SI
-    { \l__ghsystem_fahrenheit_temperature_tl } { \GHSfahrenheit } ~ ...
-  }
-\prop_put:Nnn \l__ghsystem_p_prop { 412 }
+    ... ~ \exp_args:No \SI {\l_ghsystem_celsius_temperature_tl}
+    {\GHScelsius} \ghsystem_slash: \exp_args:No \SI
+    {\l_ghsystem_fahrenheit_temperature_tl} {\GHSfahrenheit} ~ ...
+ }
+\ghsystem_add_statement:nnn {P} {412}
   {
-    ... ~ \SI { 50 } { \GHScelsius } \ghsystem_slash: \SI { 122 } {
-      \GHSfahrenheit } ~ ...
-  }
-\prop_put:Nnn \l__ghsystem_p_prop { 413 }
+    ... ~ \SI {50} {\GHScelsius} \ghsystem_slash: \SI {122} {
+      \GHSfahrenheit} ~ ...
+ }
+\ghsystem_add_statement:nnn {P} {413}
   {
-    ... ~ \exp_args:No \SI { \l__ghsystem_kg_mass_tl } { \GHSkilogram } ~
-    ... ~ \SI { \l__ghsystem_celsius_temperature_tl } { \GHScelsius }
-    \ghsystem_slash: \exp_args:No \SI { \l__ghsystem_fahrenheit_temperature_tl
-    } { \GHSfahrenheit } ~ ...
-  }
-\prop_put:Nnn \l__ghsystem_p_prop { 420 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 422 } { ... ~ \l__ghsystem_dots_tl\ ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 402 + 404 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 403 + 233 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 403 + 235 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 410 + 403 } { ... }
-\prop_put:Nnn \l__ghsystem_p_prop { 410 + 412 }
+    ... ~ \exp_args:No \SI {\l_ghsystem_kg_mass_tl} {\GHSkilogram} ~
+    ... ~ \SI {\l_ghsystem_celsius_temperature_tl} {\GHScelsius}
+    \ghsystem_slash: \exp_args:No \SI {\l_ghsystem_fahrenheit_temperature_tl
+   } {\GHSfahrenheit} ~ ...
+ }
+\ghsystem_add_statement:nnn {P} {420} {...}
+\ghsystem_add_statement:nnn {P} {422} {... ~ \l_ghsystem_dots_tl\ ...}
+\ghsystem_add_statement:nnn {P} {402 + 404} {...}
+\ghsystem_add_statement:nnn {P} {403 + 233} {...}
+\ghsystem_add_statement:nnn {P} {403 + 235} {...}
+\ghsystem_add_statement:nnn {P} {410 + 403} {...}
+\ghsystem_add_statement:nnn {P} {410 + 412}
   {
-    ... ~ \SI { 50 } { \GHScelsius } \ghsystem_slash: \SI { 122 } {
-      \GHSfahrenheit } ~ ...
-  }
-\prop_put:Nnn \l__ghsystem_p_prop { 411 + 235 }
+    ... ~ \SI {50} {\GHScelsius} \ghsystem_slash: \SI {122} {
+      \GHSfahrenheit} ~ ...
+ }
+\ghsystem_add_statement:nnn {P} {411 + 235}
   {
-    ... ~ \exp_args:No \SI { \l__ghsystem_celsius_temperature_tl }{
-      \GHScelsius } \ghsystem_slash: \exp_args:No \SI {
-      \l__ghsystem_fahrenheit_temperature_tl } { \GHSfahrenheit } ~ ...
-  }
+    ... ~ \exp_args:No \SI {\l_ghsystem_celsius_temperature_tl}{
+      \GHScelsius} \ghsystem_slash: \exp_args:No \SI {
+      \l_ghsystem_fahrenheit_temperature_tl} {\GHSfahrenheit} ~ ...
+ }
 
 % 3.5 Precautionary Statements — Disposal
-\prop_put:Nnn \l__ghsystem_p_prop { 501 } { ... ~ \l__ghsystem_dots_tl\ ... }
+\ghsystem_add_statement:nnn {P} {501} {... ~ \l_ghsystem_dots_tl\ ...}
 
 % 4 Hazard Statement Codes (Annex 6 page 4f)
-\prop_put:Nnn \l__ghsystem_h_prop { 350i } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 360F } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 360D } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 361f } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 361d } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 360FD } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 361fd } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 360Fd } { ... }
-\prop_put:Nnn \l__ghsystem_h_prop { 360Df } { ... }
+\ghsystem_add_statement:nnn {H} {350i} {...}
+\ghsystem_add_statement:nnn {H} {360F} {...}
+\ghsystem_add_statement:nnn {H} {360D} {...}
+\ghsystem_add_statement:nnn {H} {361f} {...}
+\ghsystem_add_statement:nnn {H} {361d} {...}
+\ghsystem_add_statement:nnn {H} {360FD} {...}
+\ghsystem_add_statement:nnn {H} {361fd} {...}
+\ghsystem_add_statement:nnn {H} {360Fd} {...}
+\ghsystem_add_statement:nnn {H} {360Df} {...}
 

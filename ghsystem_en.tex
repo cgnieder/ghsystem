@@ -36,6 +36,7 @@
 \usepackage{ghsystem}
 \setcnltx{
   package  = {ghsystem},
+  info     = \acl*{ghs} ,
   url      = https://github.com/cgnieder/ghsystem/ ,
   authors  = Clemens Niederberger ,
   email    = contact@mychemistry.eu ,
@@ -46,8 +47,9 @@
   } ,
   add-cmds = {
     chemsetup,
-    ghs, ghslistall, ghspic
-  }
+    ghs, ghslistall, ghspic, ghssetup
+  } ,
+  index-setup = noclearpage
 }
 
 \usepackage{booktabs}
@@ -103,6 +105,10 @@
   chemformula/format = \libertineLF
 }
 
+\ghssetup{
+  language = {german,english}
+}
+
 \sisetup{
   detect-mode=false,
   mode=text,
@@ -115,14 +121,15 @@
 \addbibresource{\jobname.bib}
 \begin{filecontents*}{\jobname.bib}
 @misc{eu:ghsystem_regulation,
-  author   = {{The European Parliament and The Council of the European Union}},
-  title    = {Regulation (EC) No 1272/2008 of the European Parliament and of
+  author    = {{The European Parliament and The Council of the European Union}},
+  title     = {Regulation (EC) No 1272/2008 of the European Parliament and of
     the Council} ,
+  shorthand = {EuP} ,
   subtitle = {on classification, labelling and packaging of substances and
     mixtures, amending and repealing Directives 67/548/EEC and 1999/45/EC, and
     amending Regulation (EC) No 1907/2006} ,
-  journal  = {Official Journal of the European Union} ,
-  date     = {2008-12-16}
+  journal   = {Official Journal of the European Union} ,
+  date      = {2008-12-16}
 }
 @online{unece:ghsystem_implementation,
   author   = {{United Nations Economic Commission for Europe}} ,
@@ -163,19 +170,20 @@ are taken from \acs{eu} regulation 1272/2008~\cite{eu:ghsystem_regulation}.
 \needpackage{ifpdf}~\cite{pkg:ifpdf}.
 
 \section{Setup}
-The simplest way is to load \pkg{chemmacros}~\cite{pkg:chemmacros} which loads
-\ghsystem{} implicitily.  All of \ghsystem's options belong to
-\pkg{chemmacros}' module \module{ghsystem}.  This means they can be setup with
-\begin{sourcecode}
-  \chemsetup[ghsystem]{<options>} or
-  \chemsetup{ghsystem/<option1>,ghsystem/<option2>}
-\end{sourcecode}
-\sinceversion{4.0}However, \ghsystem{} can be loaded as a standalone package
-and thus provides its own setup command:
-\begin{commands}
-  \command{ghssetup}[\marg{options}]
-    Setup command for \ghsystem.
-\end{commands}
+% TODO
+% The simplest way is to load \pkg{chemmacros}~\cite{pkg:chemmacros} which loads
+% \ghsystem{} implicitily.  All of \ghsystem's options belong to
+% \pkg{chemmacros}' module \module{ghsystem}.  This means they can be setup with
+% \begin{sourcecode}
+%   \chemsetup[ghsystem]{<options>} or
+%   \chemsetup{ghsystem/<option1>,ghsystem/<option2>}
+% \end{sourcecode}
+% \sinceversion{4.0}However, \ghsystem{} can be loaded as a standalone package
+% and thus provides its own setup command:
+% \begin{commands}
+%   \command{ghssetup}[\marg{options}]
+%     Setup command for \ghsystem.
+% \end{commands}
 
 \section{Get Hazard and Precautionary Statements}
 \subsection{Simple Statements}
@@ -405,29 +413,36 @@ language option then.
 
 You can also choose the language explicitly.
 \begin{options}
-  \keychoice{language}{english,german,italian,spanish}\Default{english}
-    Selects and loads language file.  Falls back to \code{english} if the
-    chosen file doesn't exist.
+  \keyval{language}{lang}\Default{english}
+    Selects\changedversion{5.0} a language and if called in the preamble also
+    loads the necessary language file if it hasn't been loaded, yet.loads
+    language file.  If the chosen file doesn't exist it falls back to
+    \code{english}.  Currently available choices are English, German, Italian,
+    and Spanish.  \meta{lang} can be a comma separated list.  Then the last
+    language in the list will be the active one.  If you plan to switch
+    languages within the document then you should make sure to load all needed
+    languages in the preamble first.
 \end{options}
 \begin{example}[side-by-side]
   \ghs{h}{201}
 
-  \chemsetup[ghsystem]{language=german}
+  \ghssetup{language=german}
   \ghs{h}{201}
 \end{example}
 
-There is another alternative:
-\begin{commands}
-  \command{loadghsystemlanguage}[\marg{language}]
-    \sinceversion{4.0}Load the language used by \ghsystem.
-\end{commands}
+% There is another alternative:
+% \begin{commands}
+%   \command{loadghsystemlanguage}[\marg{language}]
+%     \sinceversion{4.0}Load the language used by \ghsystem.
+% \end{commands}
 
 I will add other languages some time in future.  This may take a while,
 though.  If you would be willing to contribute and write the statements of
 another language please feel free to contact
-me\footnote{\href{mailto:contact@mychemistry.eu}{contact@mychemistry.eu}}.  I
-would provide you with a template file, a \acs{pdf} containing the official
-translations, and help to all your questions.
+me\footnote{\href{mailto:contact@mychemistry.eu}{contact@mychemistry.eu}}.
+Your \TeX\ distribution should contain a file
+\code{ghsystem\_langtemplate.def} which \emph{should} explain all immediate
+questions and can be used as a basis for a new language file.
 
 \section{List of All Statements}
 If for some reason you want to list all sentences you can use
