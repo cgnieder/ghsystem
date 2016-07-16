@@ -1,0 +1,830 @@
+% --------------------------------------------------------------------------
+% - the CHEMMACROS bundle
+% - ghsystem_french.def
+% - loads of little helpers for chemists
+% --------------------------------------------------------------------------
+% - Clemens Niederberger
+% --------------------------------------------------------------------------
+% - https://bitbucket.org/cgnieder/chemmacros/
+% - contact@mychemistry.eu
+% --------------------------------------------------------------------------
+% - If you have any ideas, questions, suggestions or bugs to report, please
+% - feel free to contact me.
+% --------------------------------------------------------------------------
+% - Copyright 2011-2016 Clemens Niederberger
+% -
+% - This work may be distributed and/or modified under the
+% - conditions of the LaTeX Project Public License, either version 1.3
+% - of this license or (at your option) any later version.
+% - The latest version of this license is in
+% -   http://www.latex-project.org/lppl.txt
+% - and version 1.3 or later is part of all distributions of LaTeX
+% - version 2005/12/01 or later.
+% -
+% - This work has the LPPL maintenance status `maintained'.
+% -
+% - The Current Maintainer of this work is Clemens Niederberger.
+% --------------------------------------------------------------------------
+% - the French translation was kindly provided by Bréal Frédéric and Beaude
+% - Aurélien. Many thanks!
+
+% FRENCH DEFINITIONS
+\ghsystemlanguagefile{french}{2016/07/16}
+
+% table head:
+\tl_set:Nn \l_ghsystem_identifier_tl { num\'ero }
+\tl_set:Nn \l_ghsystem_table_text_tl { phrases }
+\tl_set:Nn \l_ghsystem_table_caption_tl { Toutes~ les~ phrases~ H,~ EUH~ et~ P }
+
+\group_begin:
+\char_set_catcode_active:N \^^@
+\char_set_lccode:nn { `^^@ } { `: }
+\tl_to_lowercase:n
+  {
+    \group_end:
+    \tl_const:Nn \c_ghsystem_french_colon_tl { ^^@ }
+  }
+
+% fill-in functions:
+% <state route of exposure if it is conclusively proven that no other routes
+% of exposure cause the hazard>.
+\cs_set:Npn \ghsystem_exposure:
+  {
+    \bool_if:NT \l_ghsystem_fill_in_bool
+      {
+        \c_space_tl
+        \ghsystem_filler:n
+          {
+            indiquer~ la~ voie~ d'exposition~ s'il~ est~ formellement~
+            prouv\'e~ qu'aucune~  autre~ voie~ d'exposition~ ne~
+            conduit~ au~ m\^eme~ danger. \textgreater
+          }
+      }
+  }
+
+%  <state specific effect if known> 
+\cs_set:Npn \ghsystem_effect:
+  {
+    \bool_if:NT \l_ghsystem_fill_in_bool
+      {
+        \c_space_tl
+        \ghsystem_filler:n { indiquer~ l'effet~ s'il~ est~ connu. }
+      }
+  }
+
+% <or state all organs affected, if known>
+\cs_set:Npn \ghsystem_organs:
+  {
+    \bool_if:nT { \l_ghsystem_fill_in_bool && !\l_ghsystem_organs_bool }
+      {
+        \c_space_tl
+        \ghsystem_filler:n
+          {
+            ou~ indiquer~ tous~ les~ organes~ affect\'es,~ s'ils~ sont~
+            connus.
+        }
+      }
+  }
+
+% <name of sensitising substance>
+\cs_set:Npn \ghsystem_substance:
+  {
+    \bool_if:NF \l_ghsystem_substance_bool
+      {
+        \c_space_tl
+        \ghsystem_filler:n { nom~ de~ la~ substance~ sensibilisante }
+      }
+  }
+
+% HAZARD STATEMENTS (Annex 3)
+% 1. Hazard Statements
+% 1.1 Physical Hazards
+\ghsystem_add_statement:nnn {H} {200} {Explosif~ instable.}
+\ghsystem_add_statement:nnn {H} {201}
+  {Explosif ; ~ danger~ d'explosion~ en~ masse.}
+\ghsystem_add_statement:nnn {H} {202}
+  {Explosif ; ~ danger~ s\'erieux~ de~ projection.}
+\ghsystem_add_statement:nnn {H} {203}
+  {
+    Explosif ; ~ danger~ d'incendie,~
+    d'effet~ de~ souffle~ ou~ de~ projection.
+  }
+\ghsystem_add_statement:nnn {H} {204} {Danger~ d'incendie~ ou~ de~ projection.}
+\ghsystem_add_statement:nnn {H} {205} {Danger~ d'explosion~ en~ masse~ en~ cas~ d'incendie.}
+\ghsystem_add_statement:nnn {H} {220} {Gaz~ extr\^emement~ inflammable.}
+\ghsystem_add_statement:nnn {H} {221} {Gaz~ inflammable.}
+\ghsystem_add_statement:nnn {H} {222} {A\'erosol~ extr\^emement~ inflammable.}
+\ghsystem_add_statement:nnn {H} {223} {A\'erosol~ inflammable.}
+\ghsystem_add_statement:nnn {H} {224} {Liquide~ et~ vapeurs~ extr\^emement~ inflammables.}
+\ghsystem_add_statement:nnn {H} {225} {Liquide~ et~ vapeurs~ tr\`es~ inflammables.}
+\ghsystem_add_statement:nnn {H} {226} {Liquide~ et~ vapeurs~ inflammables.}
+\ghsystem_add_statement:nnn {H} {228} {Mati\`ere~ solide~ inflammable.}
+\ghsystem_add_statement:nnn {H} {240} {Peut~ exploser~ sous~ l'effet~ de~ la~ chaleur.}
+\ghsystem_add_statement:nnn {H} {241}
+  {Peut~ s'enflammer~ ou~ exploser~ sous~ l'effet~ de~ la~ chaleur.}
+\ghsystem_add_statement:nnn {H} {242} {Peut~ s'enflammer~ sous~ l'effet~ de~ la~ chaleur.}
+\ghsystem_add_statement:nnn {H} {250} {S'enflamme~ spontan\'ement~ au~ contact~ de~ l'air.}
+\ghsystem_add_statement:nnn {H} {251}
+  {
+    Mati\`ere~ auto-\'echauffante ; ~
+    peut~ s'enflammer.
+  }
+\ghsystem_add_statement:nnn {H} {252}
+  {
+    Mati\`ere~ auto-\'echauffante~ en~ grandes~ quantit\'es
+    ; ~ peut~ s'enflammer.
+  }
+\ghsystem_add_statement:nnn {H} {260}
+  {
+    D\'egage~ au~ contact~ de~ l'eau~ des~ gaz~ inflammables~ qui~ peuvent~
+    s'enflammer~ spontan\'ement.
+  }
+\ghsystem_add_statement:nnn {H} {261}
+  {D\'egage~ au~ contact~ de~ l'eau~ des~ gaz~ inflammables.}
+\ghsystem_add_statement:nnn {H} {270}
+  {
+    Peut~ provoquer~ ou~ aggraver~ un~ incendie
+    ; ~ comburant.
+  }
+\ghsystem_add_statement:nnn {H} {271}
+  {
+    Peut~ provoquer~ un~ incendie~ ou~ une~ explosion
+    ; ~ comburant~ puissant.
+  }
+\ghsystem_add_statement:nnn {H} {272}
+  {Peut~ aggraver~ un~ incendie ; ~ comburant.}
+\ghsystem_add_statement:nnn {H} {280}
+  {
+    Contient~ un~ gaz~ sous~ pression ;
+    ~ peut~ exploser~ sous~ l'effet~ de~ la~ chaleur.
+  }
+\ghsystem_add_statement:nnn {H} {281}
+  {
+    Contient~ un~ gaz~ r\'efrig\'er\'e ;
+    ~ peut~ causer~ des~ br\^ulures~ ou~ blessures~ cryog\'eniques.
+  }
+\ghsystem_add_statement:nnn {H} {290} {Peut~ \^etre~ corrosif~ pour~ les~ m\'etaux.}
+
+% 1.2 Health Hazards
+\ghsystem_add_statement:nnn {H} {300} {Mortel~ en~ cas~ d'ingestion.}
+\ghsystem_add_statement:nnn {H} {301} {Toxique~ en~ cas~ d'ingestion.}
+\ghsystem_add_statement:nnn {H} {302} {Nocif~ en~ cas~ d'ingestion.}
+\ghsystem_add_statement:nnn {H} {304}
+  {
+    Peut~ \^etre~ mortel~ en~ cas~ d'ingestion~ et~ de~ p\'en\'etration~ dans~
+    les~ voies~ respiratoires.
+  }
+\ghsystem_add_statement:nnn {H} {310} {Mortel~ par~ contact~ cutan\'e.}
+\ghsystem_add_statement:nnn {H} {311} {Toxique~ par~ contact~ cutan\'e.}
+\ghsystem_add_statement:nnn {H} {312} {Nocif~ par~ contact~ cutan\'e.}
+\ghsystem_add_statement:nnn {H} {314}
+  {Provoque~ des~ br\^ulures~ de~ la~ peau~ et~ des~ l\'esions~ oculaires~ graves.}
+\ghsystem_add_statement:nnn {H} {315} {Provoque~ une~ irritation~ cutan\'ee.}
+\ghsystem_add_statement:nnn {H} {317} {Peut~ provoquer~ une~ allergie~ cutan\'ee.}
+\ghsystem_add_statement:nnn {H} {318} {Provoque~ des~ l\'esions~ oculaires~ graves.}
+\ghsystem_add_statement:nnn {H} {319} {Provoque~ une~ s\'ev\`ere~ irritation~ des~ yeux.}
+\ghsystem_add_statement:nnn {H} {330} {Mortel~ par~ inhalation.}
+\ghsystem_add_statement:nnn {H} {331} {Toxique~ par~ inhalation.}
+\ghsystem_add_statement:nnn {H} {332} {Nocif~ par~ inhalation.}
+\ghsystem_add_statement:nnn {H} {334}
+  {
+    Peut~ provoquer~ des~ sympt\^omes~ allergiques~ ou~ d'asthme~ ou~ des~
+    difficult\'es~ respiratoires~ par~ inhalation.
+  }
+\ghsystem_add_statement:nnn {H} {335} {Peut~ irriter~ les~ voies~ respiratoires.}
+\ghsystem_add_statement:nnn {H} {336} {Peut~ provoquer~ somnolence~ ou~ vertiges.}
+\ghsystem_add_statement:nnn {H} {340}
+  {Peut~ induire~ des~ anomalies~ g\'en\'etiques \ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {341}
+  {Susceptible~ d'induire~ des~ anomalies~ g\'en\'etiques.~ \ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {350} {Peut~ provoquer~ le~ cancer.~ \ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {351}
+  {Susceptible~ de~ provoquer~ le~ cancer.~ \ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {360}
+  {
+    Peut~ nuire~ \`a~ la~ fertilit\'e~ ou~ au~ f\oe tus.~ \ghsystem_effect:
+    \ghsystem_exposure:
+  }
+\ghsystem_add_statement:nnn {H} {361}
+  {Susceptible~ de~ nuire~ \`a~ la~ fertilit\'e.~ \ghsystem_effect: \ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {362}
+  {Peut~ \^etre~ nocif~ pour~ les~ b\'eb\'es~ nourris~ au~ lait~ maternel.}
+\ghsystem_add_statement:nnn {H} {370}
+  {
+    Risque~ av\'er\'e~ d'effets~ graves  \bool_if:NF \l_ghsystem_organs_bool
+    {~pour~ les~ organes} \ghsystem_organs: . \ghsystem_exposure:
+  }
+% Risque avéré d’effets graves pour les organes
+\ghsystem_add_statement:nnn {H} {371}
+  {
+     Risque~ pr\'esum\'e~ d'effets~ graves \bool_if:NF \l_ghsystem_organs_bool
+     {~pour~ les~ organes} \ghsystem_organs: \ghsystem_exposure:
+  }
+\ghsystem_add_statement:nnn {H} {372}
+  {
+     Risque~ av\'er\'e~ d'effets~ graves \bool_if:NF \l_ghsystem_organs_bool
+     {~pour~ les~ organes} \ghsystem_organs: \c_space_tl \`a~ la~ suite~
+     d'expositions~ r\'ep\'et\'ees~ ou~ d'une~ exposition~ prolong\'ee.~
+     \ghsystem_exposure:
+  }
+\ghsystem_add_statement:nnn {H} {373}
+  {
+     Risque~ pr\'esum\'e~ d'effets~ graves \bool_if:NF \l_ghsystem_organs_bool
+     {~pour~ les~ organes} \ghsystem_organs: \c_space_tl \`a~ la~ suite~
+     d'expositions~ r\'ep\'et\'ees~ ou~ d'une~ exposition~ prolong\'ee.~
+     \ghsystem_exposure:
+  }
+
+% 1.3 Environmental hazards
+\ghsystem_add_statement:nnn {H} {400} {Tr\`es~ toxique~ pour~ les~ organismes~ aquatiques.}
+\ghsystem_add_statement:nnn {H} {410}
+  {
+    Tr\`es~ toxique~ pour~ les~ organismes~ aquatiques,~ entra\^ine~ des~
+    effets~ n\'efastes~ \`a~ long~ terme.
+  }
+\ghsystem_add_statement:nnn {H} {411}
+  {
+    Toxique~ pour~ les~ organismes~ aquatiques,~ entra\^ine~ des~ effets~
+    n\'efastes~ \`a~ long~ terme.
+  }
+\ghsystem_add_statement:nnn {H} {412}
+  {
+    Nocif~ pour~ les~ organismes~ aquatiques,~ entra\^ine~ des~ effets~
+    n\'efastes~ \`a~ long~ terme.
+  }
+\ghsystem_add_statement:nnn {H} {413}
+  {Peut~ \^etre~ nocif~ \`a~ long~ terme~ pour~ les~ organismes~ aquatiques.}
+
+% 2 Supplemental Hazard Informations
+% 2.1 Physical Properties
+\ghsystem_add_statement:nnn {EUH} {001} {Explosif~ \`a~ l'\'etat~ sec.}
+\ghsystem_add_statement:nnn {EUH} {006}
+  {Danger~ d'explosion~ en~ contact~ ou~ sans~ contact~ avec~ l'air.}
+\ghsystem_add_statement:nnn {EUH} {014} {R\'eagit~ violemment~ au~ contact~ de~ l'eau.}
+\ghsystem_add_statement:nnn {EUH} {018}
+  {
+    Lors~ de~ l'utilisation,~ formation~ possible~ de~ m\'elange~ vapeur-air~
+    inflammable\ghsystem_slash: explosif.
+  }
+\ghsystem_add_statement:nnn {EUH} {019} {Peut~ former~ des~ peroxydes~ explosifs.}
+\ghsystem_add_statement:nnn {EUH} {044}
+  {Risque~ d'explosion~ si~ chauff\'e~ en~ ambiance~ confin\'ee.}
+
+% 2.2 Health Properties
+\ghsystem_add_statement:nnn {EUH} {029}
+  {Au~ contact~ de~ l'eau,~ d\'egage~ des~ gaz~ toxiques.}
+\ghsystem_add_statement:nnn {EUH} {031}
+  {Au~ contact~ d'un~ acide,~ d\'egage~ un~ gaz~ toxique.}
+\ghsystem_add_statement:nnn {EUH} {032}
+  {Au~ contact~ d'un~ acide,~ d\'egage~ un~ gaz~ tr\`es~ toxique.}
+\ghsystem_add_statement:nnn {EUH} {066}
+  {
+    L'exposition~ r\'ep\'et\'ee~ peut~ provoquer~ dess\`echement~ ou~
+    ger\c{c}ures~ de~ la~ peau.
+  }
+\ghsystem_add_statement:nnn {EUH} {070} {Toxique~ par~ contact~ oculaire.}
+\ghsystem_add_statement:nnn {EUH} {071} {Corrosif~ pour~ les~ voies~ respiratoires.}
+
+% 2.3 Environmental Properties
+\ghsystem_add_statement:nnn {EUH} {059} {Dangereux~ pour~ la~ couche~ d'ozone.}
+
+% 2.4 Supplemental Label Elements/Information On Certain Substances And Mixtures
+\ghsystem_add_statement:nnn {EUH} {201}
+  {
+    Contient~ du~ plomb.~ Ne~ pas~ utiliser~ sur~ les~ objets~ susceptibles~
+    d'\^etre~ m\^ach\'es~ ou~ suc\'es~ par~ des~ enfants.
+  }
+\ghsystem_add_statement:nnn {EUH} {201A}
+  {Attention ! ~ Contient~ du~ plomb.}
+\ghsystem_add_statement:nnn {EUH} {202}
+  {
+    \iupac {Cyano|acrylate} . ~ Danger.~ Colle~ \`a~ la~ peau~ et~ aux~ yeux~
+    en~ quelques~ secondes.~ \`A~ conserver~ hors~ de~ port\'ee~ des~
+    enfants.
+  } 
+\ghsystem_add_statement:nnn {EUH} {203} {Contient~ du~ chrome~ \,(VI) . ~ Peut~ produire~ une~ r\'eaction~ allergique.}
+\ghsystem_add_statement:nnn {EUH} {204} {Contient~ des~ \iupac {iso|cyanates} . ~ Peut~ produire~ une~ r\'eaction~ allergique.}
+\ghsystem_add_statement:nnn {EUH} {205} {Contient~ des~ compos\'es~ \'epoxydiques.~ Peut~ produire~ une~ r\'eaction~ allergique.}
+\ghsystem_add_statement:nnn {EUH} {206}
+  {
+    Attention ! ~ Ne~ pas~ utiliser~ en~
+    combinaison~ avec~ d'autres~ produits.~ Peut~ lib\'erer~ des~ gaz~
+    dangereux~ (chlore).
+  }
+\ghsystem_add_statement:nnn {EUH} {207}
+  {
+    Attention ! ~ Contient~ du~ cadmium.~
+    Des~ fum\'ees~ dangereuses~ se~ d\'eveloppent~ pendant~ l'utilisation.~
+    Voir~ les~ informations~ fournies~ par~ le~ fabricant.~ Respectez~ les~
+    consignes~ de~ s\'ecurit\'e.
+  }
+\ghsystem_add_statement:nnn {EUH} {208}
+  {Contient~ \ghsystem_substance:. ~ Peut~ produire~ une~ r\'eaction~ allergique.}
+\ghsystem_add_statement:nnn {EUH} {209}
+  {Peut~ devenir~ facilement~ inflammable~ en~ cours~ d'utilisation.}
+\ghsystem_add_statement:nnn {EUH} {209A}
+  {Peut~ devenir~ inflammable~ en~ cours~ d'utilisation.}
+\ghsystem_add_statement:nnn {EUH} {210}
+  {Fiche~ de~ donn\'ees~ de~ s\'ecurit\'e~ disponible~ sur~ demande.}
+\ghsystem_add_statement:nnn {EUH} {401}
+  {
+    Respectez~ les~ instructions~ d'utilisation~ pour~ \'eviter~ les~ risques~
+    pour~ la~ sant\'e~ humaine~ et~ l'environnement.
+  }
+
+% PRECAUTIONARY STATEMENTS (Annex 4 page 19ff)
+% 3 Precautionary Statements
+% 3.1 General
+\ghsystem_add_statement:nnn {P} {101}
+  {
+    En~ cas~ de~ consultation~ d'un~ m\'edecin,~ garder~ \`a~ disposition~ le~
+    r\'ecipient~ ou~ l'\'etiquette.
+  }
+\ghsystem_add_statement:nnn {P} {102} {Tenir~ hors~ de~ port\'ee~ des~ enfants.}
+\ghsystem_add_statement:nnn {P} {103} {Lire~ l'\'etiquette~ avant~ utilisation.}
+
+% 3.2 Precautionary Statements — Prevention
+\ghsystem_add_statement:nnn {P} {201} {Se~ procurer~ les~ instructions~ avant~ utilisation.}
+\ghsystem_add_statement:nnn {P} {202}
+  {
+    Ne~ pas~ manipuler~ avant~ d'avoir~ lu~ et~ compris~ toutes~ les~
+    pr\'ecautions~ de~ s\'ecurit\'e.
+  }
+\ghsystem_add_statement:nnn {P} {210}
+  {
+    Tenir~ \`a~ l'\'ecart~ de~ la~ chaleur\ghsystem_slash: des~ \'etincelles
+    \ghsystem_slash: des~ flammes~ nues\ghsystem_slash:  des~ surfaces~
+    chaudes.~ Ne~ pas~ fumer.
+  } 
+\ghsystem_add_statement:nnn {P} {211} {Ne~ pas~ vaporiser~ sur~ une~ flamme~ nue~ ou~ sur~ toute~ autre~ source~ d'ignition.}
+\ghsystem_add_statement:nnn {P} {220}
+  {
+    Tenir\ghsystem_slash: stocker~ \`a~ l'\'ecart~ des~
+    v\^etements\l_ghsystem_dots_tl \ghsystem_slash: mati\`eres~ combustibles.
+  }
+\ghsystem_add_statement:nnn {P} {221}
+  {
+    Prendre~ toutes~ pr\'ecautions~ pour~ \'eviter~ de~ m\'elanger~ avec~ des~
+    mati\`eres~ combustibles \l_ghsystem_dots_tl
+  }
+\ghsystem_add_statement:nnn {P} {222} {Ne~ pas~ laisser~ au~ contact~ de~ l'air.}
+\ghsystem_add_statement:nnn {P} {223}
+  {
+    \'Eviter~ tout~ contact~ avec~ l'eau,~ \`a~ cause~ du~ risque~ de~
+    r\'eaction~ violente~ et~ d'inflammation~ spontan\'ee.
+  }
+\ghsystem_add_statement:nnn {P} {230} {Maintenir~ humidifi\'e~ avec~ \l_ghsystem_dots_tl}
+\ghsystem_add_statement:nnn {P} {231} {Manipuler~ sous~ gaz~ inerte.}
+\ghsystem_add_statement:nnn {P} {232} {Prot\'eger~ de~ l'humidit\'e.}
+\ghsystem_add_statement:nnn {P} {233}
+  {Maintenir~ le~ r\'ecipient~ ferm\'e~ de~ mani\`ere~ \'etanche.}
+\ghsystem_add_statement:nnn {P} {234}
+  {Conserver~ uniquement~ dans~ le~ r\'ecipient~ d'origine.}
+\ghsystem_add_statement:nnn {P} {235} {Tenir~ au~ frais.}
+\ghsystem_add_statement:nnn {P} {240}
+  {
+    Mise~ \`a~ la~ terre\ghsystem_slash: liaison~ \'equipotentielle~ du~
+    r\'ecipient~ et~ du~ mat\'eriel~ de~ r\'eception.
+  }
+\ghsystem_add_statement:nnn {P} {241} {
+  Utiliser~ du~ mat\'eriel~ \'electrique\ghsystem_slash: de~
+  ventilation\ghsystem_slash: d'\'eclairage\ghsystem_slash:
+  \l_ghsystem_dots_tl\ antid\'eflagrant.
+}
+\ghsystem_add_statement:nnn {P} {242}
+  {Ne~ pas~ utiliser~ d'outils~ produisant~ des~ \'etincelles.}
+\ghsystem_add_statement:nnn {P} {243}
+  {Prendre~ des~ mesures~ de~ pr\'ecaution~ contre~ les~ d\'echarges~ \'electrostatiques.}
+\ghsystem_add_statement:nnn {P} {244}
+  {S'assurer~ de~ l'absence~ de~ graisse~ ou~ d'huile~ sur~ les~ soupapes~ de~ r\'eduction.}
+\ghsystem_add_statement:nnn {P} {250}
+  {
+    \'Eviter~ les~ abrasions\ghsystem_slash: les~ chocs\l_ghsystem_dots_tl
+    \ghsystem_slash: les frottements.
+  }
+\ghsystem_add_statement:nnn {P} {251}
+  {
+    R\'ecipient~ sous~ pression \c_ghsystem_french_colon_tl \c_space_tl ne~ pas~
+    perforer,~ ni~ br\^uler,~ m\^eme~ apr\`es~ usage.
+  }
+\ghsystem_add_statement:nnn {P} {260}
+  {
+    Ne~ pas~ respirer~ les~ poussi\`eres\ghsystem_slash: gaz\ghsystem_slash:
+    vapeurs\ghsystem_slash: a\'erosols.
+  }
+\ghsystem_add_statement:nnn {P} {261}
+  {
+    \'Eviter~ de~ respirer~ les~ poussi\`eres\ghsystem_slash:
+    gaz\ghsystem_slash: vapeurs\ghsystem_slash: a\'erosols.
+  }
+\ghsystem_add_statement:nnn {P} {262}
+  {\'Eviter~ tout~ contact~ avec~ les~ yeux,~ la~ peau~ ou~ les~ v\^etements.}
+\ghsystem_add_statement:nnn {P} {263}
+  {
+    \'Eviter~ tout~ contact~ avec~ la~ substance~ au~ cours~ de~ la~
+    grossesse\ghsystem_slash: pendant~ l'allaitement.
+  }
+\ghsystem_add_statement:nnn {P} {264}
+  {Se~ laver~ \l_ghsystem_dots_tl\ soigneusement~ apr\`es~ manipulation.}
+\ghsystem_add_statement:nnn {P} {270}
+  {Ne~ pas~ manger,~ boire~ ou~ fumer~ en~ manipulant~ ce~ produit.}
+\ghsystem_add_statement:nnn {P} {271}
+  {Utiliser~ seulement~ en~ plein~ air~ ou~ dans~ un~ endroit~ bien~ ventil\'e.}
+\ghsystem_add_statement:nnn {P} {272}
+  {
+    Les~ v\^etements~ de~ travail~ contamin\'es~ ne~ devraient~ pas~ sortir~
+    du~ lieu~ de~ travail.
+  }
+\ghsystem_add_statement:nnn {P} {273} {\'Eviter~ le~ rejet~ dans~ l'environnement.}
+\ghsystem_add_statement:nnn {P} {280}
+  {
+    Porter~ des~ gants~ de~ protection\ghsystem_slash: des~ v\^etements~ de~
+    protection\ghsystem_slash: un~ \'equipement~ de~ protection~ des~
+    yeux\ghsystem_slash: du~ visage.
+  }
+\ghsystem_add_statement:nnn {P} {281}
+  {Utiliser~ l'\'equipement~ de~ protection~ individuel~ requis.}
+\ghsystem_add_statement:nnn {P} {282}
+  {
+    Porter~ des~ gants~ isolants~ contre~ le~ froid\ghsystem_slash: un~
+    \'equipement~ de~ protection~ du~ visage\ghsystem_slash: des~ yeux.
+  }
+\ghsystem_add_statement:nnn {P} {283}
+  {
+    Porter~ des~ v\^etements~ r\'esistants~ au~ feu\ghsystem_slash: aux~
+    flammes\ghsystem_slash: ignifuges.
+  }
+\ghsystem_add_statement:nnn {P} {284}
+  {Porter~ un~ \'equipement~ de~ protection~ respiratoire.}
+\ghsystem_add_statement:nnn {P} {285}
+  {
+    Lorsque~ la~ ventilation~ du~ local~ est~ insuffisante,~ porter~ un~
+    \'equipement~ de~ protection~ respiratoire.
+  }
+\ghsystem_add_statement:nnn {P} {231 + 232}
+  {Manipuler~ sous~ gaz~ inerte.~ Prot\'eger~ de~ l'humidit\'e.}
+\ghsystem_add_statement:nnn {P} {235 + 410}
+  {Tenir~ au~ frais.~ Prot\'eger~ du~ rayonnement~ solaire.}
+
+% 3.3 Precautionary Statements — Response
+\ghsystem_add_statement:nnn {P} {301}
+  {EN~ CAS~ D'INGESTION \c_ghsystem_french_colon_tl \c_space_tl \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {302}
+  {
+    EN~ CAS~ DE~ CONTACT~ AVEC~ LA~ PEAU \c_ghsystem_french_colon_tl
+    \c_space_tl \ghsystem_text:
+  } 
+\ghsystem_add_statement:nnn {P} {303}
+  {
+    EN~ CAS~ DE~ CONTACT~ AVEC~ LA~ PEAU~ (ou~ les~ cheveux)
+    \c_ghsystem_french_colon_tl \c_space_tl \ghsystem_text:
+  }
+\ghsystem_add_statement:nnn {P} {304}
+  {EN~ CAS~ D'INHALATION \c_ghsystem_french_colon_tl \c_space_tl \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {305}
+  {
+    EN~ CAS~ DE~ CONTACT~ AVEC~ LES~ YEUX \c_ghsystem_french_colon_tl
+    \c_space_tl \ghsystem_text:
+  }
+\ghsystem_add_statement:nnn {P} {306}
+  {
+    EN~ CAS~ DE~ CONTACT~ AVEC~ LES~ V\^ETEMENTS \c_ghsystem_french_colon_tl
+    \c_space_tl \ghsystem_text:
+  }
+\ghsystem_add_statement:nnn {P} {307}
+  {EN~ CAS~ d'exposition \c_ghsystem_french_colon_tl \c_space_tl \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {308}
+  {
+    EN~ CAS~ d'exposition~ prouv\'ee~ ou~ suspect\'ee
+    \c_ghsystem_french_colon_tl \c_space_tl \ghsystem_text:
+  }
+\ghsystem_add_statement:nnn {P} {309}
+  {
+    EN~ CAS~ d'exposition~ ou~ d'un~ malaise \c_ghsystem_french_colon_tl
+    \c_space_tl \ghsystem_text:
+  }
+\ghsystem_add_statement:nnn {P} {310}
+  {Appeler~ imm\'ediatement~ un~ CENTRE~ ANTIPOISON~ ou~ un~ m\'edecin.}
+\ghsystem_add_statement:nnn {P} {311} {Appeler~ un~ CENTRE~ ANTIPOISON~ ou~ un~ m\'edecin.}
+\ghsystem_add_statement:nnn {P} {312}
+  {Appeler~ un~ CENTRE~ ANTIPOISON~ ou~ un~ m\'edecin~ en~ cas~ de~ malaise.}
+\ghsystem_add_statement:nnn {P} {313} {Consulter~ un~ m\'edecin.}
+\ghsystem_add_statement:nnn {P} {314} {Consulter~ un~ m\'edecin~ en~ cas~ de~ malaise.}
+\ghsystem_add_statement:nnn {P} {315} {Consulter~ imm\'ediatement~ un~ m\'edecin.}
+\ghsystem_add_statement:nnn {P} {320}
+  {
+    Un~ traitement~ sp\'ecifique~ est~ urgent~ (voir~ \l_ghsystem_dots_tl\~
+    sur~ cette~ \'etiquette).
+  }
+\ghsystem_add_statement:nnn {P} {321}
+  {Traitement~ sp\'ecifique~ (voir~ \l_ghsystem_dots_tl\ sur~ cette~ \'etiquette).}
+\ghsystem_add_statement:nnn {P} {322}
+  {Mesures~ sp\'ecifiques~ \l_ghsystem_dots_tl\ sur~ cette~ \'etiquette).}
+\ghsystem_add_statement:nnn {P} {330} {Rincer~ la~ bouche.}
+\ghsystem_add_statement:nnn {P} {331} {NE~ PAS~ faire~ vomir.}
+\ghsystem_add_statement:nnn {P} {332}
+  {En~ cas~ d'irritation~ cutan\'ee \c_ghsystem_french_colon_tl \c_space_tl \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {333}
+  {
+    En~ cas~ d'irritation~ ou~ d'\'eruption~ cutan\'ee
+    \c_ghsystem_french_colon_tl \c_space_tl \ghsystem_text:
+  }
+\ghsystem_add_statement:nnn {P} {334}
+  {Rincer~ \`a~ l'eau~ fra\^iche \ghsystem_slash: poser~ une~ compresse~ humide.}
+\ghsystem_add_statement:nnn {P} {335}
+  {Enlever~ avec~ pr\'ecaution~ les~ particules~ d\'epos\'ees~ sur~ la~ peau.}
+\ghsystem_add_statement:nnn {P} {336}
+  {
+    D\'egeler~ les~ parties~ gel\'ees~ avec~ de~ l'eau~ ti\`ede.~ Ne~ pas~
+    frotter~ les~ zones~ touch\'ees.
+  }
+\ghsystem_add_statement:nnn {P} {337}
+  {
+    Si~ l'irritation~ oculaire~ persiste \c_ghsystem_french_colon_tl
+    \c_space_tl \ghsystem_text:
+  }
+\ghsystem_add_statement:nnn {P} {338}
+  {
+    Enlever~ les~ lentilles~ de~ contact~ si~ la~ victime~ en~ porte~ et~ si~
+    elles~ peuvent~ \^etre~ facilement~ enlev\'ees.~ Continuer~ \`a~ rincer.
+  }
+\ghsystem_add_statement:nnn {P} {340}
+  {
+    Transporter~ la~ victime~ \`a~ l'ext\'erieur~ et~ la~ maintenir~ au~ repos~
+    dans~ une~ position~ o\`u~ elle~ peut~ confortablement~ respirer.
+  }
+\ghsystem_add_statement:nnn {P} {341}
+  {
+    S'il~ y~ a~ difficult\'e~ \`a~ respirer,~ transporter~ la~ victime~ \`a~
+    l'ext\'erieur~ et~ la~ maintenir~ au~ repos~ dans~ une~ position~ o\`u~
+    elle~ peut~ confortablement~ respirer.
+  }
+\ghsystem_add_statement:nnn {P} {342}
+  {
+    En~ cas~ de~ sympt\^omes~ respiratoires \c_ghsystem_french_colon_tl
+    \c_space_tl \ghsystem_text:
+  }
+\ghsystem_add_statement:nnn {P} {350}
+  {Laver~ avec~ pr\'ecaution~ et~ abondamment~ \`a~ l'eau~ et~ au~ savon.}
+\ghsystem_add_statement:nnn {P} {351}
+  {Rincer~ avec~ pr\'ecaution~ \`a~ l'eau~ pendant~ plusieurs~ minutes.}
+\ghsystem_add_statement:nnn {P} {352} {Laver~ abondamment~ \`a~ l'eau~ et~ au~ savon.}
+\ghsystem_add_statement:nnn {P} {353}
+  {Rincer~ la~ peau~ \`a~ l'eau\ghsystem_slash: se~ doucher.}
+\ghsystem_add_statement:nnn {P} {360}
+  {
+    Rincer~ imm\'ediatement~ et~ abondamment~ avec~ de~ l'eau~ les~ v\^etements~
+    contamin\'es~ et~ la~ peau~ avant~ de~ les~ enlever.
+  }
+\ghsystem_add_statement:nnn {P} {361}
+  {Enlever~ imm\'ediatement~ les~ v\^etements~ contamin\'es.}
+\ghsystem_add_statement:nnn {P} {362}
+  {Enlever~ les~ v\^etements~ contamin\'es~ et~ les~ laver~ avant~ r\'eutilisation.}
+\ghsystem_add_statement:nnn {P} {363}
+  {Laver~ les~ v\^etements~ contamin\'es~ avant~ r\'eutilisation.}
+\ghsystem_add_statement:nnn {P} {370}
+  {En~ cas~ d'incendie \c_ghsystem_french_colon_tl \c_space_tl \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {371}
+  {
+    En~ cas~ d'incendie~ important~ et~ s'il~ s'agit~ de~ grandes~ quantit\'es
+    \c_ghsystem_french_colon_tl \c_space_tl \ghsystem_text:
+  }
+\ghsystem_add_statement:nnn {P} {372} {Risque~ d'explosion~ en~ cas~ d'incendie.}
+\ghsystem_add_statement:nnn {P} {373}
+  {NE~ PAS~ combattre~ l'incendie~ lorsque~ le~ feu~ atteint~ les~ explosifs.}
+\ghsystem_add_statement:nnn {P} {374}
+  {Combattre~ l'incendie~ \`a~ distance~ en~ prenant~ les~ pr\'ecautions~ normales.}
+\ghsystem_add_statement:nnn {P} {375}
+  {Combattre~ l'incendie~ \`a~ distance~ \`a~ cause~ du~ risque~ d'explosion.}
+\ghsystem_add_statement:nnn {P} {376}
+  {Obturer~ la~ fuite~ si~ cela~ peut~ se~ faire~ sans~ danger.}
+\ghsystem_add_statement:nnn {P} {377}
+  {
+    Fuite~ de~ gaz~ enflamm\'e \c_ghsystem_french_colon_tl \c_space_tl
+    \ghsystem_text:\ Ne~ pas~ \'eteindre~ si~ la~ fuite~ ne~ peut~ pas~
+    \^etre~ arr\^et\'ee~ sans~ danger.
+  }
+\ghsystem_add_statement:nnn {P} {378} {Utiliser~ \l_ghsystem_dots_tl\ pour~ l'extinction.}
+\ghsystem_add_statement:nnn {P} {380} {\'Evacuer~ la~ zone.}
+\ghsystem_add_statement:nnn {P} {381}
+  {\'Eliminer~ toutes~ les~ sources~ d'ignition~ si~ cela~ est~ faisable~ sans~ danger.}
+\ghsystem_add_statement:nnn {P} {390}
+  {
+    Absorber~ toute~ substance~ r\'epandue~ pour~ \'eviter~ qu'elle~ attaque~
+    les~ mat\'eriaux~ environnants.
+  }
+\ghsystem_add_statement:nnn {P} {391} {Recueillir~ le~ produit~ r\'epandu.}
+\ghsystem_add_statement:nnn {P} {301 + 310}
+  {
+    EN~ CAS~ D'INGESTION \c_ghsystem_french_colon_tl \c_space_tl appeler~
+    imm\'ediatement~ un~ CENTRE~ ANTIPOISON~ ou~ un~ m\'edecin.
+  }
+\ghsystem_add_statement:nnn {P} {301 + 312}
+  {
+    EN~ CAS~ D'INGESTION \c_ghsystem_french_colon_tl \c_space_tl appeler~ un~
+    CENTRE~ ANTIPOISON~ ou~ un~ m\'edecin.
+  }
+\ghsystem_add_statement:nnn {P} {301 + 330 + 331}
+  {
+    EN~ CAS~ D'INGESTION \c_ghsystem_french_colon_tl \c_space_tl rincer~ la~
+    bouche.~ NE~ PAS~ faire~ vomir.
+  }
+\ghsystem_add_statement:nnn {P} {302 + 334}
+  {
+    EN~ CAS~ DE~ CONTACT~ AVEC~ LA~ PEAU \c_ghsystem_french_colon_tl
+    \c_space_tl rincer~ \`a~ l'eau fra\^iche\ghsystem_slash: poser~ une~
+    compresse~ humide.
+  }
+\ghsystem_add_statement:nnn {P} {302 + 350}
+  {
+    EN~ CAS~ DE~ CONTACT~ AVEC~ LA~ PEAU \c_ghsystem_french_colon_tl
+    \c_space_tl laver~ avec~ pr\'ecaution~ et~ abondamment~ \`a~ l'eau~ et~
+    au~ savon.
+  }
+\ghsystem_add_statement:nnn {P} {302 + 352}
+  {
+    EN~ CAS~ DE~ CONTACT~ AVEC~ LA~ PEAU \c_ghsystem_french_colon_tl
+    \c_space_tl laver~ abondamment~ \`a~ l'eau~ et~ au~ savon.
+  }
+\ghsystem_add_statement:nnn {P} {303 + 361 + 353}
+  {
+    EN~ CAS~ DE~ CONTACT~ AVEC~ LA~ PEAU~ (ou~ les~ cheveux)
+    \c_ghsystem_french_colon_tl \c_space_tl enlever~ imm\'ediatement~ les~
+    v\^etements~ contamin\'es.~ Rincer~ la~ peau~ \`a~ l'eau\ghsystem_slash:
+    se~ doucher.
+  }
+\ghsystem_add_statement:nnn {P} {304 + 340}
+  {
+    EN~ CAS~ D'INHALATION \c_ghsystem_french_colon_tl \c_space_tl transporter~
+    la~ victime~ \`a~ l'ext\'erieur~ et~ la~ maintenir~ au~ repos~ dans~ une~
+    position~ o\`u~ elle~ peut~ confortablement~ respirer.
+  }
+\ghsystem_add_statement:nnn {P} {304 + 341}
+  {
+    EN~ CAS~ D'INHALATION \c_ghsystem_french_colon_tl \c_space_tl s'il~ y~ a~
+    difficult\'e~ \`a~ respirer,~ transporter~ la~ victime~ \`a~
+    l'ext\'erieur~ et~ la~ maintenir~ au~ repos~ dans~ une~ position~ o\`u~
+    elle~ peut~ confortablement~ respirer.
+  }
+\ghsystem_add_statement:nnn {P} {305 + 351 + 338}
+  {
+    EN~ CAS~ DE~ CONTACT~ AVEC~ LES~ YEUX \c_ghsystem_french_colon_tl
+    \c_space_tl rincer~ avec~ pr\'ecaution~ \`a~ l'eau~ pendant~ plusieurs~
+    minutes.~ Enlever~ les~ lentilles~ de~ contact~ si~ la~ victime~ en~
+    porte~ et~ si~ elles~ peuvent~ \^etre~ facilement~ enlev\'ees.~ Continuer~
+    \`a~ rincer.
+  }
+\ghsystem_add_statement:nnn {P} {306 + 360}
+  {
+    EN~ CAS~ DE~ CONTACT~ AVEC~ LES~ V\^ETEMENTS \c_ghsystem_french_colon_tl
+    \c_space_tl rincer~ imm\'ediatement~ et~ abondamment~ avec~ de~ l'eau~
+    les~ v\^etements~ contamin\'es~ et~ la~ peau~ avant~ de~ les~ enlever.
+  }
+\ghsystem_add_statement:nnn {P} {307 + 311}
+  {
+    EN~ CAS~ d'exposition \c_ghsystem_french_colon_tl \c_space_tl appeler~ un~
+    CENTRE~ ANTIPOISON~ ou~ un~ m\'edecin.
+  }
+\ghsystem_add_statement:nnn {P} {308 + 313}
+  {
+    EN~ CAS~ d'exposition~ prouv\'ee~ ou~ suspect\'ee
+    \c_ghsystem_french_colon_tl \c_space_tl consulter~ un~ m\'edecin.
+  }
+\ghsystem_add_statement:nnn {P} {309 + 311}
+  {
+    EN~ CAS~ d'exposition~ ou~ de~ malaise \c_ghsystem_french_colon_tl
+    \c_space_tl appeler~ un~ CENTRE~ ANTIPOISON~ ou~ un~ m\'edecin.
+  }
+\ghsystem_add_statement:nnn {P} {332 + 313}
+  {
+    En~ cas~ d'irritation~ cutan\'ee \c_ghsystem_french_colon_tl \c_space_tl
+    consulter~ un~ m\'edecin.
+  }
+\ghsystem_add_statement:nnn {P} {333 + 313}
+  {
+    En cas d'irritation ou d'\'eruption cutan\'ee \c_ghsystem_french_colon_tl
+    \c_space_tl consulter~ un~ m\'edecin.
+  }
+\ghsystem_add_statement:nnn {P} {335 + 334}
+  {
+    Enlever~ avec~ pr\'ecaution~ les~ particules~ d\'epos\'ees~ sur~ la~ peau.~
+    Rincer~ \`a~ l'eau~ fra\^iche~ \ghsystem_slash: poser~ une~ compresse~
+    humide.
+  }
+\ghsystem_add_statement:nnn {P} {337 + 313}
+  {
+    Si~ l'irritation~ oculaire~ persiste \c_ghsystem_french_colon_tl
+    \c_space_tl consulter~ un~ m\'edecin.
+  }
+\ghsystem_add_statement:nnn {P} {342 + 311}
+  {
+    En~ cas~ de~ sympt\^omes~ respiratoires \c_ghsystem_french_colon_tl
+    \c_space_tl appeler~ un~ CENTRE~ ANTIPOISON~ ou~ un~ m\'edecin.
+  }
+\ghsystem_add_statement:nnn {P} {370 + 376}
+  {
+    En~ cas~ d'incendie \c_ghsystem_french_colon_tl \c_space_tl obturer~ la~
+    fuite~ si~ cela~ peut~ se~ faire~ sans~ danger.
+  }
+\ghsystem_add_statement:nnn {P} {370 + 378}
+  {
+    En~cas~ d'incendie \c_ghsystem_french_colon_tl \c_space_tl utiliser~
+    \l_ghsystem_dots_tl\ pour~ l'extinction.
+  }
+\ghsystem_add_statement:nnn {P} {370 + 380}
+  {En~ cas~ d'incendie \c_ghsystem_french_colon_tl \c_space_tl \'evacuer~ la~ zone.}
+\ghsystem_add_statement:nnn {P} {370 + 380 + 375}
+  {
+    En~ cas~ d'incendie \c_ghsystem_french_colon_tl \c_space_tl \'evacuer~ la~
+    zone.~ Combattre~ l'incendie~ \`a~ distance~ \`a~ cause~ du~ risque~ d'explosion.
+  }
+\ghsystem_add_statement:nnn {P} {371 + 380 + 375}
+  {
+    En~ cas~ d'incendie~ important~ et~ s'il~ s'agit~ de~ grandes~ quantit\'es
+    \c_ghsystem_french_colon_tl \c_space_tl \'evacuer~ la~ zone.~ Combattre~
+    l'incendie~ \`a~ distance~ \`a~ cause~ du~ risque~ d'explosion.
+  }
+
+% 3.4 Precautionary Statements — Storage
+\ghsystem_add_statement:nnn {P} {401} {Stocker~ \l_ghsystem_dots_tl }
+\ghsystem_add_statement:nnn {P} {402} {Stocker~ dans~ un~ endroit~ sec.}
+\ghsystem_add_statement:nnn {P} {403} {Stocker~ dans~ un~ endroit~ bien~ ventil\'e.}
+\ghsystem_add_statement:nnn {P} {404} {Stocker~ dans~ un~ r\'ecipient~ ferm\'e.}
+\ghsystem_add_statement:nnn {P} {405} {Garder~ sous~ clef.}
+\ghsystem_add_statement:nnn {P} {406}
+  {
+    Stocker~ dans~ un~ r\'ecipient~ r\'esistant~ \`a~ la~
+    corrosion\ghsystem_slash: \l_ghsystem_dots_tl\ avec~ doublure~ int\'erieure~
+    r\'esistant~ \`a~ la~ corrosion.
+  }
+\ghsystem_add_statement:nnn {P} {407}
+  {Maintenir~ un~ intervalle~ d'air~ entre~ les~ piles\ghsystem_slash: palettes.}
+\ghsystem_add_statement:nnn {P} {410} {Prot\'eger~ du~ rayonnement~ solaire.}
+\ghsystem_add_statement:nnn {P} {411}
+  {
+    Stocker~ \`a~ une~ temp\'erature~ ne~ d\'epassant~ pas~
+    \exp_args:NV \SI \l_ghsystem_celsius_temperature_tl {\GHScelsius} \ghsystem_slash:
+    \exp_args:NV \SI \l_ghsystem_fahrenheit_temperature_tl {\GHSfahrenheit}.
+  }
+\ghsystem_add_statement:nnn {P} {412}
+  {
+    Ne~ pas~ exposer~ \`a~ une~ temp\'erature~ ne~ d\'epassant~ pas~
+    \SI {50} {\GHScelsius} \ghsystem_slash:
+    \SI {122} {\GHSfahrenheit}.
+  }
+\ghsystem_add_statement:nnn {P} {413}
+  {
+    Stocker~ les~ quantit\'es~ en~ vrac~ de~ plus~ de~
+    \exp_args:NV \SI \l_ghsystem_kg_mass_tl {\GHSkilogram}~
+    \`a~ une~ temp\'erature~ ne~ d\'epassant~ pas~
+    \exp_args:NV \SI \l_ghsystem_celsius_temperature_tl {\GHScelsius}
+    \ghsystem_slash:
+    \exp_args:NV \SI \l_ghsystem_fahrenheit_temperature_tl {\GHSfahrenheit}.
+  }
+\ghsystem_add_statement:nnn {P} {420} {Stocker~ \`a~ l'\'ecart~ des~ autres~ mati\`eres.}
+\ghsystem_add_statement:nnn {P} {422} {Stocker~ le~ contenu~ sous~ \l_ghsystem_dots_tl }
+\ghsystem_add_statement:nnn {P} {402 + 404} {Stocker~ dans~ un~ endroit~ sec.~
+  Stocker~ dans~ un~ r\'ecipient~ ferm\'e.}
+\ghsystem_add_statement:nnn {P} {403 + 233}
+  {
+    Stocker~ dans~ un~ endroit~ bien~ ventil\'e.~ Maintenir~ le~ r\'ecipient~
+    ferm\'e~ de~ mani\`ere~ \'etanche.
+  }
+\ghsystem_add_statement:nnn {P} {403 + 235}
+  {Stocker~ dans~ un~ endroit~ bien~ ventil\'e.~ Tenir~ au~ frais.}
+\ghsystem_add_statement:nnn {P} {410 + 403}
+  {Prot\'eger~ du~ rayonnement~ solaire.~ Stocker~ dans~ un~ endroit~ bien~ ventil\'e.}
+\ghsystem_add_statement:nnn {P} {410 + 412}
+  {
+    Prot\'eger~ du~ rayonnement~ solaire.~ Ne~ pas~ exposer~ \`a~ une~
+    temp\'erature~ sup\'erieure~ \`a~ \SI {50} {\GHScelsius} \ghsystem_slash:
+    \SI {122} {\GHSfahrenheit}.
+  }
+\ghsystem_add_statement:nnn {P} {411 + 235}
+  {
+    Stocker~ \`a~ une~ temp\'erature~ ne~ d\'epassant~ pas~
+    \exp_args:NV \SI \l_ghsystem_celsius_temperature_tl {\GHScelsius} \ghsystem_slash:
+    \exp_args:NV \SI \l_ghsystem_fahrenheit_temperature_tl {\GHSfahrenheit}.
+  }
+
+% 3.5 Precautionary Statements — Disposal
+\ghsystem_add_statement:nnn {P} {501} {\'Eliminer~ le~ contenu\ghsystem_slash: r\'ecipient~ dans~ \l_ghsystem_dots_tl }
+
+% 4 Hazard Statement Codes (Annex 6 page 4f)
+\ghsystem_add_statement:nnn {H} {350i} {Peut~ provoquer~ le~ cancer~ par~ inhalation.}
+\ghsystem_add_statement:nnn {H} {360F} {Peut~ nuire~ \`a~ la~ fertilit\'e.}
+\ghsystem_add_statement:nnn {H} {360D} {Peut~ nuire~ au~ f\oe tus.}
+\ghsystem_add_statement:nnn {H} {361f} {Susceptible~ de~ nuire~ \`a~ la~ fertilit\'e.}
+\ghsystem_add_statement:nnn {H} {361d} {Susceptible~ de~ nuire~ au~ f\oe tus.}
+\ghsystem_add_statement:nnn {H} {360FD}
+  {Peut~ nuire~ \`a~ la~ fertilit\'e.~ Peut~ nuire~ au~ f\oe tus.}
+\ghsystem_add_statement:nnn {H} {361fd}
+  {
+    Susceptible~ de~ nuire~ \`a~ la~ fertilit\'e.~ Susceptible~ de~ nuire~ au~
+    f\oe tus.
+  }
+\ghsystem_add_statement:nnn {H} {360Fd}
+  {Peut~ nuire~ \`a~ la~ fertilit\'e.~ Susceptible~ de~ nuire~ au~ f\oe tus.}
+\ghsystem_add_statement:nnn {H} {360Df}
+  {Peut~ nuire~ au~ f\oe tus.~ Susceptible~ de~ nuire~ \`a~ la~ fertilit\'e.}
+

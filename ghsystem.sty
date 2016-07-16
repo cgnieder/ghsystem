@@ -29,8 +29,8 @@
 \RequirePackage{ expl3, xparse, chemmacros }
 \ExplSyntaxOn
 
-\tl_const:Nn \c_ghsystem_version_tl {5.0}
-\tl_const:Nn \c_ghsystem_date_tl    {2016/01/15}
+\tl_const:Nn \c_ghsystem_version_tl {4.8}
+\tl_const:Nn \c_ghsystem_date_tl    {2016/07/16}
 \tl_const:Nn \c_ghsystem_info_tl    {globally~ harmonised~ system}
 
 \ProvidesExplPackage
@@ -544,7 +544,7 @@
   }
 
 \prg_new_protected_conditional:Npnn
-\ghsystem_if_statement_in_current_language:n #1 {T,F,TF}
+  \ghsystem_if_statement_in_current_language:n #1 {T,F,TF}
   {
     % is it safe to check str with \tl_ functions? interface3 seems to
     % implicate it…
@@ -648,7 +648,8 @@ VERSION HISTORY
                             (following a request by Karl Berry for TeXlive)
 2012/02/05 - version 3.0c - renamed pictogram files (following a request by
                             Karl Berry for TeXlive)
-2012/05/13 - version 3.3a - Italian translations of the H, EUH and P statements
+2012/05/13 - version 3.3a - Italian translations of the H, EUH and P
+                            statements, thanks to Jonas Rivetti
 2012/05/18 - version 3.3b - compatibility with MiKTeX
 2012/05/18 - version 3.3c - fix in the `ghsystem/language' option
 2012/07/24 - version 3.3d - additional picture file type `pdf'
@@ -677,6 +678,8 @@ VERSION HISTORY
                           - set table column width of \ghslistall at begin
                             document when we can be sure \linewidth has a
                             proper value
+2016/07/16 - version 4.8  - French translations, thanks to Bréal Frédéric and
+                            Beaude Aurélien
 
 % --------------------------------------------------------------------------
 % TODO:

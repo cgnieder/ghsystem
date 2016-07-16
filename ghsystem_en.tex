@@ -403,8 +403,10 @@ pictograms.  You are free to choose the picture type yourself with the option
 \end{options}
 
 \section{Available Languages}\label{sec:ghsystem_language}
-Right now the H and P statements are only available in English, German,
-Italian and Spanish.  The package adapts \pkg{chemmacros}' option
+Right now the H and P statements are available in English,
+French\footnote{Thanks to Bréal Frédéric and Beaude Aurélien!}, German,
+Italian\footnote{Thanks to Jonas Rivetti!} and Spanish\footnote{Thanks to
+  Ignacio Fernández Galván!}.  The package adapts \pkg{chemmacros}' option
 \option{language} or if the option hasn't been used recognizes the language
 settings made with \pkg{babel} or \pkg{polyglossia}.  To be more precise: the
 language selected at begin document is recognized.  Later changes won't affect
@@ -414,14 +416,13 @@ language option then.
 You can also choose the language explicitly.
 \begin{options}
   \keyval{language}{lang}\Default{english}
-    Selects\changedversion{5.0} a language and if called in the preamble also
-    loads the necessary language file if it hasn't been loaded, yet.loads
-    language file.  If the chosen file doesn't exist it falls back to
-    \code{english}.  Currently available choices are English, German, Italian,
-    and Spanish.  \meta{lang} can be a comma separated list.  Then the last
-    language in the list will be the active one.  If you plan to switch
-    languages within the document then you should make sure to load all needed
-    languages in the preamble first.
+    Selects a language and if called in the preamble also loads the necessary
+    language file if it hasn't been loaded, yet.  If the chosen file doesn't
+    exist it falls back to  \code{english}.  Currently available choices are
+    English, French, German, Italian, and Spanish.  \meta{lang} can be a comma
+    separated list.  Then the last language in the list will be the active
+    one.  If you plan to switch languages within the document then you should
+    make sure to load all needed languages in the preamble first.
 \end{options}
 \begin{example}[side-by-side]
   \ghs{h}{201}

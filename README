@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------
-the GHSYSTEM package v4.7 2016/01/15
+the GHSYSTEM package v4.8 2016/07/16
 
   globally harmonized system
 
@@ -30,6 +30,7 @@ image files:
 language-definition files:
  - ghsystem_german.def,
  - ghsystem_english.def,
+ - ghsystem_french.def,
  - ghsystem_italian.def
  - ghsystem_langtemplate.def
 documentation and README:
