@@ -208,19 +208,45 @@
       {#3}
   }
 
-\cs_new:Npn \ghsystem_load_language_file:n #1
+\cs_new_protected:Npn \__ghsystem_load_language:n #1
+  {
+    \seq_gput_right:Nn \g__ghsystem_loadad_languages_seq {#1}
+    \str_set:Nn \l_ghsystem_current_language_str {#1}
+    \@onefilewithoptions
+      {\c__ghsystem_definition_file_prefix_tl _ #1} [][]
+      \c__ghsystem_definition_file_extension_tl
+  }
+\cs_generate_variant:Nn \__ghsystem_load_language:n {V}
+\cs_generate_variant:Nn \file_if_exist:nTF {V}
+
+\cs_new_protected:Npn \__ghsystem_load_language_file:n #1
+  {
+    \tl_set:Nx \l__ghsystem_tmpa_tl { \@trnslt@language {#1} }
+    \file_if_exist:nTF
+      {
+        \c__ghsystem_definition_file_prefix_tl _ \l__ghsystem_tmpa_tl .
+        \c__ghsystem_definition_file_extension_tl
+      }
+      { \__ghsystem_load_language:V \l__ghsystem_tmpa_tl }
+      {
+        \tl_set:Nx \l__ghsystem_tmpa_tl { \baselanguage {#1} }
+        \file_if_exist:nTF
+          {
+            \c__ghsystem_definition_file_prefix_tl _ \l__ghsystem_tmpa_tl .
+            \c__ghsystem_definition_file_extension_tl
+          }
+          { \__ghsystem_load_language:V \l__ghsystem_tmpa_tl }
+          { \errorTODO }
+      }
+  }
+
+\cs_new_protected:Npn \ghsystem_load_language_file:n #1
   {
     \ghsystem_if_language_file_loaded:nF {#1}
       {
         \cs_if_eq:NNTF \@onefilewithoptions\@notprerr
           { \msg_error:nnn {ghsystem} {language-file} {#1} }
-          {
-            \seq_gput_right:Nx \g__ghsystem_loadad_languages_seq
-              { \@trnslt@language {#1} }
-            \@onefilewithoptions
-              {\c__ghsystem_definition_file_prefix_tl _ #1} [][]
-              \c__ghsystem_definition_file_extension_tl
-          }
+          { \__ghsystem_load_language_file:n {#1} }
       }
   }
 \cs_generate_variant:Nn \ghsystem_load_language_file:n { V }
@@ -230,7 +256,12 @@
     \seq_if_in:NxTF \g__ghsystem_loadad_languages_seq
       { \@trnslt@language {#1} }
       { \prg_return_true: }
-      { \prg_return_false: }
+      {
+        \seq_if_in:NxTF \g__ghsystem_loadad_languages_seq
+          { \baselanguage {#1} }
+          { \prg_return_true: }
+          { \prg_return_false: }
+      }
   }
 
 % TODO: an neuen Mechanismus anpassen:
@@ -238,7 +269,6 @@
   {
     \ghsystem_if_language_file_loaded:nF {#1}
       { \ghsystem_load_language_file:n {#1} }
-    \str_set:Nx \l_ghsystem_current_language_str { \@trnslt@language {#1} }
     \bool_set_true:N \l__ghsystem_language_file_loaded_bool
   }
 \cs_generate_variant:Nn \ghsystem_load_language:n { V }
@@ -638,9 +668,10 @@
 
 \chemmacros_load_module:n {nomenclature}
 
-\chemmacros_integrate_package:nnn {} {ghsystem} {2016/01/11}
+\cs_generate_variant:Nn \chemmacros_integrate_package:nnn {nnV}
+\chemmacros_integrate_package:nnV {} {ghsystem} \c_ghsystem_date_tl
 
-\tex_endinput:D
+\file_input_stop:
 
 % --------------------------------------------------------------------------
 VERSION HISTORY
