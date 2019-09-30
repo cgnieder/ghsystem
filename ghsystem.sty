@@ -106,14 +106,14 @@
 \cs_new:Npn \ghsystem_text: {}
 \cs_new:Npn \ghsystem_dash:
   {
-    \tex_penalty:D \c_ten_thousand
+    \tex_penalty:D 10000 \scan_stop:
     -
     \skip_horizontal:N \c_zero_skip
   }
 
 \cs_new:Npn \ghsystem_slash:
   {
-    \tex_penalty:D \c_ten_thousand
+    \tex_penalty:D 10000 \scan_stop:
     /
     \skip_horizontal:N \c_zero_skip
   }
