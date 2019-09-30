@@ -29,12 +29,13 @@
 % - Aurélien. Many thanks!
 
 % FRENCH DEFINITIONS
-\ghsystemlanguagefile{french}{2016/07/16}
+\ghsystemlanguagefile{french}{2019/09/30}
 
 % table head:
 \tl_set:Nn \l_ghsystem_identifier_tl { num\'ero }
 \tl_set:Nn \l_ghsystem_table_text_tl { phrases }
 \tl_set:Nn \l_ghsystem_table_caption_tl { Toutes~ les~ phrases~ H,~ EUH~ et~ P }
+\tl_set:Nn \l_ghsystem_table_next_page_tl { suite~ sur~ la~ prochaine~ page }
 
 \group_begin:
 \char_set_catcode_active:N \^^@

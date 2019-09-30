@@ -76,6 +76,7 @@
 \tl_set:Nn \l_ghsystem_identifier_tl { ... }
 \tl_set:Nn \l_ghsystem_table_text_tl { ... }
 \tl_set:Nn \l_ghsystem_table_caption_tl { ... }
+\tl_set:Nn \l_ghsystem_table_next_page_tl { ... }
 
 % fill-in functions:
 % <state route of exposure if it is conclusively proven that no other routes of exposure cause the hazard>.
