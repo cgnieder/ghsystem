@@ -30,43 +30,8 @@
 %
 % The Current Maintainer of this work is Clemens Niederberger.
 % --------------------------------------------------------------------------
-\documentclass[load-preamble+]{cnltx-doc}
-\usepackage[utf8]{inputenc}
-% \usepackage[greek=newtx]{chemmacros}
-\usepackage{ghsystem}
-\setcnltx{
-  package  = {ghsystem},
-  info     = \acl*{ghs} ,
-  url      = https://github.com/cgnieder/ghsystem/ ,
-  authors  = Clemens Niederberger ,
-  email    = contact@mychemistry.eu ,
-  abstract = {%
-    \centering
-    \includegraphics{chemmacros-logo.pdf}
-    \par
-  } ,
-  add-cmds = {
-    chemsetup,
-    ghs, ghslistall, ghspic, ghssetup
-  } ,
-  index-setup = noclearpage
-}
+\documentclass{ghsystem-manual}
 
-\usepackage{booktabs}
-
-\expandafter\def\csname libertine@figurestyle\endcsname{LF}
-\usepackage[libertine]{newtxmath}
-\expandafter\def\csname libertine@figurestyle\endcsname{OsF}
-
-\usepackage[biblatex]{embrac}
-\ChangeEmph{[}[,.02em]{]}[.055em,-.08em]
-\ChangeEmph{(}[-.01em,.04em]{)}[.04em,-.05em]
-
-\usepackage[accsupp]{acro}
-\acsetup{
-  long-format  = \scshape ,
-  short-format = \scshape
-}
 \DeclareAcronym{ghs}{
   short     = ghs ,
   long      = Globally Harmonized System of Classification and Labelling of
@@ -99,27 +64,11 @@
   accsupp   = PDF
 }
 
-\chemsetup{
-  greek = newtx ,
-  formula = chemformula ,
-  chemformula/format = \libertineLF
-}
-
-\ghssetup{
-  language = {german,english}
-}
-
-\sisetup{
-  detect-mode=false,
-  mode=text,
-  text-rm=\libertineLF
-}
-
-\usepackage{filecontents}
 
 \defbibheading{bibliography}{\addsec{References}}
+\addbibresource{cnltx.bib}
 \addbibresource{\jobname.bib}
-\begin{filecontents*}{\jobname.bib}
+\begin{filecontents*}[overwrite]{\jobname.bib}
 @misc{eu:ghsystem_regulation,
   author    = {{The European Parliament and The Council of the European Union}},
   title     = {Regulation (EC) No 1272/2008 of the European Parliament and of
@@ -490,5 +439,7 @@ The code below shows how table~\ref{tab:ghs-hp-statements} was created:
 \end{sourcecode}
 
 \ghslistall[fill-in,table-rules=booktabs]
+
+\printbibliography
 
 \end{document}

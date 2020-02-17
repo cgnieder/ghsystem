@@ -34,7 +34,7 @@ language-definition files:
  - ghsystem_italian.def
  - ghsystem_langtemplate.def
 documentation and README:
- - ghsystem_en.tex, ghsystem_en.pdf,
+ - ghsystem-manual.tex, ghsystem-manual.cls, ghsystem-manual.pdf,
  - README
 --------------------------------------------------------------------------
 If you have any ideas, questions, suggestions or bugs to report, please

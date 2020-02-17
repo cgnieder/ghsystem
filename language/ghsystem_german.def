@@ -26,7 +26,7 @@
 % - The Current Maintainer of this work is Clemens Niederberger.
 % --------------------------------------------------------------------------
 % GERMAN DEFINITIONS
-\ghsystemlanguagefile{german}{2016/01/16}
+\ghsystemlanguagefile {german} {2016/01/16}
 
 % table head and foot:
 \tl_set:Nn \l_ghsystem_identifier_tl { Nummer }
@@ -62,7 +62,9 @@
 % <or state all organs affected, if known>
 \cs_set:Npn \ghsystem_organs:
   {
-    \bool_if:nT { \l_ghsystem_fill_in_bool && !\l_ghsystem_organs_bool }
+    \bool_lazy_and:nnT
+      { \l_ghsystem_fill_in_bool }
+      { !\l_ghsystem_organs_bool }
       {
         \c_space_tl
         \ghsystem_filler:n

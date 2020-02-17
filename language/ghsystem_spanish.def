@@ -29,7 +29,7 @@
 % - Galván. Many thanks!
 
 % SPANISH DEFINITIONS
-\ghsystemlanguagefile{spanish}{2016/01/16}
+\ghsystemlanguagefile {spanish} {2020/02/17}
 
 % table head:
 \tl_set:Nn \l_ghsystem_identifier_tl { Identificador }
@@ -67,7 +67,9 @@
 % <or state all organs affected, if known>
 \cs_set:Npn \ghsystem_organs:
   {
-    \bool_if:nT { \l_ghsystem_fill_in_bool && !\l_ghsystem_organs_bool }
+    \bool_lazy_and:nnT
+      { \l_ghsystem_fill_in_bool }
+      { !\l_ghsystem_organs_bool }
       {
         \c_space_tl
         \ghsystem_filler:n

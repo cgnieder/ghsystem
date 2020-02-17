@@ -29,8 +29,8 @@
 \RequirePackage{ expl3, xparse, chemmacros }
 \ExplSyntaxOn
 
-\tl_const:Nn \c_ghsystem_version_tl {4.8b}
-\tl_const:Nn \c_ghsystem_date_tl    {2020/01/16}
+\tl_const:Nn \c_ghsystem_version_tl {4.8c}
+\tl_const:Nn \c_ghsystem_date_tl    {2020/02/17}
 \tl_const:Nn \c_ghsystem_info_tl    {globally~ harmonised~ system}
 
 \ProvidesExplPackage
@@ -525,7 +525,7 @@
         \caption [ \l_ghsystem_table_caption_short_tl ]
           {
             \l_ghsystem_table_caption_tl
-            \exp_args:No \label { \l__ghsystem_table_label_tl }
+            \exp_args:NV \label \l__ghsystem_table_label_tl
           } \\
         \l__ghsystem_table_top_head_rule_tl
         \textbf { \l_ghsystem_identifier_tl } &
@@ -714,3 +714,4 @@ VERSION HISTORY
 2019/09/30 - version 4.8a - add \l_ghsystem_table_next_page_tl to the template
                             and the French translations
 2020/01/16 - version 4.8b - adapt to renaming of case changing functions
+2020/02/17 - version 4.8c - resolve bug with French and Lua- or XeLaTeX
