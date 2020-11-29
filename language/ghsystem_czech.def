@@ -1,0 +1,424 @@
+% --------------------------------------------------------------------------
+% - the CHEMMACROS bundle
+% - ghsystem_langtemplate.def
+% - loads of little helpers for chemists
+% --------------------------------------------------------------------------
+% - Clemens Niederberger
+% --------------------------------------------------------------------------
+% - https://bitbucket.org/cgnieder/chemmacros/
+% - contact@mychemistry.eu
+% --------------------------------------------------------------------------
+% - If you have any ideas, questions, suggestions or bugs to report, please
+% - feel free to contact me.
+% --------------------------------------------------------------------------
+% - Copyright 2011-2016 Clemens Niederberger
+% -
+% - This work may be distributed and/or modified under the
+% - conditions of the LaTeX Project Public License, either version 1.3
+% - of this license or (at your option) any later version.
+% - The latest version of this license is in
+% -   http://www.latex-project.org/lppl.txt
+% - and version 1.3 or later is part of all distributions of LaTeX
+% - version 2005/12/01 or later.
+% -
+% - This work has the LPPL maintenance status `maintained.
+% -
+% - The Current Maintainer of this work is Clemens Niederberger.
+% --------------------------------------------------------------------------
+%
+% Some information how to use this template:
+%
+% The H, EUH, and P statements are stored in a property list, respectively.
+% The commands for adding a respective entry are pre-typed so you only have to
+% fill in the missing text.
+% The commands are in a logical order (first H then EUH then P, numbers
+% increasing) and have hints where to find the corresponding statements in the
+% EU regulation 1272/2008.
+% You will notice that some of the gaps are pre-filled with commands like
+% `\ghsystem_exposure:'. These commands are called “fill-in functions” and put a
+% corresponding replacement text in their position depending on package options
+% used. They should _not_ be replaced but be in the corresponding position in
+% statement where the replacement text should appear.
+%
+% You need to know:
+% - every gap that is to be filled is indicated be three dots: ...
+% - you need to take care of special symbols such as ä replaced with \"{a} etc.
+%   so the statements can be used with latex, pdflatex, xelatex, and lualatex as
+%   well
+% - for the fill-in functions the original English text is given to help you
+%   identify the right one
+%
+% You may find it helpful to have a look at existing language files. You'll find
+% them in the directory of chemmacros in your TeX installation in a
+% sub-directory called `language'.
+%
+% To test your language file you have to name it
+%   \ghsystem_<language name>.def
+% for example by replacing `langtemplate' in the name of this file.  You now
+% can use it with
+%   \chemsetup[ghsystem]{language=<language name>}
+% I suggest running a test file similar to this:
+% -----------------------------------------------------------------------------
+% \documentclass{article}
+% \usepackage{ghsystem}
+% \begin{document}
+%
+% \loadghsystemlanguage{<language name>}
+% \ghslistall
+% 
+% \end{document}
+% -----------------------------------------------------------------------------
+%
+% <LANGUAGE> DEFINITIONS
+\ghsystemlanguagefile{czech}{2019/12/05}
+
+% table head:
+\tl_set:Nn \l_ghsystem_identifier_tl { Identifik\'{a}tor }
+\tl_set:Nn \l_ghsystem_table_text_tl { V\v{e}ta }
+\tl_set:Nn \l_ghsystem_table_caption_tl { V\v{s}echny~H-,~EUH-,~a~P-v\v{e}ty. }
+
+% fill-in functions:
+% <state route of exposure if it is conclusively proven that no other routes of exposure cause the hazard>.
+\cs_set:Npn \ghsystem_exposure:
+  {
+    \bool_if:NT \l_ghsystem_fill_in_bool
+      {
+        \c_space_tl \ghsystem_filler:n { uve\v{d}te~ cestu~ expozice~, je-li~ p\v{r}esv\v{e}d\v{c}iv\v{e}~ prok\'{a}z\'{a}no,~ \v{z}e~ ostatn\'{\i}~ cesty~ expozice~ nejsou~ nebezpe\v{c}n\'{e}}
+      }
+  }
+
+%  <state specific effect if known> 
+\cs_set:Npn \ghsystem_effect:
+  {
+    \bool_if:NT \l_ghsystem_fill_in_bool
+      {
+        \c_space_tl \ghsystem_filler:n { uved\nolinebreak{\hspace{-0.4mm}'}te~ specifick\'{y}~ \'{u}\v{c}inek,~ je-li~ zn\'{a}m }
+      }
+  }
+
+% <or state all organs affected, if known>
+\cs_set:Npn \ghsystem_organs:
+  {
+    \bool_if:nT { \l_ghsystem_fill_in_bool && !\l_ghsystem_organs_bool }
+      {
+        \c_space_tl \ghsystem_filler:n { nebo~ uv\'{e}st~ v\v{s}echny~ posti\v{z}en\'{e}~ org\'{a}ny,~ jsou-li~ zn\'{a}my }
+      }
+  }
+
+% <name of sensitising substance>
+\cs_set:Npn \ghsystem_substance:
+  {
+    \bool_if:NF \l_ghsystem_substance_bool
+      {
+        \c_space_tl \ghsystem_filler:n { n\'{a}zev~ senzibilizuj\'{\i}c\'{\i}~ l\'{a}tky }
+      }
+  }
+
+% HAZARD STATEMENTS (Annex 3)
+% 1. Hazard Statements
+% 1.1 Physical Hazards
+\ghsystem_add_statement:nnn {H} {200} {Nestabiln\'{\i}~ v\'{y}bu\v{s}nina.}
+\ghsystem_add_statement:nnn {H} {201} {V\'{y}bu\v{s}nina;~ nebezpe\v{c}\'{\i}~ masivn\'{\i}ho~ v\'{y}buchu.}
+\ghsystem_add_statement:nnn {H} {202} {V\'{y}bu\v{s}nina;~ v\'{a}\v{z}n\'{e}~ nebezpe\v{c}\'{\i}~ zasa\v{z}en\'{\i}~ \v{c}\'{a}sticemi.}
+\ghsystem_add_statement:nnn {H} {203} {V\'{y}bu\v{s}nina;~ nebezpe\v{c}\'{\i}~ po\v{z}\'{a}ru,~ tlakov\'{e}~ vlny~ nebo~ zasa\v{z}en\'{\i}~ \v{c}\'{a}sticemi.}
+\ghsystem_add_statement:nnn {H} {204} {Nebezpe\v{c}\'{\i}~ po\v{z}\'{a}ru~ nebo~ zasa\v{z}en\'{\i}~ \v{c}\'{a}sticemi.}
+\ghsystem_add_statement:nnn {H} {205} {P\v{r}i~ po\v{z}\'{a}ru~ m\r{u}\v{z}e~ zp\r{u}sobit~ masivn\'{\i}~ v\'{y}buch.}
+\ghsystem_add_statement:nnn {H} {220} {Extr\'{e}mn\v{e}~ ho\v{r}lav\'{y}~ plyn.}
+\ghsystem_add_statement:nnn {H} {221} {Ho\v{r}lav\'{y}~ plyn.}
+\ghsystem_add_statement:nnn {H} {222} {Extr\'{e}mn\v{e}~ ho\v{r}lav\'{y}~ aerosol.}
+\ghsystem_add_statement:nnn {H} {223} {Ho\v{r}lav\'{y}~ aerosol.}
+\ghsystem_add_statement:nnn {H} {224} {Extr\'{e}mn\v{e}~ ho\v{r}lav\'{a}~ kapalina~ a~p\'{a}ry.}
+\ghsystem_add_statement:nnn {H} {225} {Vysoce~ ho\v{r}lav\'{a}~ kapalina~ a~p\'{a}ry.}
+\ghsystem_add_statement:nnn {H} {226} {Ho\v{r}lav\'{a}~ kapalina~ a~p\'{a}ry.}
+\ghsystem_add_statement:nnn {H} {228} {Ho\v{r}lav\'{a}~ tuh\'{a}~ l\'{a}tka.}
+\ghsystem_add_statement:nnn {H} {229} {N\'{a}doba~ je~ pod~ tlakem:~ p\v{r}i~ zah\v{r}\'{\i}v\'{a}n\'{\i}~ se~ m\r{u}\v{z}e~ roztrhnout.}
+\ghsystem_add_statement:nnn {H} {230} {M\r{u}\v{z}e~ reagovat~ v\'{y}bu\v{s}n\v{e}~ i~bez~ p\v{r}\'{\i}tomnosti~ vzduchu.}
+\ghsystem_add_statement:nnn {H} {231} {P\v{r}i~ zv\'{y}\v{s}en\'{e}m~ tlaku~ a/nebo~ teplot\v{e}~ m\r{u}\v{z}e~ reagovat~ v\'{y}bu\v{s}n\v{e}~ i~bez~ p\v{r}\'{\i}tomnosti~ vzduchu.}
+\ghsystem_add_statement:nnn {H} {240} {Zah\v{r}\'{\i}v\'{a}n\'{\i}~ m\r{u}\v{z}e~ zp\r{u}sobit~ v\'{y}buch.}
+\ghsystem_add_statement:nnn {H} {241} {Zah\v{r}\'{\i}v\'{a}n\'{\i}~ m\r{u}\v{z}e~ zp\r{u}sobit~ po\v{z}\'{a}r~ nebo~ v\'{y}buch.}
+\ghsystem_add_statement:nnn {H} {242} {Zah\v{r}\'{\i}v\'{a}n\'{\i}~ m\r{u}\v{z}e~ zp\r{u}sobit~ po\v{z}\'{a}r.}
+\ghsystem_add_statement:nnn {H} {250} {P\v{r}i~ styku~ se~ vzduchem~ se~ samovoln\v{e}~ vzn\'{\i}t\'{\i}.}
+\ghsystem_add_statement:nnn {H} {251} {Samovoln\v{e}~ se~ zah\v{r}\'{\i}v\'{a}:~ m\r{u}\v{z}e~ se~ vzn\'{\i}tit.}
+\ghsystem_add_statement:nnn {H} {252} {Ve~ velk\'{e}m~ mno\v{z}stv\'{\i}~ se~ samovoln\v{e}~ zah\v{r}\'{\i}v\'{a};~ m\r{u}\v{z}e~ se~ vzn\'{\i}tit.}
+\ghsystem_add_statement:nnn {H} {260} {P\v{r}i~ styku~ s~vodou~ uvol\v{n}uje~ ho\v{r}lav\'{e}~ plyny,~ kter\'{e}~ se~ mohou~ samovoln\v{e}~ vzn\'{\i}tit.}
+\ghsystem_add_statement:nnn {H} {261} {P\v{r}i~ styku~ s~vodou~ uvol\v{n}uje~ ho\v{r}lav\'{e}~ plyny.}
+\ghsystem_add_statement:nnn {H} {270} {M\r{u}\v{z}e~ zp\r{u}sobit~ nebo~ zes\'{\i}lit~ po\v{z}\'{a}r;~ oxidant.}
+\ghsystem_add_statement:nnn {H} {271} {M\r{u}\v{z}e~ zp\r{u}sobit~ po\v{z}\'{a}r~ nebo~ v\'{y}buch;~ siln\'{y}~ oxidant.}
+\ghsystem_add_statement:nnn {H} {272} {M\r{u}\v{z}e~ zes\'{\i}lit~ po\v{z}\'{a}r;~ oxidant.}
+\ghsystem_add_statement:nnn {H} {280} {Obsahuje~ plyn~ pod~ tlakem;~ p\v{r}i~ zah\v{r}\'{\i}v\'{a}n\'{\i}~ m\r{u}\v{z}e~ vybuchnout.}
+\ghsystem_add_statement:nnn {H} {281} {Obsahuje~ zchlazen\'{y}~ plyn;~ m\r{u}\v{z}e~ zp\r{u}sobit~ omrzliny~ nebo~ po\v{s}kozen\'{\i}~ chladem.}
+\ghsystem_add_statement:nnn {H} {290} {M\r{u}\v{z}e~ b\'{y}t~ korozivn\'{\i}~ pro~ kovy.}
+
+% 1.2 Health Hazards
+\ghsystem_add_statement:nnn {H} {300} {P\v{r}i~ po\v{z}it\'{\i}~ m\r{u}\v{z}e~ zp\r{u}sobit~ smrt.}
+\ghsystem_add_statement:nnn {H} {301} {Toxick\'{y}~ p\v{r}i~ po\v{z}it\'{\i}.}
+\ghsystem_add_statement:nnn {H} {302} {Zdrav\'{\i}~ \v{s}kodliv\'{y}~ p\v{r}i~ po\v{z}it\'{\i}.}
+\ghsystem_add_statement:nnn {H} {304} {P\v{r}i~ po\v{z}it\'{\i}~ a~vniknut\'{\i}~ do~ d\'{y}chac\'{\i}ch~ cest~ m\r{u}\v{z}e~ zp\r{u}sobit~ smrt.}
+\ghsystem_add_statement:nnn {H} {310} {P\v{r}i~ styku~ s~k\r{u}\v{z}\'{\i}~ m\r{u}\v{z}e~ zp\r{u}sobit~ smrt.}
+\ghsystem_add_statement:nnn {H} {311} {Toxick\'{y}~ p\v{r}i~ styku~ s~k\r{u}\v{z}\'{\i}.}
+\ghsystem_add_statement:nnn {H} {312} {Zdrav\'{\i}~ \v{s}kodliv\'{y}~ p\v{r}i~ styku~ s~k\r{u}\v{z}\'{\i}.}
+\ghsystem_add_statement:nnn {H} {314} {Zp\r{u}sobuje~ t\v{e}\v{z}k\'{e}~ polept\'{a}n\'{\i}~ k\r{u}\v{z}e~ a~po\v{s}kozen\'{\i}~ o\v{c}\'{\i}.}
+\ghsystem_add_statement:nnn {H} {315} {Dr\'{a}\v{z}d\'{\i}~ k\r{u}\v{z}i.}
+\ghsystem_add_statement:nnn {H} {317} {M\r{u}\v{z}e~ vyvolat~ alergickou~ ko\v{z}n\'{\i}~ reakci.}
+\ghsystem_add_statement:nnn {H} {318} {Zp\r{u}sobuje~ v\'{a}\v{z}n\'{e}~ po\v{s}kozen\'{\i}~ o\v{c}\'{\i}.}
+\ghsystem_add_statement:nnn {H} {319} {Zp\r{u}sobuje~ v\'{a}\v{z}n\'{e}~ podr\'{a}\v{z}d\v{e}n\'{\i}~ o\v{c}\'{\i}.}
+\ghsystem_add_statement:nnn {H} {330} {P\v{r}i~ vdechov\'{a}n\'{\i}~ m\r{u}\v{z}e~ zp\r{u}sobit~ smrt.}
+\ghsystem_add_statement:nnn {H} {331} {Toxick\'{y}~ p\v{r}i~ vdechov\'{a}n\'{\i}.}
+\ghsystem_add_statement:nnn {H} {332} {Zdrav\'{\i}~ \v{s}kodliv\'{y}~ p\v{r}i~ vdechov\'{a}n\'{\i}.}
+\ghsystem_add_statement:nnn {H} {334} {P\v{r}i~ vdechov\'{a}n\'{\i}~ m\r{u}\v{z}e~ vyvolat~ p\v{r}\'{\i}znaky~ alergie~ nebo~ astmatu~ nebo~ d\'{y}chac\'{\i}~ pot\'{\i}\v{z}e.}
+\ghsystem_add_statement:nnn {H} {335} {M\r{u}\v{z}e~ zp\r{u}sobit~ podr\'{a}\v{z}d\v{e}n\'{\i}~ d\'{y}chac\'{\i}ch~ cest.}
+\ghsystem_add_statement:nnn {H} {336} {M\r{u}\v{z}e~ zp\r{u}sobit~ ospalost~ nebo~ z\'{a}vrat\v{e}.}
+\ghsystem_add_statement:nnn {H} {340} {M\r{u}\v{z}e~ vyvolat~ genetick\'{e}~ po\v{s}kozen\'{\i} \ghsystem_exposure: .}
+\ghsystem_add_statement:nnn {H} {341} {Podez\v{r}en\'{\i}~ na~ genetick\'{e}~ po\v{s}kozen\'{\i} \ghsystem_exposure: .}
+\ghsystem_add_statement:nnn {H} {350} {M\r{u}\v{z}e~ vyvolat~ rakovinu \ghsystem_exposure: .}
+\ghsystem_add_statement:nnn {H} {351} {Podez\v{r}en\'{\i}~ na~ vyvol\'{a}n\'{\i}~ rakoviny \ghsystem_exposure: .}
+\ghsystem_add_statement:nnn {H} {360} {M\r{u}\v{z}e~ po\v{s}kodit~ reproduk\v{c}n\'{\i}~ schopnost~ nebo~ plod~ v~t\v{e}le~ matky \ghsystem_effect: \ghsystem_exposure: .}
+\ghsystem_add_statement:nnn {H} {361} {Podez\v{r}en\'{\i}~ na~ po\v{s}kozen\'{\i}~ reproduk\v{c}n\'{\i}~ schopnosti~ nebo~ plodu~ v~t\v{e}le~ matky \ghsystem_effect: \ghsystem_exposure: .}
+\ghsystem_add_statement:nnn {H} {362} {M\r{u}\v{z}e~ po\v{s}kodit~ kojence~ prost\v{r}ednictv\'{\i}m~ mate\v{r}sk\'{e}ho~ ml\'{e}ka.}
+\ghsystem_add_statement:nnn {H} {370}
+  {
+    Zp\r{u}sobuje~ po\v{s}kozen\'{\i}~ \bool_if:NF \l_ghsystem_organs_bool {org\'{a}n\r{u}} \ghsystem_organs:
+     \ghsystem_exposure:
+ .}
+\ghsystem_add_statement:nnn {H} {371}
+  {
+    M\r{u}\v{z}e~ zp\r{u}sobit~ po\v{s}kozen\'{\i}~ \bool_if:NF \l_ghsystem_organs_bool {org\'{a}n\r{u}} \ghsystem_organs:
+    \ghsystem_exposure:
+ .}
+\ghsystem_add_statement:nnn {H} {372}
+  {
+    Zp\r{u}sobuje~ po\v{s}kozen\'{\i}~ \bool_if:NF \l_ghsystem_organs_bool {org\'{a}n\r{u}} \ghsystem_organs:\
+    p\v{r}i~ dlouh\'{e}~ nebo~ opakovan\'{e}~ expozici \ghsystem_exposure:
+ .}
+\ghsystem_add_statement:nnn {H} {373}
+  {
+    M\r{u}\v{z}e~ zp\r{u}sobit~ po\v{s}kozen\'{\i}~ \bool_if:NF \l_ghsystem_organs_bool {org\'{a}n\r{u}} \ghsystem_organs:\
+    p\v{r}i~ dlouh\'{e}~ nebo~ opakovan\'{e}~ expozici \ghsystem_exposure:
+ .}
+\ghsystem_add_statement:nnn {H} {300 + 310} {P\v{r}i~ po\v{z}it\'{\i}~ nebo~ p\v{r}i~ styku~ s~k\r{u}\v{z}\'{\i}~ m\r{u}\v{z}e~ zp\r{u}sobit~ smrt.}
+\ghsystem_add_statement:nnn {H} {300 + 330} {P\v{r}i~ po\v{z}it\'{\i}~ nebo~ p\v{r}i~ vdechov\'{a}n\'{\i}~ m\r{u}\v{z}e~ zp\r{u}sobit~ smrt.}
+\ghsystem_add_statement:nnn {H} {310 + 330} {P\v{r}i~ styku~ s~k\r{u}\v{z}\'{\i}~ nebo~ p\v{r}i~ vdechov\'{a}n\'{\i}~ m\r{u}\v{z}e~ zp\r{u}sobit~ smrt.}
+\ghsystem_add_statement:nnn {H} {300 + 310 + 330} {P\v{r}i~ po\v{z}it\'{\i},~ p\v{r}i~ styku~ s~k\r{u}\v{z}\'{\i}~ nebo~ p\v{r}i~ vdechov\'{a}n\'{\i}~ m\r{u}\v{z}e~ zp\r{u}sobit~ smrt.}
+\ghsystem_add_statement:nnn {H} {301 + 311} {Toxick\'{y}~ p\v{r}i~ po\v{z}it\'{\i}~ nebo~ p\v{r}i~ styku~ s~k\r{u}\v{z}\'{\i}.}
+\ghsystem_add_statement:nnn {H} {301 + 331} {Toxick\'{y}~ p\v{r}i~ po\v{z}it\'{\i}~ nebo~ p\v{r}i~ vdechov\'{a}n\'{\i}.}
+\ghsystem_add_statement:nnn {H} {311 + 331} {Toxick\'{y}~ p\v{r}i~ styku~ s~k\r{u}\v{z}\'{\i}~ nebo~ p\v{r}i~ vdechov\'{a}n\'{\i}.}
+\ghsystem_add_statement:nnn {H} {301 + 311 + 331} {Toxick\'{y}~ p\v{r}i~ po\v{z}it\'{\i},~ p\v{r}i~ styku~ s~k\r{u}\v{z}\'{\i}~ nebo~ p\v{r}i~ vdechov\'{a}n\'{\i}.}
+\ghsystem_add_statement:nnn {H} {302 + 312} {Zdrav\'{\i}~ \v{s}kodliv\'{y}~ p\v{r}i~ po\v{z}it\'{\i}~ nebo~ p\v{r}i~ styku~ s~k\r{u}\v{z}\'{\i}.}
+\ghsystem_add_statement:nnn {H} {302 + 332} {Zdrav\'{\i}~ \v{s}kodliv\'{y}~ p\v{r}i~ po\v{z}it\'{\i}~ nebo~ p\v{r}i~ vdechov\'{a}n\'{\i}.}
+\ghsystem_add_statement:nnn {H} {312 + 332} {Zdrav\'{\i}~ \v{s}kodliv\'{y}~ p\v{r}i~ styku~ s~k\r{u}\v{z}\'{\i}~ nebo~ p\v{r}i~ vdechov\'{a}n\'{\i}.}
+\ghsystem_add_statement:nnn {H} {302 + 312 + 332} {Zdrav\'{\i}~ \v{s}kodliv\'{y}~ p\v{r}i~ po\v{z}it\'{\i},~ p\v{r}i~ styku~ s~k\r{u}\v{z}\'{\i}~ nebo~ p\v{r}i~ vdechov\'{a}n\'{\i}.}
+
+% 1.3 Environmental hazards
+\ghsystem_add_statement:nnn {H} {400} {Vysoce~ toxick\'{y}~ pro~ vodn\'{\i}~ organismy.}
+\ghsystem_add_statement:nnn {H} {410} {Vysoce~ toxick\'{y}~ pro~ vodn\'{\i}~ organismy,~ s~dlouhodob\'{y}mi~ \'{u}\v{c}inky.}
+\ghsystem_add_statement:nnn {H} {411} {Toxick\'{y}~ pro~ vodn\'{\i}~ organismy,~ s~dlouhodob\'{y}mi~ \'{u}\v{c}inky.}
+\ghsystem_add_statement:nnn {H} {412} {\v{S}kodliv\'{y}~ pro~ vodn\'{\i}~ organismy,~ s~dlouhodob\'{y}mi~ \'{u}\v{c}inky.}
+\ghsystem_add_statement:nnn {H} {413} {M\r{u}\v{z}e~ vyvolat~ dlouhodob\'{e}~ \v{s}kodliv\'{e}~ \'{u}\v{c}inky~ pro~ vodn\'{\i}~ organismy.}
+\ghsystem_add_statement:nnn {H} {420} {Po\v{s}kozuje~ ve\v{r}ejn\'{e}~ zdrav\'{\i}~ a~\v{z}ivotn\'{\i}~ prost\v{r}ed\'{\i}~ t\'{\i}m,~ \v{z}e~ ni\v{c}\'{\i}~ ozon~ ve~ svrchn\'{\i}ch~ vrstv\'{a}ch~ atmosf\'{e}ry.}
+
+% 2 Supplemental Hazard Informations
+% 2.1 Physical Properties
+\ghsystem_add_statement:nnn {EUH} {001} {V\'{y}bu\v{s}n\'{y}~ v~such\'{e}m~ stavu.}
+\ghsystem_add_statement:nnn {EUH} {014} {Prudce~ reaguje~ s~vodou.}
+\ghsystem_add_statement:nnn {EUH} {018} {P\v{r}i~ pou\v{z}\'{\i}v\'{a}n\'{\i}~ m\r{u}\v{z}e~ vytv\'{a}\v{r}et~ ho\v{r}lav\'{e}~ nebo~ v\'{y}bu\v{s}n\'{e}~ sm\v{e}si~ par~ se~ vzduchem.}
+\ghsystem_add_statement:nnn {EUH} {019} {M\r{u}\v{z}e~ vytv\'{a}\v{r}et~ v\'{y}bu\v{s}n\'{e}~ peroxidy.}
+\ghsystem_add_statement:nnn {EUH} {044} {Nebezpe\v{c}\'{\i}~ v\'{y}buchu~ p\v{r}i~ zah\v{r}\'{a}t\'{\i}~ v~uzav\v{r}en\'{e}m~ obalu.}
+
+% 2.2 Health Properties
+\ghsystem_add_statement:nnn {EUH} {029} {Uvol\v{n}uje~ toxick\'{y}~ plyn~ p\v{r}i~ styku~ s~vodou.}
+\ghsystem_add_statement:nnn {EUH} {031} {Uvol\v{n}uje~ toxick\'{y}~ plyn~ p\v{r}i~ styku~ s~kyselinami.}
+\ghsystem_add_statement:nnn {EUH} {032} {Uvol\v{n}uje~ vysoce~ toxick\'{y}~ plyn~ p\v{r}i~ styku~ s~kyselinami.}
+\ghsystem_add_statement:nnn {EUH} {066} {Opakovan\'{a}~ expozice~ m\r{u}\v{z}e~ zp\r{u}sobit~ vysu\v{s}en\'{\i}~ nebo~ poprask\'{a}n\'{\i}~ k\r{u}\v{z}e.}
+\ghsystem_add_statement:nnn {EUH} {070} {Toxick\'{y}~ p\v{r}i~ styku~ s~o\v{c}ima.}
+\ghsystem_add_statement:nnn {EUH} {071} {Zp\r{u}sobuje~ polept\'{a}n\'{\i}~ d\'{y}chac\'{\i}ch~ cest.
+}
+
+% 2.3 Environmental Properties + 
+\ghsystem_add_statement:nnn {EUH} {059} {Nebezpe\v{c}n\'{y}~ pro~ ozonovou~ vrstvu.}
+
+% 2.4 Supplemental Label Elements/Information On Certain Substances And Mixtures
+\ghsystem_add_statement:nnn {EUH} {201} {Obsahuje~ olovo.~ Nem\'{a}~ se~ pou\v{z}\'{\i}vat~ na~ povrchy,~ kter\'{e}~ mohou~ okusovat~ nebo~ olizovat~ d\v{e}ti.}
+\ghsystem_add_statement:nnn {EUH} {201A} {Pozor!~ Obsahuje~ olovo.}
+\ghsystem_add_statement:nnn {EUH} {202} {\iupac {Kyano|akryl\'{a}t} . ~ Nebezpe\v{c}\'{\i}.~ Okam\v{z}it\v{e}~ slepuje~ k\r{u}\v{z}i~ a~o\v{c}i.~ Uchov\'{a}vejte~ mimo~ dosah~ d\v{e}t\'{\i}.}
+\ghsystem_add_statement:nnn {EUH} {203} {Obsahuje ~ chrom \, (VI) .~  M\r{u}\v{z}e~ vyvolat~ alergickou~ reakci.}
+\ghsystem_add_statement:nnn {EUH} {204} {Obsahuje ~ \iupac {iso|kyan\'{a}ty} . ~ M\r{u}\v{z}e~ vyvolat~ alergickou~ reakci.}
+\ghsystem_add_statement:nnn {EUH} {205} {Obsahuje~ epoxidov\'{e}~ slo\v{z}ky.~ M\r{u}\v{z}e~ vyvolat~ alergickou~ reakci.}
+\ghsystem_add_statement:nnn {EUH} {206} {Pozor!~ Nepou\v{z}\'{\i}vejte~ spole\v{c}n\v{e}~ s~jin\'{y}mi~ v\'{y}robky.~ M\r{u}\v{z}e~ uvol\v{n}ovat~ nebezpe\v{c}n\'{e}~ plyny~ (chlor).}
+\ghsystem_add_statement:nnn {EUH} {207} {Pozor!~ Obsahuje~ kadmium.~ P\v{r}i~ pou\v{z}\'{\i}v\'{a}n\'{\i}~ vznikaj\'{\i}~ nebezpe\v{c}n\'{e}~ v\'{y}pary.~ Viz~ informace~ dodan\'{e}~ v\'{y}robcem.~ Dodr\v{z}ujte~ bezpe\v{c}nostn\'{\i}~ pokyny.}
+\ghsystem_add_statement:nnn {EUH} {208} {Obsahuje \ghsystem_substance: . ~ M\r{u}\v{z}e~ vyvolat~ alergickou~ reakci.}
+\ghsystem_add_statement:nnn {EUH} {209} {P\v{r}i~ pou\v{z}\'{\i}v\'{a}n\'{\i}~ se~ m\r{u}\v{z}e~ st\'{a}t~ vysoce~ ho\v{r}lav\'{y}m.}
+\ghsystem_add_statement:nnn {EUH} {209A} {P\v{r}i~ pou\v{z}\'{\i}v\'{a}n\'{\i}~ se~ m\r{u}\v{z}e~ st\'{a}t~ ho\v{r}lav\'{y}m.}
+\ghsystem_add_statement:nnn {EUH} {210} {Na~ vy\v{z}\'{a}d\'{a}n\'{\i}~ je~ k~dispozici~ bezpe\v{c}nostn\'{\i}~ list.}
+\ghsystem_add_statement:nnn {EUH} {401} {Dodr\v{z}ujte~ pokyny~ pro~ pou\v{z}\'{\i}v\'{a}n\'{\i},~ abyste~ se~ vyvarovali~ rizik~ pro~ lidsk\'{e}~ zdrav\'{\i}~ a~ \v{z}ivotn\'{\i}~ prost\v{r}ed\'{\i}.}
+
+% PRECAUTIONARY STATEMENTS (Annex 4 page 19ff)
+% 3 Precautionary Statements
+% 3.1 General
+\ghsystem_add_statement:nnn {P} {101} {Je-li~ nutn\'{a}~ l\'{e}ka\v{r}sk\'{a}~ pomoc,~ m\v{e}jte~ po~ ruce~ obal~ nebo~ \v{s}t\'{\i}tek~ v\'{y}robku.}
+\ghsystem_add_statement:nnn {P} {102} {Uchov\'{a}vejte~ mimo~ dosah~ d\v{e}t\'{\i}.}
+\ghsystem_add_statement:nnn {P} {103} {P\v{r}ed~ pou\v{z}it\'{\i}m~ si~ p\v{r}e\v{c}t\v{e}te~ \'{u}daje~ na~ \v{s}t\'{\i}tku.}
+
+% 3.2 Precautionary Statements — Prevention
+\ghsystem_add_statement:nnn {P} {201} {P\v{r}ed~ pou\v{z}it\'{\i}m~ si~ obstarejte~ speci\'{a}ln\'{\i}~ instrukce.}
+\ghsystem_add_statement:nnn {P} {202} {Nepou\v{z}\'{\i}vejte,~ dokud~ jste~ si~ nep\v{r}e\v{c}etli~ v\v{s}echny~ bezpe\v{c}nostn\'{\i}~ pokyny~ a~neporozum\v{e}li~ jim.}
+\ghsystem_add_statement:nnn {P} {210} {Chra\v{n}te~ p\v{r}ed~ teplem,~ hork\'{y}mi~ povrchy,~ jiskrami,~ otev\v{r}en\'{y}m~ ohn\v{e}m~ a~jin\'{y}mi~ zdroji~
+zap\'{a}len\'{\i}.~ Z\'{a}kaz~ kou\v{r}en\'{\i}.}
+\ghsystem_add_statement:nnn {P} {211} {Nest\v{r}\'{\i}kejte~ do~ otev\v{r}en\'{e}ho~ ohn\v{e}~ nebo~ jin\'{y}ch~ zdroj\r{u}~ zap\'{a}len\'{\i}.}
+\ghsystem_add_statement:nnn {P} {220}
+  {Uchov\'{a}vejte~ odd\v{e}len\v{e}~ od~ od\v{e}v\r{u}~ a~jin\'{y}ch~ ho\v{r}lav\'{y}ch~ materi\'{a}l\r{u}.}
+\ghsystem_add_statement:nnn {P} {222}
+  {Zabra\v{n}te~ styku~ se~ vzduchem.}
+\ghsystem_add_statement:nnn {P} {223}
+  {Zabra\v{n}te~ styku~ s~vodou.}
+\ghsystem_add_statement:nnn {P} {230} {Uchov\'{a}vejte~ ve~ zvlh\v{c}en\'{e}m~ stavu~ \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {231}
+  {Manipulace~ a~skladov\'{a}n\'{\i}~ pod~ inertn\'{\i}m~ plynem \ghsystem_slash: \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {232} {Chra\v{n}te~ p\v{r}ed~ vlhkem.}
+\ghsystem_add_statement:nnn {P} {233} {Uchov\'{a}vejte~ obal~ t\v{e}sn\v{e}~ uzav\v{r}en\'{y}.}
+\ghsystem_add_statement:nnn {P} {234} {Uchov\'{a}vejte~ pouze~ v~p\r{u}vodn\'{\i}m~ balen\'{\i}.}
+\ghsystem_add_statement:nnn {P} {235} {Uchov\'{a}vejte~ v~chladu.}
+\ghsystem_add_statement:nnn {P} {240} {Uzemn\v{e}te~ a~upevn\v{e}te~ obal~ a~odb\v{e}rov\'{e}~ za\v{r}\'{\i}zen\'{\i}.}
+\ghsystem_add_statement:nnn {P} {241}
+  {Pou\v{z}\'{\i}vejte~ elektrick\'{e} \ghsystem_slash: ventila\v{c}n\'{\i}  \ghsystem_slash: osv\v{e}tlovac\'{\i} \ghsystem_slash: \l_ghsystem_dots_tl\ za\v{r}\'{\i}zen\'{\i}~ do~ v\'{y}bu\v{s}n\'{e}ho~ prost\v{r}ed\'{\i}.}
+\ghsystem_add_statement:nnn {P} {242} {Pou\v{z}\'{\i}vejte~ n\'{a}\v{r}ad\'{\i}~ z~nejisk\v{r}\'{\i}c\'{\i}ho~ kovu.}
+\ghsystem_add_statement:nnn {P} {243} {Proved\nolinebreak{\hspace{-0.4mm}'}te~ opat\v{r}en\'{\i}~ proti~ v\'{y}boj\r{u}m~ statick\'{e}~ elekt\v{r}iny.}
+\ghsystem_add_statement:nnn {P} {244} {Udr\v{z}ujte~ ventily~ i~p\v{r}\'{\i}slu\v{s}enstv\'{\i}~ \v{c}ist\'{e}~ --~ bez~ olej\r{u}~ a~maziv. }
+\ghsystem_add_statement:nnn {P} {250}
+  {Nevystavujte \ghsystem_slash: obru\v{s}ov\'{a}n\'{\i} \ghsystem_slash: n\'{a}raz\r{u}m \ghsystem_slash: t\v{r}en\'{\i} \ghsystem_slash: \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {251} {Nepropichujte~ nebo~ nespalujte~ ani~ po~ pou\v{z}it\'{\i}.}
+\ghsystem_add_statement:nnn {P} {260} {Nevdechujte~ prach \ghsystem_slash: d\'{y}m \ghsystem_slash: plyn \ghsystem_slash: mlhu \ghsystem_slash: p\'{a}ry \ghsystem_slash: aerosoly.}
+\ghsystem_add_statement:nnn {P} {261} {Zamezte~ vdechov\'{a}n\'{\i}~ prachu \ghsystem_slash: d\'{y}mu \ghsystem_slash: plynu \ghsystem_slash: mlhy \ghsystem_slash: par \ghsystem_slash: aerosol\r{u}.}
+\ghsystem_add_statement:nnn {P} {262} {Zabra\v{n}te~ styku~ s~o\v{c}ima,~ k\r{u}\v{z}\'{\i}~ nebo~ od\v{e}vem.}
+\ghsystem_add_statement:nnn {P} {263} {Zabra\v{n}te~ styku~ b\v{e}hem~ t\v{e}hotenstv\'{\i}~ a~kojen\'{\i}.}
+\ghsystem_add_statement:nnn {P} {264} {Po~ manipulaci~ d\r{u}kladn\v{e}~ omyjte ~ \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {270} {P\v{r}i~ pou\v{z}\'{\i}v\'{a}n\'{\i}~ tohoto~ v\'{y}robku~ nejezte,~ nepijte~ ani~ neku\v{r}te.}
+\ghsystem_add_statement:nnn {P} {271} {Pou\v{z}\'{\i}vejte~ pouze~ venku~ nebo~ v~dob\v{r}e~ v\v{e}tran\'{y}ch~ prostor\'{a}ch.}
+\ghsystem_add_statement:nnn {P} {272} {Kontaminovan\'{y}~ pracovn\'{\i}~ od\v{e}v~ neodn\'{a}\v{s}ejte~ z~pracovi\v{s}t\v{e}.}
+\ghsystem_add_statement:nnn {P} {273} {Zabra\v{n}te~ uvoln\v{e}n\'{\i}~ do~ \v{z}ivotn\'{\i}ho~ prost\v{r}ed\'{\i}.}
+\ghsystem_add_statement:nnn {P} {280} {Pou\v{z}\'{\i}vejte~ ochrann\'{e}~ rukavice \ghsystem_slash: ochrann\'{y}~ od\v{e}v \ghsystem_slash: ochrann\'{e}~ br\'{y}le \ghsystem_slash: obli\v{c}ejov\'{y}~ \v{s}t\'{\i}t.}
+\ghsystem_add_statement:nnn {P} {281} {Pou\v{z}\'{\i}vejte~ po\v{z}adovan\'{e}~ osobn\'{\i}~ ochrann\'{e}~ prost\v{r}edky.}
+\ghsystem_add_statement:nnn {P} {282} {Pou\v{z}\'{\i}vejte~ ochrann\'{e}~ rukavice~ proti~ chladu~ a~bud\nolinebreak{\hspace{-0.4mm}'}~ obli\v{c}ejov\'{y}~ \v{s}t\'{\i}t,~ anebo~ ochrann\'{e}~ br\'{y}le.}
+\ghsystem_add_statement:nnn {P} {283} {Pou\v{z}\'{\i}vejte~ ohnivzdorn\'{y}~ od\v{e}v~ nebo~ od\v{e}v~ zpomaluj\'{\i}c\'{\i}~ ho\v{r}en\'{\i}.}
+\ghsystem_add_statement:nnn {P} {284} {[V~p\v{r}\'{\i}pad\v{e}~ nedostate\v{c}n\'{e}ho~ v\v{e}tr\'{a}n\'{\i}]~ pou\v{z}\'{\i}vejte~ vybaven\'{\i}~ pro~ ochranu~ d\'{y}chac\'{\i}ch~ cest.}
+\ghsystem_add_statement:nnn {P} {231 + 232} {Manipulace~ a~skladov\'{a}n\'{\i}~ pod~ inertn\'{\i}m~ plynem~ \ghsystem_slash: \l_ghsystem_dots_tl ~ Chra\v{n}te~ p\v{r}ed~ vlhkem.}
+
+% 3.3 Precautionary Statements — Response
+\ghsystem_add_statement:nnn {P} {301} {P\v{R}I~ PO\v{Z}IT\'{I}: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {302} {P\v{R}I~ STYKU~ S~K\r{U}\v{Z}\'{I}: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {303} {P\v{R}I~ STYKU~ S~K\r{U}\v{Z}\'{I}~ (nebo~ s~vlasy): \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {304} {P\v{R}I~ VDECHNUT\'{I}: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {305} {P\v{R}I~ ZASA\v{Z}EN\'{I}~ O\v{C}\'{I}: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {306} {P\v{R}I~ STYKU~ S~OD\v{E}VEM: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {308} {P\v{R}I~ expozici~ nebo~ podez\v{r}en\'{\i}~ na~ ni: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {310} {Okam\v{z}it\v{e}~ volejte~ TOXIKOLOGICK\'{E}~ INFORMA\v{C}N\'{I}~ ST\v{R}EDISKO \ghsystem_slash: l\'{e}ka\v{r}e \ghsystem_slash: \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {311} {Volejte~ TOXIKOLOGICK\'{E}~ INFORMA\v{C}N\'{I}~ ST\v{R}EDISKO \ghsystem_slash: l\'{e}ka\v{r}e \ghsystem_slash: \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {312} {Nec\'{\i}t\'{\i}te-li~ se~ dob\v{r}e,~ volejte~ TOXIKOLOGICK\'{E}~ INFORMA\v{C}N\'{I}~ ST\v{R}EDISKO \ghsystem_slash: l\'{e}ka\v{r}e \ghsystem_slash: \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {313} {Vyhledejte~ l\'{e}ka\v{r}skou~ pomoc \ghsystem_slash: o\v{s}et\v{r}en\'{\i}.}
+\ghsystem_add_statement:nnn {P} {314} {Nec\'{\i}t\'{\i}te-li~ se~ dob\v{r}e,~ vyhledejte~ l\'{e}ka\v{r}skou~ pomoc \ghsystem_slash: o\v{s}et\v{r}en\'{\i}.}
+\ghsystem_add_statement:nnn {P} {315} {Okam\v{z}it\v{e}~ vyhledejte~ l\'{e}ka\v{r}skou~ pomoc \ghsystem_slash: o\v{s}et\v{r}en\'{\i}.}
+\ghsystem_add_statement:nnn {P} {320} {Je~ nutn\'{e}~ odborn\'{e}~ o\v{s}et\v{r}en\'{\i}~ (viz ~ \l_ghsystem_dots_tl\ na~ tomto~ \v{s}t\'{\i}tku).}
+\ghsystem_add_statement:nnn {P} {321} {Odborn\'{e}~ o\v{s}et\v{r}en\'{\i}~ (viz ~ \l_ghsystem_dots_tl\ na~ tomto~ \v{s}t\'{\i}tku).}
+\ghsystem_add_statement:nnn {P} {330} {Vypl\'{a}chn\v{e}te~ \'{u}sta.}
+\ghsystem_add_statement:nnn {P} {331} {NEVYVOL\'{A}VEJTE~ zvracen\'{\i}.}
+\ghsystem_add_statement:nnn {P} {332} {P\v{r}i~ podr\'{a}\v{z}d\v{e}n\'{\i}~ k\r{u}\v{z}e: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {333} {P\v{r}i~ podr\'{a}\v{z}d\v{e}n\'{\i}~ k\r{u}\v{z}e~ nebo~ vyr\'{a}\v{z}ce: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {334} {Pono\v{r}te~ do~ studen\'{e}~ vody~ [nebo~ zabalte~ do~ vlhk\'{e}ho~ obvazu].}
+\ghsystem_add_statement:nnn {P} {335} {Voln\'{e}~ \v{c}\'{a}stice~ odstra\v{n}te~ z~k\r{u}\v{z}e.}
+\ghsystem_add_statement:nnn {P} {336} {Omrzl\'{a}~ m\'{\i}sta~ o\v{s}et\v{r}ete~ vla\v{z}nou~ vodou.~ Posti\v{z}en\'{e}~ m\'{\i}sto~ net\v{r}ete.}
+\ghsystem_add_statement:nnn {P} {337} {P\v{r}etrv\'{a}v\'{a}-li~ podr\'{a}\v{z}d\v{e}n\'{\i}~ o\v{c}\'{\i}: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {338} {Vyjm\v{e}te~ kontaktn\'{\i}~ \v{c}o\v{c}ky,~ jsou-li~ nasazeny~ a~pokud~ je~ lze~ vyjmout~ snadno.~ Pokra\v{c}ujte~ ve~ vyplachov\'{a}n\'{\i}.}
+\ghsystem_add_statement:nnn {P} {340} {P\v{r}eneste~ osobu~ na~ \v{c}erstv\'{y}~ vzduch~ a~ponechte~ ji~ v~poloze~ usnad\v{n}uj\'{\i}c\'{\i}~ d\'{y}ch\'{a}n\'{\i}.}
+\ghsystem_add_statement:nnn {P} {342} {P\v{r}i~ d\'{y}chac\'{\i}ch~ pot\'{\i}\v{z}\'{\i}ch: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {351} {N\v{e}kolik~ minut~ opatrn\v{e}~ oplachujte~ vodou.}
+\ghsystem_add_statement:nnn {P} {352} {Omyjte~ velk\'{y}m~ mno\v{z}stv\'{\i}m~ vody \ghsystem_slash: \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {353} {Opl\'{a}chn\v{e}te~ k\r{u}\v{z}i~ vodou~ [nebo~ osprchujte].}
+\ghsystem_add_statement:nnn {P} {360} {Kontaminovan\'{y}~ od\v{e}v~ a~k\r{u}\v{z}i~ okam\v{z}it\v{e}~ omyjte~ velk\'{y}m~ mno\v{z}stv\'{\i}m~ vody~ a~potom~ od\v{e}v~ odlo\v{z}te.}
+\ghsystem_add_statement:nnn {P} {361} {Ve\v{s}ker\'{e}~ kontaminovan\'{e}~ \v{c}\'{a}sti~ od\v{e}vu~ okam\v{z}it\v{e}~ svl\'{e}kn\v{e}te.}
+\ghsystem_add_statement:nnn {P} {362} {Kontaminovan\'{y}~ od\v{e}v~ svl\'{e}kn\v{e}te.}
+\ghsystem_add_statement:nnn {P} {363} {Kontaminovan\'{y}~ od\v{e}v~ p\v{r}ed~ op\v{e}tovn\'{y}m~ pou\v{z}it\'{\i}m~ vyperte.}
+\ghsystem_add_statement:nnn {P} {364} {A~p\v{r}ed~ op\v{e}tovn\'{y}m~ pou\v{z}it\'{\i}m~ vyperte.}
+\ghsystem_add_statement:nnn {P} {370} {V~p\v{r}\'{\i}pad\v{e}~ po\v{z}\'{a}ru: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {371} {V~p\v{r}\'{\i}pad\v{e}~ velk\'{e}ho~ po\v{z}\'{a}ru~ a~velk\'{e}ho~ mno\v{z}stv\'{\i}: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {372} {Nebezpe\v{c}\'{\i}~ v\'{y}buchu.}
+\ghsystem_add_statement:nnn {P} {373} {Po\v{z}\'{a}r~ NEHASTE,~ dostane-li~ se~ k~v\'{y}bu\v{s}nin\'{a}m.}
+\ghsystem_add_statement:nnn {P} {375} {Kv\r{u}li~ nebezpe\v{c}\'{\i}~ v\'{y}buchu~ haste~ z~dostate\v{c}n\'{e}~ vzd\'{a}lenosti.}
+\ghsystem_add_statement:nnn {P} {376} {Zastavte~ \'{u}nik,~ m\r{u}\v{z}ete-li~ tak~ u\v{c}init~ bez~ rizika.}
+\ghsystem_add_statement:nnn {P} {377} {Po\v{z}\'{a}r~ unikaj\'{\i}c\'{\i}ho~ plynu:~ \ghsystem_text: Nehaste,~ nelze-li~ \'{u}nik~ bezpe\v{c}n\v{e}~ zastavit.}
+\ghsystem_add_statement:nnn {P} {378} {K~uha\v{s}en\'{\i}~ pou\v{z}ijte~ \l_ghsystem_dots_tl\ .}
+\ghsystem_add_statement:nnn {P} {380} {Vyklid\nolinebreak{\hspace{-0.4mm}'}te~ prostor.}
+\ghsystem_add_statement:nnn {P} {381} {V~p\v{r}\'{\i}pad\v{e}~ \'{u}niku~ odstra\v{n}te~ v\v{s}echny~ zdroje~ zap\'{a}len\'{\i}.}
+\ghsystem_add_statement:nnn {P} {390} {Unikl\'{y}~ produkt~ absorbujte,~ aby~ se~ zabr\'{a}nilo~ materi\'{a}ln\'{\i}m~ \v{s}kod\'{a}m.}
+\ghsystem_add_statement:nnn {P} {391} {Unikl\'{y}~ produkt~ seberte.}
+\ghsystem_add_statement:nnn {P} {301 + 310} {P\v{R}I~ PO\v{Z}IT\'{I}:~ Okam\v{z}it\v{e}~ volejte~ TOXIKOLOGICK\'{E}~ INFORMA\v{C}N\'{I}~ ST\v{R}EDISKO \ghsystem_slash: l\'{e}ka\v{r}e \ghsystem_slash: \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {301 + 312} {P\v{R}I~ PO\v{Z}IT\'{I}:~ Nec\'{\i}t\'{\i}te-li~ se~ dob\v{r}e,~ volejte~ TOXIKOLOGICK\'{E}~ INFORMA\v{C}N\'{I}~ ST\v{R}EDISKO \ghsystem_slash: l\'{e}ka\v{r}e \ghsystem_slash: \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {301 + 330 + 331} {P\v{R}I~ PO\v{Z}IT\'{I}:~ Vypl\'{a}chn\v{e}te~ \'{u}sta.~ NEVYVOL\'{A}VEJTE~ zvracen\'{\i}.}
+\ghsystem_add_statement:nnn {P} {302 + 334} {P\v{R}I~ STYKU~ S~K\r{U}\v{Z}\'{I}:~ Pono\v{r}te~ do~ studen\'{e}~ vody~ nebo~ zabalte~ do~ vlhk\'{e}ho~ obvazu.}
+\ghsystem_add_statement:nnn {P} {302 + 352} {P\v{R}I~ STYKU~ S~K\r{U}\v{Z}\'{I}:~ Omyjte~ velk\'{y}m~ mno\v{z}stv\'{\i}m~ vody \ghsystem_slash: \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {302 + 335 + 334} {P\v{R}I~ STYKU~ S~K\r{U}\v{Z}\'{I}:~ Voln\'{e}~ \v{c}\'{a}stice~ odstra\v{n}te~ z~k\r{u}\v{z}e.~ Pono\v{r}te~ do~ studen\'{e}~ vody~ [nebo~ zabalte~ do~ vlhk\'{e}ho~ obvazu].}
+\ghsystem_add_statement:nnn {P} {303 + 361 + 353} {P\v{R}I~ STYKU~ S~K\r{U}\v{Z}\'{I}~ (nebo~ s~vlasy):~ Ve\v{s}ker\'{e}~ kontaminovan\'{e}~ \v{c}\'{a}sti~ od\v{e}vu~ okam\v{z}it\v{e}~ svl\'{e}kn\v{e}te.~ Opl\'{a}chn\v{e}te~ k\r{u}\v{z}i~ vodou~ [nebo~ osprchujte].}
+\ghsystem_add_statement:nnn {P} {304 + 340} {P\v{R}I~ VDECHNUT\'{I}:~ P\v{r}eneste~ osobu~ na~ \v{c}erstv\'{y}~ vzduch~ a~ponechte~ ji~ v~poloze~ usnad\v{n}uj\'{\i}c\'{\i}~ d\'{y}ch\'{a}n\'{\i}.}
+\ghsystem_add_statement:nnn {P} {305 + 351 + 338} {P\v{R}I~ ZASA\v{Z}EN\'{I}~ O\v{C}\'{I}:~ N\v{e}kolik~ minut~ opatrn\v{e}~ vyplachujte~ vodou.~ Vyjm\v{e}te~ kontaktn\'{\i}~ \v{c}o\v{c}ky,~ jsou-li~ nasazeny~ a~pokud~ je~ lze~ vyjmout~ snadno.~ Pokra\v{c}ujte~ ve~ vyplachov\'{a}n\'{\i}.}
+\ghsystem_add_statement:nnn {P} {306 + 360} {P\v{R}I~ STYKU~ S~OD\v{E}VEM:~ Kontaminovan\'{y}~ od\v{e}v~ a~k\r{u}\v{z}i~ okam\v{z}it\v{e}~ omyjte~ velk\'{y}m~ mno\v{z}stv\'{\i}m~ vody~ a~potom~ od\v{e}v~ odlo\v{z}te.}
+\ghsystem_add_statement:nnn {P} {308 + 311} {P\v{R}I~ expozici~ nebo~ podez\v{r}en\'{\i}~ na~ ni:~ Volejte~ TOXIKOLOGICK\'{E}~ INFORMA\v{C}N\'{I}~ ST\v{R}EDISKO \ghsystem_slash: l\'{e}ka\v{r}e \ghsystem_slash: \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {308 + 313} {P\v{r}i~ expozici~ nebo~ podez\v{r}en\'{\i}~ na~ ni:~ Vyhledejte~ l\'{e}ka\v{r}skou~ pomoc \ghsystem_slash: o\v{s}et\v{r}en\'{\i}.}
+\ghsystem_add_statement:nnn {P} {332 + 313} {P\v{r}i~ podr\'{a}\v{z}d\v{e}n\'{\i}~ k\r{u}\v{z}e:~ Vyhledejte~ l\'{e}ka\v{r}skou~ pomoc~ \ghsystem_slash: o\v{s}et\v{r}en\'{\i}.}
+\ghsystem_add_statement:nnn {P} {333 + 313} {P\v{r}i~ podr\'{a}\v{z}d\v{e}n\'{\i}~ k\r{u}\v{z}e~ nebo~ vyr\'{a}\v{z}ce:~ Vyhledejte~ l\'{e}ka\v{r}skou~ pomoc \ghsystem_slash: o\v{s}et\v{r}en\'{\i}.}
+\ghsystem_add_statement:nnn {P} {336 + 315} {Omrzl\'{a}~ m\'{\i}sta~ o\v{s}et\v{r}ete~ vla\v{z}nou~ vodou.~ Posti\v{z}en\'{e}~ m\'{\i}sto~ net\v{r}ete.~ Okam\v{z}it\v{e}~ vyhledejte~ l\'{e}ka\v{r}skou~ pomoc \ghsystem_slash: o\v{s}et\v{r}en\'{\i}.}
+\ghsystem_add_statement:nnn {P} {337 + 313} {P\v{r}etrv\'{a}v\'{a}-li~ podr\'{a}\v{z}d\v{e}n\'{\i}~ o\v{c}\'{\i}:~ Vyhledejte~ l\'{e}ka\v{r}skou~ pomoc \ghsystem_slash: o\v{s}et\v{r}en\'{\i}.}
+\ghsystem_add_statement:nnn {P} {342 + 311} {P\v{r}i~ d\'{y}chac\'{\i}ch~ pot\'{\i}\v{z}\'{\i}ch:~ Volejte~ TOXIKOLOGICK\'{E}~ INFORMA\v{C}N\'{I}~ ST\v{R}EDISKO \ghsystem_slash: l\'{e}ka\v{r}e \ghsystem_slash: \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {361 + 364} {Ve\v{s}ker\'{e}~ kontaminovan\'{e}~ \v{c}\'{a}sti~ od\v{e}vu~ okam\v{z}it\v{e}~ svl\'{e}kn\v{e}te~ a~p\v{r}ed~ op\v{e}tovn\'{y}m~ pou\v{z}it\'{\i}m~ vyperte.}
+\ghsystem_add_statement:nnn {P} {362 + 364} {Kontaminovan\'{y}~ od\v{e}v~ svl\'{e}kn\v{e}te~ a~p\v{r}ed~ op\v{e}tovn\'{y}m~ pou\v{z}it\'{\i}m~ vyperte.}
+\ghsystem_add_statement:nnn {P} {370 + 376} {V~p\v{r}\'{\i}pad\v{e}~ po\v{z}\'{a}ru:~ Zastavte~ \'{u}nik,~ m\r{u}\v{z}ete-li~ tak~ u\v{c}init~ bez~ rizika.}
+\ghsystem_add_statement:nnn {P} {370 + 378} {V~p\v{r}\'{\i}pad\v{e}~ po\v{z}\'{a}ru:~ K~ha\v{s}en\'{\i}~ pou\v{z}ijte ~ \l_ghsystem_dots_tl\ .}
+\ghsystem_add_statement:nnn {P} {370 + 380 + 375} {V~p\v{r}\'{\i}pad\v{e}~ po\v{z}\'{a}ru:~ Vyklid\nolinebreak{\hspace{-0.7mm}'}te~prostor.~ Kv\r{u}li~ nebezpe\v{c}\'{\i}~ v\'{y}buchu~ haste~ z~dostate\v{c}n\'{e}~ vzd\'{a}lenosti.}
+\ghsystem_add_statement:nnn {P} {371 + 380 + 375} {V~p\v{r}\'{\i}pad\v{e}~ velk\'{e}ho~ po\v{z}\'{a}ru~ a~velk\'{e}ho~ mno\v{z}stv\'{\i}:~ Vyklid\nolinebreak{\hspace{-0.4mm}'}te~ prostor.~ Kv\r{u}li~ nebezpe\v{c}\'{\i}~ v\'{y}buchu~ haste~ z~dostate\v{c}n\'{e}~ vzd\'{a}lenosti.}
+%\ghsystem_add_statement:nnn {P} {370 + 372 + 380 + 373} {V~p\v{r}\'{\i}pad\v{e}~ po\v{z}\'{a}ru:~ Nebezpe\v{c}\'{\i}~ v\'{y}buchu.~ Vyklid\nolinebreak{\hspace{-0.4mm}'}te~ prostor.~ Po\v{z}\'{a}r~ NEHASTE,~ dostane-li~ se~ k~v\'{y}bu\v{s}nin\'{a}m.}
+%\ghsystem_add_statement:nnn {P} {370 + 380 + 375 + [378]} {V~p\v{r}\'{\i}pad\v{e}~ po\v{z}\'{a}ru:~ Vyklid\nolinebreak{\hspace{-0.4mm}'}te~ prostor.~ Kv\r{u}li~ nebezpe\v{c}\'{\i}~ v\'{y}buchu~ haste~ z~dostate\v{c}n\'{e}~ vzd\'{a}lenosti.~ [K~uha\v{s}en\'{\i}~ pou\v{z}ijte \l_ghsystem_dots_tl ].}
+
+% 3.4 Precautionary Statements — Storage
+\ghsystem_add_statement:nnn {P} {401} {Skladujte~ v~souladu~ s~ \l_ghsystem_dots_tl .}
+\ghsystem_add_statement:nnn {P} {402} {Skladujte~ na~ such\'{e}m~ m\'{\i}st\v{e}.}
+\ghsystem_add_statement:nnn {P} {403} {Skladujte~ na~ dob\v{r}e~ v\v{e}tran\'{e}m~ m\'{\i}st\v{e}.}
+\ghsystem_add_statement:nnn {P} {404} {Skladujte~ v~zav\v{r}en\'{e}m~ obalu.}
+\ghsystem_add_statement:nnn {P} {405} {Skladujte~ uzam\v{c}en\'{e}.}
+\ghsystem_add_statement:nnn {P} {406}
+  {Skladujte~ v~obalu~ odoln\'{e}m~ proti~ korozi \ghsystem_slash: \l_ghsystem_dots_tl\ s~odolnou~ vnit\v{r}n\'{\i}~ vrstvou.}
+\ghsystem_add_statement:nnn {P} {407} {Mezi~ stohy~ nebo~ paletami~ ponechte~ vzduchovou~ mezeru.}
+\ghsystem_add_statement:nnn {P} {410} {Chra\v{n}te~ p\v{r}ed~ slune\v{c}n\'{\i}m~ z\'{a}\v{r}en\'{\i}m.}
+\ghsystem_add_statement:nnn {P} {411}
+  {
+    Skladujte~ p\v{r}i~ teplot\v{e}~ nep\v{r}esahuj\'{\i}c\'{\i}~
+    \exp_args:No
+    \SI { \l_ghsystem_celsius_temperature_tl }{ \GHScelsius }
+    \ghsystem_slash:
+    \exp_args:No
+    \SI { \l_ghsystem_fahrenheit_temperature_tl } { \GHSfahrenheit } .
+  }
+\ghsystem_add_statement:nnn {P} {412}
+  {
+    Nevystavujte~ teplot\v{e}~ p\v{r}esahuj\'{\i}c\'{\i}~ \SI { 50 } { \GHScelsius } \ghsystem_slash:
+    \SI { 122 } { \GHSfahrenheit } .
+  }
+\ghsystem_add_statement:nnn {P} {413}
+  {
+    Mno\v{z}stv\'{\i}~ v\v{e}t\v{s}\'{\i}~ ne\v{z}~
+    \exp_args:No \SI { \l_ghsystem_kg_mass_tl } { \GHSkilogram } \ghsystem_slash:
+    \exp_args:No \SI { \l_ghsystem_lbs_mass_tl } { \GHSpounds } ~
+    skladujte~ p\v{r}i~ teplot\v{e}~ nep\v{r}esahuj\'{\i}c\'{\i}~
+    \exp_args:No \SI { \l_ghsystem_celsius_temperature_tl } { \GHScelsius } \ghsystem_slash:
+    \exp_args:No \SI { \l_ghsystem_fahrenheit_temperature_tl } { \GHSfahrenheit } .
+  }
+\ghsystem_add_statement:nnn {P} {420} {Skladujte~ odd\v{e}len\v{e}.}
+\ghsystem_add_statement:nnn {P} {402 + 404} {Skladujte~ na~ such\'{e}m~ m\'{\i}st\v{e}.~ Skladujte~ v~uzav\v{r}en\'{e}m~ obalu.}
+\ghsystem_add_statement:nnn {P} {403 + 233} {Skladujte~ na~ dob\v{r}e~ v\v{e}tran\'{e}m~ m\'{\i}st\v{e}.~ Uchov\'{a}vejte~ obal~ t\v{e}sn\v{e}~ uzav\v{r}en\'{y}.}
+\ghsystem_add_statement:nnn {P} {403 + 235} {Skladujte~ na~ dob\v{r}e~ v\v{e}tran\'{e}m~ m\'{\i}st\v{e}.~ Uchov\'{a}vejte~ v~chladu.}
+\ghsystem_add_statement:nnn {P} {410 + 403} {Chra\v{n}te~ p\v{r}ed~ slune\v{c}n\'{\i}m~ z\'{a}\v{r}en\'{\i}m.~ Skladujte~ na~ dob\v{r}e~ v\v{e}tran\'{e}m~ m\'{\i}st\v{e}.}
+\ghsystem_add_statement:nnn {P} {410 + 412}
+  {Chra\v{n}te~ p\v{r}ed~ slune\v{c}n\'{\i}m~ z\'{a}\v{r}en\'{\i}m.~ Nevystavujte~ teplot\v{e}~ p\v{r}esahuj\'{\i}c\'{\i}~ \SI { 50 } { \GHScelsius } \ghsystem_slash:
+    \SI { 122 } { \GHSfahrenheit } .
+  }
+
+% 3.5 Precautionary Statements — Disposal
+\ghsystem_add_statement:nnn {P} {501} {Odstra\v{n}te~ obsah \ghsystem_slash: obal ~ \l_ghsystem_dots_tl}
+\ghsystem_add_statement:nnn {P} {501} {Informujte~ se~ u~v\'{y}robce~ nebo~ dodavatele~ o~regeneraci~ nebo~ recyklaci.}
+
