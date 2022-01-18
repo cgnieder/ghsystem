@@ -666,8 +666,6 @@
 \NewDocumentCommand \ghssetup {m}
   { \ghsystem_setup:n {#1} }
 
-\chemmacros_load_module:n {nomenclature}
-
 \cs_generate_variant:Nn \chemmacros_integrate_package:nnn {nnV}
 \chemmacros_integrate_package:nnV {} {ghsystem} \c_ghsystem_date_tl
 
@@ -715,3 +713,5 @@ VERSION HISTORY
                             and the French translations
 2020/01/16 - version 4.8b - adapt to renaming of case changing functions
 2020/02/17 - version 4.8c - resolve bug with French and Lua- or XeLaTeX
+2022/01/?? - version 4.9  - adapt to chemmacros v6.0
+                          - adapt to siunitx v3.0

@@ -11,7 +11,7 @@
 % - If you have any ideas, questions, suggestions or bugs to report, please
 % - feel free to contact me.
 % --------------------------------------------------------------------------
-% - Copyright 2011--2020 Clemens Niederberger
+% - Copyright 2011--2022 Clemens Niederberger
 % -
 % - This work may be distributed and/or modified under the
 % - conditions of the LaTeX Project Public License, either version 1.3
@@ -780,16 +780,16 @@
   { Proteggere~ dai~ raggi~ solari. }
 \ghsystem_add_statement:nnn {P} { 411 }
   {
-    Conservare~ a~ temperature~ non~ superiori~ a~  \exp_args:No \SI {
+    Conservare~ a~ temperature~ non~ superiori~ a~  \exp_args:No \qty {
       \l_ghsystem_celsius_temperature_tl }{ \GHScelsius } .
   }
 \ghsystem_add_statement:nnn {P} { 412 }
-  { Non~ esporre~ a~ temperature~ superiori~ a~  \SI { 50 } { \GHScelsius } . }
+  { Non~ esporre~ a~ temperature~ superiori~ a~  \qty { 50 } { \GHScelsius } . }
 \ghsystem_add_statement:nnn {P} { 413 }
   {
-    Conservare~ le~ rinfuse~ di~ peso~ superiore~ a~  \exp_args:No \SI {
+    Conservare~ le~ rinfuse~ di~ peso~ superiore~ a~  \exp_args:No \qty {
       \l_ghsystem_kg_mass_tl }{ \GHSkilogram } ~  a~ temperature~ non~
-    superiori~ a ~  \exp_args:No \SI { \l_ghsystem_celsius_temperature_tl } {
+    superiori~ a ~  \exp_args:No \qty { \l_ghsystem_celsius_temperature_tl } {
       \GHScelsius } .
   }
 \ghsystem_add_statement:nnn {P} { 420 }
@@ -807,12 +807,12 @@
 \ghsystem_add_statement:nnn {P} { 410 + 412 }
   {
     Proteggere~ dai~ raggi~ solari.~ Non~ esporre~ a~ temperature~ superiori~
-    a~  \SI { 50 } { \GHScelsius } .
+    a~  \qty { 50 } { \GHScelsius } .
   }
 \ghsystem_add_statement:nnn {P} { 411 + 235 }
   {
     Conservare~ in~ luogo~ fresco~ a~ temperature~ non~ superiori~ a~
-    \exp_args:No \SI { \l_ghsystem_celsius_temperature_tl } { \GHScelsius } .
+    \exp_args:No \qty { \l_ghsystem_celsius_temperature_tl } { \GHScelsius } .
   }
 
 % 3.5 Consigli di prudenza - Smaltimento

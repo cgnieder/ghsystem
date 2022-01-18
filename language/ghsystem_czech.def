@@ -389,24 +389,24 @@ zap\'{a}len\'{\i}.~ Z\'{a}kaz~ kou\v{r}en\'{\i}.}
   {
     Skladujte~ p\v{r}i~ teplot\v{e}~ nep\v{r}esahuj\'{\i}c\'{\i}~
     \exp_args:No
-    \SI { \l_ghsystem_celsius_temperature_tl }{ \GHScelsius }
+    \qty { \l_ghsystem_celsius_temperature_tl }{ \GHScelsius }
     \ghsystem_slash:
     \exp_args:No
-    \SI { \l_ghsystem_fahrenheit_temperature_tl } { \GHSfahrenheit } .
+    \qty { \l_ghsystem_fahrenheit_temperature_tl } { \GHSfahrenheit } .
   }
 \ghsystem_add_statement:nnn {P} {412}
   {
-    Nevystavujte~ teplot\v{e}~ p\v{r}esahuj\'{\i}c\'{\i}~ \SI { 50 } { \GHScelsius } \ghsystem_slash:
-    \SI { 122 } { \GHSfahrenheit } .
+    Nevystavujte~ teplot\v{e}~ p\v{r}esahuj\'{\i}c\'{\i}~ \qty { 50 } { \GHScelsius } \ghsystem_slash:
+    \qty { 122 } { \GHSfahrenheit } .
   }
 \ghsystem_add_statement:nnn {P} {413}
   {
     Mno\v{z}stv\'{\i}~ v\v{e}t\v{s}\'{\i}~ ne\v{z}~
-    \exp_args:No \SI { \l_ghsystem_kg_mass_tl } { \GHSkilogram } \ghsystem_slash:
-    \exp_args:No \SI { \l_ghsystem_lbs_mass_tl } { \GHSpounds } ~
+    \exp_args:No \qty { \l_ghsystem_kg_mass_tl } { \GHSkilogram } \ghsystem_slash:
+    \exp_args:No \qty { \l_ghsystem_lbs_mass_tl } { \GHSpounds } ~
     skladujte~ p\v{r}i~ teplot\v{e}~ nep\v{r}esahuj\'{\i}c\'{\i}~
-    \exp_args:No \SI { \l_ghsystem_celsius_temperature_tl } { \GHScelsius } \ghsystem_slash:
-    \exp_args:No \SI { \l_ghsystem_fahrenheit_temperature_tl } { \GHSfahrenheit } .
+    \exp_args:No \qty { \l_ghsystem_celsius_temperature_tl } { \GHScelsius } \ghsystem_slash:
+    \exp_args:No \qty { \l_ghsystem_fahrenheit_temperature_tl } { \GHSfahrenheit } .
   }
 \ghsystem_add_statement:nnn {P} {420} {Skladujte~ odd\v{e}len\v{e}.}
 \ghsystem_add_statement:nnn {P} {402 + 404} {Skladujte~ na~ such\'{e}m~ m\'{\i}st\v{e}.~ Skladujte~ v~uzav\v{r}en\'{e}m~ obalu.}
@@ -414,8 +414,8 @@ zap\'{a}len\'{\i}.~ Z\'{a}kaz~ kou\v{r}en\'{\i}.}
 \ghsystem_add_statement:nnn {P} {403 + 235} {Skladujte~ na~ dob\v{r}e~ v\v{e}tran\'{e}m~ m\'{\i}st\v{e}.~ Uchov\'{a}vejte~ v~chladu.}
 \ghsystem_add_statement:nnn {P} {410 + 403} {Chra\v{n}te~ p\v{r}ed~ slune\v{c}n\'{\i}m~ z\'{a}\v{r}en\'{\i}m.~ Skladujte~ na~ dob\v{r}e~ v\v{e}tran\'{e}m~ m\'{\i}st\v{e}.}
 \ghsystem_add_statement:nnn {P} {410 + 412}
-  {Chra\v{n}te~ p\v{r}ed~ slune\v{c}n\'{\i}m~ z\'{a}\v{r}en\'{\i}m.~ Nevystavujte~ teplot\v{e}~ p\v{r}esahuj\'{\i}c\'{\i}~ \SI { 50 } { \GHScelsius } \ghsystem_slash:
-    \SI { 122 } { \GHSfahrenheit } .
+  {Chra\v{n}te~ p\v{r}ed~ slune\v{c}n\'{\i}m~ z\'{a}\v{r}en\'{\i}m.~ Nevystavujte~ teplot\v{e}~ p\v{r}esahuj\'{\i}c\'{\i}~ \qty { 50 } { \GHScelsius } \ghsystem_slash:
+    \qty { 122 } { \GHSfahrenheit } .
   }
 
 % 3.5 Precautionary Statements — Disposal

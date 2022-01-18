@@ -11,7 +11,7 @@
 % - If you have any ideas, questions, suggestions or bugs to report, please
 % - feel free to contact me.
 % --------------------------------------------------------------------------
-% - Copyright 2011--2020 Clemens Niederberger
+% - Copyright 2011--2022 Clemens Niederberger
 % -
 % - This work may be distributed and/or modified under the
 % - conditions of the LaTeX Project Public License, either version 1.3
@@ -377,20 +377,20 @@
 \ghsystem_add_statement:nnn {P} {410} {...}
 \ghsystem_add_statement:nnn {P} {411}
   {
-    ... ~ \exp_args:No \SI {\l_ghsystem_celsius_temperature_tl}
-    {\GHScelsius} \ghsystem_slash: \exp_args:No \SI
+    ... ~ \exp_args:No \qty {\l_ghsystem_celsius_temperature_tl}
+    {\GHScelsius} \ghsystem_slash: \exp_args:No \qty
     {\l_ghsystem_fahrenheit_temperature_tl} {\GHSfahrenheit} ~ ...
  }
 \ghsystem_add_statement:nnn {P} {412}
   {
-    ... ~ \SI {50} {\GHScelsius} \ghsystem_slash: \SI {122} {
+    ... ~ \qty {50} {\GHScelsius} \ghsystem_slash: \qty {122} {
       \GHSfahrenheit} ~ ...
  }
 \ghsystem_add_statement:nnn {P} {413}
   {
-    ... ~ \exp_args:No \SI {\l_ghsystem_kg_mass_tl} {\GHSkilogram} ~
-    ... ~ \SI {\l_ghsystem_celsius_temperature_tl} {\GHScelsius}
-    \ghsystem_slash: \exp_args:No \SI {\l_ghsystem_fahrenheit_temperature_tl
+    ... ~ \exp_args:No \qty {\l_ghsystem_kg_mass_tl} {\GHSkilogram} ~
+    ... ~ \qty {\l_ghsystem_celsius_temperature_tl} {\GHScelsius}
+    \ghsystem_slash: \exp_args:No \qty {\l_ghsystem_fahrenheit_temperature_tl
    } {\GHSfahrenheit} ~ ...
  }
 \ghsystem_add_statement:nnn {P} {420} {...}
@@ -401,13 +401,13 @@
 \ghsystem_add_statement:nnn {P} {410 + 403} {...}
 \ghsystem_add_statement:nnn {P} {410 + 412}
   {
-    ... ~ \SI {50} {\GHScelsius} \ghsystem_slash: \SI {122} {
+    ... ~ \qty {50} {\GHScelsius} \ghsystem_slash: \qty {122} {
       \GHSfahrenheit} ~ ...
  }
 \ghsystem_add_statement:nnn {P} {411 + 235}
   {
-    ... ~ \exp_args:No \SI {\l_ghsystem_celsius_temperature_tl}{
-      \GHScelsius} \ghsystem_slash: \exp_args:No \SI {
+    ... ~ \exp_args:No \qty {\l_ghsystem_celsius_temperature_tl}{
+      \GHScelsius} \ghsystem_slash: \exp_args:No \qty {
       \l_ghsystem_fahrenheit_temperature_tl} {\GHSfahrenheit} ~ ...
  }
 
