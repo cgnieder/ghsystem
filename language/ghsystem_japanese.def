@@ -1,0 +1,430 @@
+% JAPANESE DEFINITIONS
+\ghsystemlanguagefile {japanese} {2024-03-10}
+% [Ref]
+% Ministry of Economy, Trade and Industry https://www.meti.go.jp/policy/chemical_management/int/ghs_text.html
+% Japanese Industrial Standards JIS Z 7253:2019.
+
+% table head:
+\tl_set:Nn \l_ghsystem_identifier_tl {コード}
+\tl_set:Nn \l_ghsystem_table_text_tl {安全対策の注意書き}
+\tl_set:Nn \l_ghsystem_table_caption_tl {全てのH，EUH，P危険有害性コード}
+\tl_set:Nn \l_ghsystem_table_next_page_tl { 次頁へ続く }
+
+% fill-in functions:
+% <state route of exposure if it is conclusively proven that no other routes of exposure cause the hazard>.
+\cs_set:Npn \ghsystem_exposure:
+  {
+    \bool_if:NT \l_ghsystem_fill_in_bool
+      {
+        \c_space_tl \ghsystem_filler:n {他の経路からのばく露が有害でないことが決定的に証明されている場合，有害なばく露経路を記載する}
+      }
+  }
+
+%  <state specific effect if known> 
+\cs_set:Npn \ghsystem_effect:
+  {
+    \bool_if:NT \l_ghsystem_fill_in_bool
+      {
+        \c_space_tl \ghsystem_filler:n {もしわかれば影響の内容を記載する}
+      }
+  }
+
+% <or state all organs affected, if known>
+\cs_set:Npn \ghsystem_organs:
+  {
+    \bool_lazy_and:nnT
+      { \l_ghsystem_fill_in_bool }
+      { !\l_ghsystem_organs_bool }
+      {
+        \c_space_tl \ghsystem_filler:n {もしわかればすべての影響を受ける臓器を挙げる}
+      }
+  }
+
+% <name of sensitising substance>
+\cs_set:Npn \ghsystem_substance:
+  {
+    \bool_if:NF \l_ghsystem_substance_bool
+      {
+        \c_space_tl \ghsystem_filler:n {有害物質}
+      }
+  }
+
+% HAZARD STATEMENTS (Annex 3)
+% 1. Hazard Statements
+% 1.1 Physical Hazards
+\ghsystem_add_statement:nnn {H} {200} {不安定爆発物}
+\ghsystem_add_statement:nnn {H} {201} {爆発物; 大量爆発危険性}
+\ghsystem_add_statement:nnn {H} {202} {爆発物; 激しい飛散危険性}
+\ghsystem_add_statement:nnn {H} {203} {爆発物; 火災，爆風又は飛散危険性}
+\ghsystem_add_statement:nnn {H} {204} {火災又は飛散危険性}
+\ghsystem_add_statement:nnn {H} {205} {危険}
+\ghsystem_add_statement:nnn {H} {206} {火災，爆風または飛散危険性; 鈍性化剤が減少した場合には爆発の危険性の増加}
+\ghsystem_add_statement:nnn {H} {207} {火災または飛散危険性; 鈍性化剤が減少した場合には爆発の危険性の増加}
+\ghsystem_add_statement:nnn {H} {208} {火災危険性; 鈍性化剤が減少した場合には爆発の危険性の増加}
+\ghsystem_add_statement:nnn {H} {209} {爆発物}
+\ghsystem_add_statement:nnn {H} {210} {非常に敏感}
+\ghsystem_add_statement:nnn {H} {211} {敏感である可能性}
+
+\ghsystem_add_statement:nnn {H} {220} {極めて可燃性の高いガス}
+\ghsystem_add_statement:nnn {H} {221} {可燃性ガス}
+\ghsystem_add_statement:nnn {H} {222} {極めて可燃性の高いエアゾール}
+\ghsystem_add_statement:nnn {H} {223} {可燃性エアゾール}
+\ghsystem_add_statement:nnn {H} {224} {極めて引火性の高い液体および蒸気}
+\ghsystem_add_statement:nnn {H} {225} {引火性の高い液体および蒸気}
+\ghsystem_add_statement:nnn {H} {226} {引火性の液体および蒸気}
+\ghsystem_add_statement:nnn {H} {227} {可燃性液体}
+\ghsystem_add_statement:nnn {H} {228} {可燃性固体}
+\ghsystem_add_statement:nnn {H} {229} {高圧容器; 熱すると破裂のおそれ}
+\ghsystem_add_statement:nnn {H} {230} {空気が無くても爆発的に反応するおそれ}
+\ghsystem_add_statement:nnn {H} {231} {圧力および/または温度が上昇した場合，空気が無くても爆発的に反応するおそれ}
+\ghsystem_add_statement:nnn {H} {232} {空気に触れると自然発火のおそれ}
+
+\ghsystem_add_statement:nnn {H} {240} {熱すると爆発のおそれ}
+\ghsystem_add_statement:nnn {H} {241} {熱すると火災または爆発のおそれ}
+\ghsystem_add_statement:nnn {H} {242} {熱すると火災のおそれ}
+
+\ghsystem_add_statement:nnn {H} {250} {空気に触れると自然発火}
+\ghsystem_add_statement:nnn {H} {251} {自己発熱；火災のおそれ}
+\ghsystem_add_statement:nnn {H} {252} {大量の場合自己発熱; 火災のおそれ}
+
+\ghsystem_add_statement:nnn {H} {260} {水に触れると自然発火するおそれのある可燃性ガスを発生}
+\ghsystem_add_statement:nnn {H} {261} {水に触れると可燃性ガスを発生}
+
+\ghsystem_add_statement:nnn {H} {270} {発火または火災助長のおそれ; 酸化性物質}
+\ghsystem_add_statement:nnn {H} {271} {火災または爆発のおそれ; 強酸化性物質}
+\ghsystem_add_statement:nnn {H} {272} {火災助長のおそれ; 酸化性物質}
+
+\ghsystem_add_statement:nnn {H} {280} {高圧ガス; 熱すると爆発のおそれ}
+\ghsystem_add_statement:nnn {H} {281} {深冷液化ガス; 凍傷または傷害のおそれ}
+\ghsystem_add_statement:nnn {H} {282} {極めて可燃性の高い加圧下化学品; 熱すると爆発のおそれ}
+\ghsystem_add_statement:nnn {H} {283} {可燃性の加圧下化学品; 熱すると爆発のおそれ}
+\ghsystem_add_statement:nnn {H} {284} {加圧下化学品; 熱すると爆発のおそれ}
+
+\ghsystem_add_statement:nnn {H} {290} {金属腐食のおそれ}
+
+% 1.2 Health Hazards
+\ghsystem_add_statement:nnn {H} {300} {飲み込むと生命に危険}
+\ghsystem_add_statement:nnn {H} {301} {飲み込むと有毒}
+\ghsystem_add_statement:nnn {H} {302} {飲み込むと有害}
+\ghsystem_add_statement:nnn {H} {303} {飲み込むと有害のおそれ}
+\ghsystem_add_statement:nnn {H} {304} {飲み込んで気道に侵入すると生命に危険のおそれ}
+\ghsystem_add_statement:nnn {H} {305} {飲み込んで気道に侵入すると有害のおそれ}
+
+\ghsystem_add_statement:nnn {H} {310} {皮膚に接触すると生命に危険}
+\ghsystem_add_statement:nnn {H} {311} {皮膚に接触すると有毒}
+\ghsystem_add_statement:nnn {H} {312} {皮膚に接触すると有害}
+\ghsystem_add_statement:nnn {H} {313} {皮膚に接触すると有害のおそれ}
+\ghsystem_add_statement:nnn {H} {314} {重篤な皮膚の薬傷および目の損傷}
+\ghsystem_add_statement:nnn {H} {315} {皮膚刺激}
+\ghsystem_add_statement:nnn {H} {316} {軽度の皮膚刺激}
+\ghsystem_add_statement:nnn {H} {317} {アレルギー性皮膚反応を起こすおそれ}
+\ghsystem_add_statement:nnn {H} {318} {重篤な眼の損傷}
+\ghsystem_add_statement:nnn {H} {319} {強い眼刺激}
+\ghsystem_add_statement:nnn {H} {320} {眼刺激}
+
+\ghsystem_add_statement:nnn {H} {330} {吸引すると生命に危険}
+\ghsystem_add_statement:nnn {H} {331} {吸引すると有毒}
+\ghsystem_add_statement:nnn {H} {332} {吸引すると有害}
+\ghsystem_add_statement:nnn {H} {333} {吸引すると有害のおそれ}
+\ghsystem_add_statement:nnn {H} {334} {吸引するとアレルギー，喘息または呼吸困難を起こすおそれ}
+\ghsystem_add_statement:nnn {H} {335} {呼吸器への刺激のおそれ}
+\ghsystem_add_statement:nnn {H} {336} {眠気またはめまいのおそれ}
+
+\ghsystem_add_statement:nnn {H} {340} {遺伝性疾患のおそれ\ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {341} {遺伝性疾患のおそれの疑い\ghsystem_exposure:}
+
+\ghsystem_add_statement:nnn {H} {350} {発がんのおそれ\ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {351} {発がんのおそれの疑い\ghsystem_exposure:}
+
+\ghsystem_add_statement:nnn {H} {360} {生殖能または胎児への悪影響のおそれ\ghsystem_effect: \ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {361} {生殖能または胎児への悪影響のおそれの疑い\ghsystem_effect: \ghsystem_exposure:}
+\ghsystem_add_statement:nnn {H} {362} {授乳中の子に害を及ぼすおそれ}
+
+\ghsystem_add_statement:nnn {H} {370}
+  {
+    \bool_if:NF\l_ghsystem_organs_bool {臓器}
+    \ghsystem_organs:
+    の障害
+    \ghsystem_exposure: 
+ }
+\ghsystem_add_statement:nnn {H} {371}
+  {
+    \bool_if:NF\l_ghsystem_organs_bool {臓器}
+    \ghsystem_organs:
+    の障害のおそれ 
+    \ghsystem_exposure:
+ }
+\ghsystem_add_statement:nnn {H} {372}
+  {
+    長期にわたる，または反復ばく露\ghsystem_exposure: による
+    \bool_if:NF\l_ghsystem_organs_bool {臓器}
+    \ghsystem_organs:
+    の障害
+ }
+\ghsystem_add_statement:nnn {H} {373}
+  {
+    長期にわたる，または反復ばく露\ghsystem_exposure: による
+    \bool_if:NF\l_ghsystem_organs_bool {臓器}
+    \ghsystem_organs:
+    の障害のおそれ
+ }
+\ghsystem_add_statement:nnn {H} {300 + 310} {飲み込んだ場合や皮膚に接触した場合は生命に危険}
+\ghsystem_add_statement:nnn {H} {300 + 330} {飲み込んだ場合や吸引した場合は生命に危険}
+\ghsystem_add_statement:nnn {H} {310 + 330} {皮膚に接触した場合や吸引した場合は生命に危険}
+\ghsystem_add_statement:nnn {H} {300 + 310 +330} {飲み込んだ場合や皮膚に接触した場合や吸引した場合は生命に危険}
+
+\ghsystem_add_statement:nnn {H} {301 + 311} {飲み込んだ場合や皮膚に接触した場合は有毒}
+\ghsystem_add_statement:nnn {H} {301 + 331} {飲み込んだ場合や吸引した場合は有毒}
+\ghsystem_add_statement:nnn {H} {311 + 331} {皮膚に接触した場合や吸引した場合は有毒}
+\ghsystem_add_statement:nnn {H} {301 + 311 + 331} {飲み込んだ場合や皮膚に接触した場合や吸引した場合は有毒}
+
+\ghsystem_add_statement:nnn {H} {302 + 312} {飲み込んだ場合や皮膚に接触した場合は有害}
+\ghsystem_add_statement:nnn {H} {302 + 332} {飲み込んだ場合や吸引した場合は有害}
+\ghsystem_add_statement:nnn {H} {312 + 332} {皮膚に接触した場合や吸引した場合は有害}
+\ghsystem_add_statement:nnn {H} {302 + 312 + 332} {飲み込んだ場合や皮膚に接触した場合や吸引した場合は有害}
+
+\ghsystem_add_statement:nnn {H} {303 + 313} {飲み込んだ場合や皮膚に接触した場合は有害のおそれ}
+\ghsystem_add_statement:nnn {H} {303 + 333} {飲み込んだ場合や吸引した場合は有害のおそれ}
+\ghsystem_add_statement:nnn {H} {303 + 313 + 333} {飲み込んだ場合や皮膚に接触した場合や吸引した場合は有害のおそれ}
+
+\ghsystem_add_statement:nnn {H} {315 + 319} {強い皮膚および眼刺激}
+\ghsystem_add_statement:nnn {H} {315 + 320} {皮膚および眼刺激}
+
+% 1.3 Environmental hazards
+\ghsystem_add_statement:nnn {H} {400} {水生生物に非常に強い毒性}
+\ghsystem_add_statement:nnn {H} {401} {水生生物に毒性}
+\ghsystem_add_statement:nnn {H} {402} {水生生物に有害}
+
+\ghsystem_add_statement:nnn {H} {410} {長期継続的影響によって水生生物に非常に強い毒性}
+\ghsystem_add_statement:nnn {H} {411} {長期継続的影響によって水生生物に毒性}
+\ghsystem_add_statement:nnn {H} {412} {長期継続的影響によって水生生物に有害}
+\ghsystem_add_statement:nnn {H} {413} {長期継続的影響によって水生生物に有害のおそれ}
+
+\ghsystem_add_statement:nnn {H} {420} {オゾン層を破壊し，健康および環境に有害}
+
+% 2 Supplemental Hazard Informations
+% 2.1 Physical Properties
+\ghsystem_add_statement:nnn {EUH} {001} {乾燥すると爆発性を持つ}
+\ghsystem_add_statement:nnn {EUH} {006} {空気との接触の有無にかかわらず，CLPの技術進歩に対する4番目の適応で削除された爆発物である}
+\ghsystem_add_statement:nnn {EUH} {014} {水と激しく反応する}
+\ghsystem_add_statement:nnn {EUH} {018} {使用中は可燃性/爆発性の蒸気-空気混合物を形成する可能性がある}
+\ghsystem_add_statement:nnn {EUH} {019} {爆発性過酸化物を形成する可能性がある}
+\ghsystem_add_statement:nnn {EUH} {044} {閉じ込められて加熱した場合爆発の危険性がある}
+
+% 2.2 Health Properties
+\ghsystem_add_statement:nnn {EUH} {029} {水と接触すると有毒ガスが発生する}
+\ghsystem_add_statement:nnn {EUH} {031} {酸と接触すると有毒ガスが発生する}
+\ghsystem_add_statement:nnn {EUH} {032} {酸との接触により非常に有毒なガスが発生する}
+\ghsystem_add_statement:nnn {EUH} {066} {繰り返しばく露すると，皮膚の乾燥またはひび割れを引き起こす可能性がある}
+\ghsystem_add_statement:nnn {EUH} {070} {眼に入ると有毒性がある}
+\ghsystem_add_statement:nnn {EUH} {071} {気道に対して腐食性がある}
+
+% 2.3 Environmental Properties
+\ghsystem_add_statement:nnn {EUH} {059} {オゾン層に有害}
+
+% 2.4 Supplemental Label Elements/Information On Certain Substances And Mixtures
+\ghsystem_add_statement:nnn {EUH} {201} {鉛を含む。子供が口にしたり吸い込んだりしやすい表面には使用しないこと。}
+\ghsystem_add_statement:nnn {EUH} {201A} {警告! 鉛を含む。}
+\ghsystem_add_statement:nnn {EUH} {202} {\iupac {シアノアクリレート}。危険。皮膚と眼を数秒で接着する。子供の手の届かないところに保管すること。}
+\ghsystem_add_statement:nnn {EUH} {203} {六価クロムを含む。アレルギー反応を起こすことがある。}
+\ghsystem_add_statement:nnn {EUH} {204} {\iupac {イソシアネート}を含む。アレルギー反応を起こすことがある。}
+\ghsystem_add_statement:nnn {EUH} {205} {エポキシ成分を含む。アレルギー反応を起こすことがある。}
+\ghsystem_add_statement:nnn {EUH} {206} {警告! 他の製品と併用しないこと。危険なガス (塩素) を放出することがある。}
+\ghsystem_add_statement:nnn {EUH} {207} {警告! カドミウムを含む。使用中に危険な煙が発生する。製造元が提供する情報を参照すること。安全上の注意事項を遵守すること。}
+\ghsystem_add_statement:nnn {EUH} {208} {\ghsystem_substance: を含む。アレルギー反応を起こすことがある。}
+\ghsystem_add_statement:nnn {EUH} {209} {使用中に非常に可燃性になる可能性がある。}
+\ghsystem_add_statement:nnn {EUH} {209A} {使用中に可燃性になる可能性がある。}
+\ghsystem_add_statement:nnn {EUH} {210} {安全データシートが提供されている。}
+\ghsystem_add_statement:nnn {EUH} {401} {人の健康と環境への危険性を回避するために，使用説明書に従うこと。}
+
+% PRECAUTIONARY STATEMENTS (Annex 4 page 19ff)
+% 3 Precautionary Statements
+% 3.1 General
+\ghsystem_add_statement:nnn {P} {101} {医学的助言が必要な時には，製品容器やラベルを持っていくこと。}
+\ghsystem_add_statement:nnn {P} {102} {子供の手の届かないところに置くこと。}
+\ghsystem_add_statement:nnn {P} {103} {全ての指示をよく読み，従うこと。}
+
+% 3.2 Precautionary Statements — Prevention
+\ghsystem_add_statement:nnn {P} {201} {使用前に取扱説明書を入手すること。}
+\ghsystem_add_statement:nnn {P} {202} {全ての安全注意を読み理解するまで取り扱わないこと。}
+\ghsystem_add_statement:nnn {P} {203} {使用前にすべての安全説明書を入手し，読み，従うこと。}
+\ghsystem_add_statement:nnn {P} {210} {熱，高温のもの，火花，裸火および他の着火源から遠ざけること。禁煙。}
+\ghsystem_add_statement:nnn {P} {211} {裸火または他の着火源に噴霧しないこと。}
+\ghsystem_add_statement:nnn {P} {212} {密閉状態での加熱または鈍性化洗剤の減少を避ける}
+
+\ghsystem_add_statement:nnn {P} {220} {衣類および可燃物から遠ざけること。}
+\ghsystem_add_statement:nnn {P} {222} {空気に接触させないこと。}
+\ghsystem_add_statement:nnn {P} {223} {水と接触させないこと。}
+
+\ghsystem_add_statement:nnn {P} {230} {\l_ghsystem_dots_tl にて希釈しておくこと。}
+\ghsystem_add_statement:nnn {P} {231} {不活性ガス\ghsystem_slash:\l_ghsystem_dots_tl 下で取扱い，保管すること。}
+\ghsystem_add_statement:nnn {P} {232} {湿気を遮断すること。}
+\ghsystem_add_statement:nnn {P} {233} {容器を密閉しておくこと。}
+\ghsystem_add_statement:nnn {P} {234} {他の容器に移し替えないこと。}
+\ghsystem_add_statement:nnn {P} {235} {涼しいところに置くこと。}
+\ghsystem_add_statement:nnn {P} {236} {元の容器のままで保存すること；輸送の構成において区分\l_ghsystem_dots_tl 。}
+
+\ghsystem_add_statement:nnn {P} {240} {容器を接地しアースを取ること。}
+\ghsystem_add_statement:nnn {P} {241} {防爆型の【電気\ghsystem_slash: 換気\ghsystem_slash: 照明\ghsystem_slash:\l_ghsystem_dots_tl 】機器を使用すること。}
+\ghsystem_add_statement:nnn {P} {242} {火花を発生させない工具を使用すること。}
+\ghsystem_add_statement:nnn {P} {243} {静電気放電に対する措置を講ずること。}
+\ghsystem_add_statement:nnn {P} {244} {バルブや付属品にはグリースおよび油を使用しないこと。}
+
+\ghsystem_add_statement:nnn {P} {250} {粉砕\ghsystem_slash: 衝撃\ghsystem_slash: 摩擦\ghsystem_slash:\l_ghsystem_dots_tl のような取り扱いをしないこと。}
+\ghsystem_add_statement:nnn {P} {251} {使用後を含め，穴を開けたり燃やしたりしないこと。}
+
+\ghsystem_add_statement:nnn {P} {260} {粉じん\ghsystem_slash: 煙\ghsystem_slash: ガス\ghsystem_slash: ミスト\ghsystem_slash: 蒸気\ghsystem_slash: スプレーを吸引しないこと。}
+\ghsystem_add_statement:nnn {P} {261} {粉じん\ghsystem_slash: 煙\ghsystem_slash: ガス\ghsystem_slash: ミスト\ghsystem_slash: 蒸気\ghsystem_slash: スプレーの吸引を避けること。}
+\ghsystem_add_statement:nnn {P} {262} {眼，皮膚，衣類につけないこと。}
+\ghsystem_add_statement:nnn {P} {263} {妊娠中および授乳期中は接触を避けること。}
+\ghsystem_add_statement:nnn {P} {264} {取扱後は手【および\l_ghsystem_dots_tl 】をよく洗うこと。}
+\ghsystem_add_statement:nnn {P} {265} {眼には触らないこと。}
+
+\ghsystem_add_statement:nnn {P} {270} {この製品を使用する時に，飲食または喫煙をしないこと。}
+\ghsystem_add_statement:nnn {P} {271} {屋外または換気の良い場所でのみ使用すること。}
+\ghsystem_add_statement:nnn {P} {272} {汚染された作業衣は作業場から出さないこと。}
+\ghsystem_add_statement:nnn {P} {273} {環境への放出を避けること。}
+
+\ghsystem_add_statement:nnn {P} {280} {保護手袋\ghsystem_slash: 保護衣\ghsystem_slash: 保護眼鏡\ghsystem_slash: 保護面\ghsystem_slash: 聴覚保護具\ghsystem_slash: を着用すること。}
+\ghsystem_add_statement:nnn {P} {282} {耐寒手袋および保護面または保護眼鏡を着用すること。}
+\ghsystem_add_statement:nnn {P} {283} {防火服または防炎服を着用すること。}
+\ghsystem_add_statement:nnn {P} {284} {【換気が不十分な場合】呼吸用保護具を着用すること。}
+
+\ghsystem_add_statement:nnn {P} {231 + 232} {湿気を遮断し，不活性ガス\ghsystem_slash:\l_ghsystem_dots_tl 下で取り扱い保管すること。}
+\ghsystem_add_statement:nnn {P} {264 + 265} {取扱後は手【および\l_ghsystem_dots_tl 】をよく洗うこと。眼には触らないこと。}
+
+% 3.3 Precautionary Statements — Response
+\ghsystem_add_statement:nnn {P} {301} {飲み込んだ場合: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {302} {皮膚に付着した場合: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {303} {皮膚（または髪）に付着した場合: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {304} {吸引した場合: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {305} {眼に入った場合: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {306} {衣類にかかった場合: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {308} {ばく露またはその懸念がある場合: \ghsystem_text:}
+
+\ghsystem_add_statement:nnn {P} {310} {直ちに医師\ghsystem_slash:\l_ghsystem_dots_tl に連絡すること。}
+\ghsystem_add_statement:nnn {P} {311} {医師\ghsystem_slash:\l_ghsystem_dots_tl に連絡すること。}
+\ghsystem_add_statement:nnn {P} {312} {気分が悪い時は医師\ghsystem_slash:\l_ghsystem_dots_tl に連絡すること。}
+\ghsystem_add_statement:nnn {P} {313} {医師の診察\ghsystem_slash: 手当てを受けること。}
+\ghsystem_add_statement:nnn {P} {314} {気分が悪い時は，医師の診察\ghsystem_slash: 手当てを受けること。}
+\ghsystem_add_statement:nnn {P} {315} {直ちに医師の診察\ghsystem_slash: 手当てを受けること。}
+\ghsystem_add_statement:nnn {P} {316} {すぐに救急の医療処置を受けること。}
+\ghsystem_add_statement:nnn {P} {317} {医療処置を受けること。}
+\ghsystem_add_statement:nnn {P} {318} {ばく露またはその懸念がある場合は，医学的助言を求めること。}
+\ghsystem_add_statement:nnn {P} {319} {気分が悪い時は，医療処置を受けること。}
+
+\ghsystem_add_statement:nnn {P} {320} {特別な処置が緊急に必要である（このラベルの\l_ghsystem_dots_tl を見よ）。}
+\ghsystem_add_statement:nnn {P} {321} {特別な処置が必要である（このラベルの\l_ghsystem_dots_tl を見よ）。}
+
+\ghsystem_add_statement:nnn {P} {330} {口をすすぐこと。}
+\ghsystem_add_statement:nnn {P} {331} {無理に吐かせないこと。}
+\ghsystem_add_statement:nnn {P} {332} {皮膚刺激が生じた場合: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {333} {皮膚刺激または発疹が生じた場合: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {334} {冷たい水に浸すこと【または湿った包帯で覆うこと】。}
+\ghsystem_add_statement:nnn {P} {335} {固着していない粒子を皮膚から払いのけること。}
+\ghsystem_add_statement:nnn {P} {336} {凍った部分をすぐにぬるま湯でとかすこと。受傷部はこすらないこと。}
+\ghsystem_add_statement:nnn {P} {337} {眼の刺激が続く場合: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {338} {コンタクトレンズを着用していて容易に外せる場合は外すこと。その後も洗浄を続けること。}
+
+\ghsystem_add_statement:nnn {P} {340} {空気の新鮮な場所に移し，呼吸しやすい姿勢で休息させること。}
+\ghsystem_add_statement:nnn {P} {342} {呼吸に関する症状が出た場合: \ghsystem_text:}
+
+\ghsystem_add_statement:nnn {P} {351} {水で数分間注意深く洗うこと。}
+\ghsystem_add_statement:nnn {P} {352} {多量の水\ghsystem_slash:\l_ghsystem_dots_tl で洗うこと}
+\ghsystem_add_statement:nnn {P} {353} {接触部位を水【またはシャワー】で洗うこと。}
+\ghsystem_add_statement:nnn {P} {354} {すぐに水で数分間洗うこと。}
+
+\ghsystem_add_statement:nnn {P} {360} {服を脱ぐ前に，直ちに汚染された衣類及び皮膚を多量の水で洗うこと。}
+\ghsystem_add_statement:nnn {P} {361} {汚染された衣類を直ちにすべて脱ぐこと。}
+\ghsystem_add_statement:nnn {P} {362} {汚染された衣類を脱ぐこと。}
+\ghsystem_add_statement:nnn {P} {363} {汚染された衣類を再使用する場合には洗濯をすること。}
+\ghsystem_add_statement:nnn {P} {364} {そして再使用する場合には洗濯をすること。}
+
+\ghsystem_add_statement:nnn {P} {370} {火災の場合: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {371} {大火災の場合で大量にある場合: \ghsystem_text:}
+\ghsystem_add_statement:nnn {P} {372} {爆発する危険性あり。}
+\ghsystem_add_statement:nnn {P} {373} {炎が爆発物に届いたら消火活動をしないこと。}
+\ghsystem_add_statement:nnn {P} {375} {爆発の危険性があるため，離れた距離から消火すること。}
+\ghsystem_add_statement:nnn {P} {376} {安全に対処できるならば漏えいを止めること。}
+\ghsystem_add_statement:nnn {P} {377} {漏えいガス火災の場合: 漏えいが安全に停止されない限り消火しないこと。}
+\ghsystem_add_statement:nnn {P} {378} {消火するために\l_ghsystem_dots_tl を使用すること。}
+
+\ghsystem_add_statement:nnn {P} {380} {区域より退避させること。}
+\ghsystem_add_statement:nnn {P} {381} {漏えいした場合，着火源を除去すること。}
+
+\ghsystem_add_statement:nnn {P} {390} {物的被害を防止するために流出したものを吸収すること。}
+\ghsystem_add_statement:nnn {P} {391} {漏出物を回収すること。}
+
+\ghsystem_add_statement:nnn {P} {301 + 316} {飲み込んだ場合: すぐに救急の医療処置を受けること。}
+\ghsystem_add_statement:nnn {P} {301 + 317} {飲み込んだ場合: 医療処置を受けること。}
+\ghsystem_add_statement:nnn {P} {302 + 317} {皮膚に付着した場合: 医療処置を受けること。}
+\ghsystem_add_statement:nnn {P} {302 + 334} {皮膚に付着した場合: 冷たい水に浸すこと【または湿った包帯で覆うこと】。}
+\ghsystem_add_statement:nnn {P} {302 + 352} {皮膚に付着した場合: 多量の水\ghsystem_slash:\l_ghsystem_dots_tl で洗うこと。}
+\ghsystem_add_statement:nnn {P} {304 + 317} {吸引した場合: 医療処置を受けること。}
+\ghsystem_add_statement:nnn {P} {304 + 340} {吸引した場合: 空気の新鮮な場所に移し，呼吸しやすい姿勢で休息させること。}
+\ghsystem_add_statement:nnn {P} {306 + 360} {衣類にかかった場合: 服を脱ぐ前に，直ちに汚染された衣類及び皮膚を多量の水で洗うこと。}
+\ghsystem_add_statement:nnn {P} {308 + 316} {ばく露またはその懸念がある場合: すぐに救急の医療処置を受けること。}
+\ghsystem_add_statement:nnn {P} {332 + 317} {皮膚刺激が生じた場合: 医療処置を受けること。}
+\ghsystem_add_statement:nnn {P} {333 + 317} {皮膚刺激または発疹が生じた場合: 医療処置を受けること。}
+\ghsystem_add_statement:nnn {P} {336 + 317} {凍った部分をすぐにぬるま湯でとかすこと。受傷部はこすらないこと。医療処置を受けること。}
+\ghsystem_add_statement:nnn {P} {337 + 317} {眼の刺激が続く場合: 医療処置を受けること。}
+\ghsystem_add_statement:nnn {P} {342 + 316} {呼吸に関する症状が出た場合: すぐに救急の医療処置を受けること。}
+\ghsystem_add_statement:nnn {P} {361 + 364} {汚染された衣類を直ちにすべて脱ぎ，再使用する場合には洗濯をすること。}
+\ghsystem_add_statement:nnn {P} {362 + 364} {汚染された衣類を脱ぎ，再使用する場合には洗濯をすること。}
+\ghsystem_add_statement:nnn {P} {370 + 376} {火災の場合: 安全に対処できるならば漏えいを止めること。}
+\ghsystem_add_statement:nnn {P} {370 + 378} {火災の場合: 消火するために\l_ghsystem_dots_tl を使用すること。}
+\ghsystem_add_statement:nnn {P} {301 + 330 + 331} {飲み込んだ場合: 口をすすぐこと。無理に吐かせないこと。}
+\ghsystem_add_statement:nnn {P} {302 + 335 + 334} {皮膚についた場合: 固着していない粒子を皮膚から払いのけ，冷たい水に浸すこと【または湿った包帯で覆うこと】。}
+\ghsystem_add_statement:nnn {P} {302 + 361 + 354} {皮膚についた場合: 直ちに汚染された衣類をすべて脱ぐこと。すぐに水で数分間洗うこと。}
+\ghsystem_add_statement:nnn {P} {303 + 361 + 353} {皮膚（または髪）に付着した場合: 直ちに汚染された衣類をすべて脱ぐこと。接触部位を水【またはシャワー】で洗うこと。}
+\ghsystem_add_statement:nnn {P} {305 + 351 + 338} {眼に入った場合: 水で数分間注意深く洗うこと。コンタクトレンズを着用していて容易に外せる場合は外すこと。その後も洗浄を続けること。}
+\ghsystem_add_statement:nnn {P} {305 + 354 + 338} {眼に入った場合: すぐに水で数分間洗うこと。コンタクトレンズを着用していて容易に外せる場合は外すこと。その後も洗浄を続けること。}
+\ghsystem_add_statement:nnn {P} {370 + 380 + 375} {火災の場合: 区域より退避させ，爆発の危険性があるため，離れた距離から消火すること。}
+\ghsystem_add_statement:nnn {P} {371 + 380 + 375} {大火災の場合で大量にある場合: 区域より退避させ，爆発の危険性があるため，離れた距離から消火すること。}
+\ghsystem_add_statement:nnn {P} {370 + 372 + 380 + 373} {火災の場合: 爆発する危険性あり。区域より退避させること。炎が爆発物に届いたら消火活動をしないこと。}
+\ghsystem_add_statement:nnn {P} {370 + 380 + 375} {火災の場合: 区域より退避させ，爆発の危険性があるため，離れた距離から消火すること。}
+\ghsystem_add_statement:nnn {P} {370 + 380 + 375 + 378} {火災の場合: 区域より退避させ，爆発の危険性があるため，離れた距離から消火すること。【消火するために\l_ghsystem_dots_tl を使用すること。】}
+
+% 3.4 Precautionary Statements — Storage
+\ghsystem_add_statement:nnn {P} {401} {\l_ghsystem_dots_tl にしたがって保管すること。}
+\ghsystem_add_statement:nnn {P} {402} {乾燥した場所に保管すること。}
+\ghsystem_add_statement:nnn {P} {403} {換気の良い場所で保管すること。}
+\ghsystem_add_statement:nnn {P} {404} {密閉容器に保管すること。}
+\ghsystem_add_statement:nnn {P} {405} {施錠して保管すること。}
+\ghsystem_add_statement:nnn {P} {406}
+  {耐腐食性\ghsystem_slash: 耐腐食性内張りのある\l_ghsystem_dots_tl 容器に保管すること。}
+\ghsystem_add_statement:nnn {P} {407} {積荷またはパレット間にすきまをあけること。}
+\ghsystem_add_statement:nnn {P} {410} {日光から遮断すること。}
+\ghsystem_add_statement:nnn {P} {411} {\exp_args:No \qty {\l_ghsystem_celsius_temperature_tl}
+  {\GHScelsius}以下の温度で保管すること。}
+\ghsystem_add_statement:nnn {P} {412} {\qty {50} {\GHScelsius}以下の温度で保管すること。}
+\ghsystem_add_statement:nnn {P} {413} {
+  \exp_args:No \qty {\l_ghsystem_kg_mass_tl} {\GHSkilogram}以上の大量品は，
+  \exp_args:No \qty {\l_ghsystem_celsius_temperature_tl} {\GHScelsius}
+  以下の温度で保管すること。
+ }
+\ghsystem_add_statement:nnn {P} {420} {隔離して保管すること。}
+
+\ghsystem_add_statement:nnn {P} {402 + 404} {乾燥した場所または密閉容器に保管すること。}
+\ghsystem_add_statement:nnn {P} {403 + 233} {換気の良い場所で保管すること。容器を密閉しておくこと。}
+\ghsystem_add_statement:nnn {P} {403 + 235} {換気の良い場所で保管すること。涼しいところに置くこと。}
+\ghsystem_add_statement:nnn {P} {410 + 403} {日光から遮断し，換気の良い場所で保管すること。}
+\ghsystem_add_statement:nnn {P} {410 + 412} {日光から遮断し，\qty {50} {\GHScelsius}以上の温度のばく露しないこと。}
+
+% 3.5 Precautionary Statements — Disposal
+\ghsystem_add_statement:nnn {P} {501} {内容物\ghsystem_slash: 容器を\l_ghsystem_dots_tl に排気すること。}
+\ghsystem_add_statement:nnn {P} {502} {回収またはリサイクルに関する情報について製造者または供給者に問い合わせる。}
+\ghsystem_add_statement:nnn {P} {503} {廃棄\ghsystem_slash: 回収\ghsystem_slash: リサイクルに関する情報について製造者\ghsystem_slash: 供給者\ghsystem_slash:\l_ghsystem_dots_tl に問い合わせる。}
+
+% 4 Hazard Statement Codes (Annex 6 page 4f)
+% \ghsystem_add_statement:nnn {H} {350i} {...}
+\ghsystem_add_statement:nnn {H} {360d} {胎児に損傷を与える疑い}
+\ghsystem_add_statement:nnn {H} {360D} {胎児に損傷を与える可能性}
+\ghsystem_add_statement:nnn {H} {360F} {生殖能力を損なう可能性}
+\ghsystem_add_statement:nnn {H} {361d} {胎児に損傷を与える疑い}
+\ghsystem_add_statement:nnn {H} {361f} {胎児に悪影響を与える疑い}
+% \ghsystem_add_statement:nnn {H} {360FD} {...}
+% \ghsystem_add_statement:nnn {H} {361fd} {...}
+% \ghsystem_add_statement:nnn {H} {360Fd} {...}
+% \ghsystem_add_statement:nnn {H} {360Df} {...}
+
